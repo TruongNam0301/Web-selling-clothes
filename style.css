@@ -18,6 +18,7 @@ li{
     justify-content: center;
 }
 .menu-item{
+    
     position: relative;
     line-height: 100px;
     padding:0 12px;
@@ -75,10 +76,11 @@ li{
 .icon-menu{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content:flex-end;
     
 }
 .icon-menu i{
+    
     line-height: 100px;
     text-align: center;
     padding: 0 15px;
