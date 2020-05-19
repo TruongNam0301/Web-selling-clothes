@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}   
+a{
+    display: block;
+    text-decoration: none !important;
+    color:black !important;
+}
+li{
+    list-style: none;
+}
+.menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.menu-item{
+    position: relative;
+    line-height: 100px;
+    padding:0 12px;
+    text-align: center;
+}
+.item-clothing{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+}
+.first{
+    display: block;
+    padding-left:15px;
+    text-align: left;
+    position: relative;
+    width:150px;
+    line-height: 60px;
+}
+.second{
+    position: absolute;
+    line-height:60px;
+    display: block;
+    width: 135px;
+}
+.second li{
+    border-top: 1px solid rgba(0,0,0,.15);
+}
+.dropdown-menu{
+    box-shadow: 0px 0px 15px 1px rgba(133,129,133,0.92);
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    line-height: 60px;
+    display:none;
+}
+.item-accessories li{
+   border-bottom: 1px solid rgba(0,0,0,.15);
+    width: 200px;
+    padding-left: 15px;
+}
+.list-clothing{
+    box-shadow: 0px 0px 15px 1px rgba(133,129,133,0.92);
+    position: absolute;
+    border-top: 1px solid rgba(0,0,0,.15);
+    height: 305px;
+    width: 600px;
+    display: none;
+}
+.accessories:hover .dropdown-menu{
+    display:block
+}
+.clothing:hover .list-clothing{
+    display: block;
+}
