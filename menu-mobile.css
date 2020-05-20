@@ -1,0 +1,50 @@
+
+#swapper{
+    position: absolute;
+    position: fixed;
+    min-width: 260px;
+    height: 999px;
+    background-color: antiquewhite;
+    left:-260px;
+    transition: 0.5s linear;
+    border: 1px solid black;
+    top:0;
+}
+
+.menu2{
+    background-attachment: fixed;
+    padding-top: 100px ;
+   display: flex;
+    flex-direction: column;
+   width:260px;  
+}
+#swapper.active , .exit{
+    left:0 !important;
+}
+.mb-list{
+    padding: 12px 0;
+    border-bottom: 1px solid black;
+}
+.mb-list-clothing li{
+    padding: 12px 30px;
+}
+.mb-list-home{
+    border-top:1px solid black ;
+}
+span{
+    display: block;
+    cursor: pointer;
+}
+.mb-item >li{
+    border-bottom: 1px solid black;
+}
+#menu-exit{
+    padding-left: 200px;
+    top: 20px;;
+    position: absolute;
+    z-index: 100;
+}
+#menu-exit{
+    left:-260px;
+    transition: 0.5s linear;
+}

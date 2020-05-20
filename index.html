@@ -1,114 +1,159 @@
 <html>
     <head>
+        
         <script src="https://kit.fontawesome.com/65adf3fa6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="menu-mobile.css">
         <title>Exercise</title>
     </head>
 
 
     <body>
-       <div class="mg-left-right " style="margin:0 50px;">
-            <div class="row">
-                <div class="col-lg-2 col-6">
-                    <div class="logo">
-                    <img src="./image/Untitled.png" width="100px" height="100px" style="float:left">
-                    </div>
-                    <div class="icon-menu" style="float:left">
-                        <a href="#"><i class="fas fa-bars fa-lg"></i></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-8 d-none d-lg-block">
-                    <div class="menu-bar">
-                        <ul class="menu">
-                            
-                            <li class="menu-item home"><a href="#"> HOME</a></li>
-
-                            <li class="menu-item clothing"><a href="#">CLOTHING</a>
-                                <div class='list-clothing'>
-                                    <ul class="item-clothing">
-                                        <li class="first"> <a href="#">item1 </a>
-                                            <div class="second">
-                                                <ul class="list-item">
-                                                    <li><a href="#">aaaaaa</a></li>
-                                                    <li><a href="#">aaaaaa</a></li>
-                                                    <li><a href="#">aaaaaa</a></li>
-                                                    <li><a href="#">aaaaaa</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="first"> <a href="#">item2 </a>
-                                            <div class="second">
-                                                <ul class="list-item">
-                                                    <li><a href="#">bbbbbb</a></li>
-                                                    <li><a href="#">bbbbbb</a></li>
-                                                    <li><a href="#">bbbbb</a></li>
-                                                    <li><a href="#">bbb</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="first"> <a href="#">item3</a>
-                                            <div class="second">
-                                                <ul class="list-item">
-                                                    <li><a href="#">cccccc</a></li>
-                                                    <li><a href="#">cccccc</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="first"><a href="#"> item4</a>
-                                            <div class="second">
-                                                <ul class="list-item">
-                                                    <li><a href="#">ddddd</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="menu-item accessories"><a href="#">ACCESSORIES</a>
-                                <div class='dropdown-menu list-accessories'>
-                                    <ul class=" item-accessories">
-                                        <li> <a href="#">item1</a></li>
-                                        <li><a href="#"> item1</a></li>
-                                        <li><a href="#"> item1</a></li>
-                                        <li> <a href="#">item1</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="menu-item about"><a href="#">ABOUT US</a></li>
-
-                            <li class="menu-item contact"><a href="#">CONTACT</a></li>
-
-                        </ul>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-2 col-6">
-                    <div class="icon-menu">
-                        <div class="icon-search">
-                            <a href="#"><i class="fas fa-search fa-lg"></i></a>
+        <div class="header">
+        <div class="mg-left-right " style="margin:0 50px;">
+                <div class="row">
+                    <div class="col-lg-2 col-6">
+                        <div class="logo">
+                        <img src="./image/Untitled.png" width="100px" height="100px" style="float:left">
                         </div>
-                        <div class="icon-bag">
-                            <a href="#"><i class="fas fa-shopping-bag fa-lg"></i></a>
+                        <div class="icon-menu" style="float:left">
+                            <a href="#"><i id="menu-click" onclick="menuActive()" class="fas fa-bars fa-lg"></i></i></a>
                         </div>
-                        <div class="icon-login">
+                    </div>
+                    <div class="col-lg-8 d-none d-lg-block">
+                        <div class="menu-bar">
+                            <ul class="menu">
+                                
+                                <li class="menu-item home"><a href="#"> HOME</a></li>
+
+                                <li class="menu-item clothing"><a href="#">CLOTHING</a>
+                                    <div class='list-clothing'>
+                                        <ul class="item-clothing">
+                                            <li class="first"> <a href="#">item1 </a>
+                                                <div class="second">
+                                                    <ul class="list-item">
+                                                        <li><a href="#">aaaaaa</a></li>
+                                                        <li><a href="#">aaaaaa</a></li>
+                                                        <li><a href="#">aaaaaa</a></li>
+                                                        <li><a href="#">aaaaaa</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="first"> <a href="#">item2 </a>
+                                                <div class="second">
+                                                    <ul class="list-item">
+                                                        <li><a href="#">bbbbbb</a></li>
+                                                        <li><a href="#">bbbbbb</a></li>
+                                                        <li><a href="#">bbbbb</a></li>
+                                                        <li><a href="#">bbb</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="first"> <a href="#">item3</a>
+                                                <div class="second">
+                                                    <ul class="list-item">
+                                                        <li><a href="#">cccccc</a></li>
+                                                        <li><a href="#">cccccc</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="first"><a href="#"> item4</a>
+                                                <div class="second">
+                                                    <ul class="list-item">
+                                                        <li><a href="#">ddddd</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <li class="menu-item accessories"><a href="#">ACCESSORIES</a>
+                                    <div class='dropdown-menu list-accessories'>
+                                        <ul class=" item-accessories">
+                                            <li> <a href="#">item1</a></li>
+                                            <li><a href="#"> item1</a></li>
+                                            <li><a href="#"> item1</a></li>
+                                            <li> <a href="#">item1</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <li class="menu-item about"><a href="#">ABOUT US</a></li>
+
+                                <li class="menu-item contact"><a href="#">CONTACT</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-6">
+                        <div class="icon-menu">
+                            <div class="icon-search">
+                                <a href="#"><i class="fas fa-search fa-lg"></i></a>
+                            </div>
+                            <div class="icon-bag">
+                                <a href="#"><i class="fas fa-shopping-bag fa-lg"></i></a>
+                            </div>
                             <div class="icon-login">
-                                <a href="#"><i class="fas fa-lock-open fa-lg"></i></a>
+                                <div class="icon-login">
+                                    <a href="#"><i class="fas fa-lock-open fa-lg"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                </div>
+        </div>
+    </div>
+ </div>
+ <div class="main-swap">
+ <div id="menu-exit"><i onclick="menuExit()" class="fas fa-times"></i></div>
+ <div id="swapper">
+   
+ <div class="menu2">
+    <ul >
+        <li class="mb-list mb-list-home">Home</li>
+        
+        <li class="mb-list title-main"><span onclick="myFunction()">Clothing</span>
+
+            <div id="clothing" class="mb-clothing" style="display:none;">
+                <ul class="mb-list-clothing">
+                    <li><a href="#">item1</a>
+                        <div class="mb-item">
+                            <ul>
+                                <li><a href="#">aaaaaa</a></li>
+                                <li><a href="#">aaaaaa</a></li>
+                                <li><a href="#">aaaaaa</a></li>
+                                <li><a href="#">aaaaaa</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li><a href="#">item2</a>
+                        <div class="mb-item">
+                            <ul>
+                                <li><a href="#">bbbb</a></li>
+                                <li><a href="#">bbbb</a></li>
+                                <li><a href="#">bbb</a></li>
+                                <li><a href="#">bbbb</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
             </div>
-       </div>
-        
+        </li>
+  
+        <li class="mb-list">ACCESSORIES</li>
+        <li class="mb-list">about us</li>
+        <li class="mb-list">contact</li>
+
+    </ul>
+</div>
+</div>  
+</div>
 
 
-
-        
-
-
+            <script src="xxx.js"></script>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
