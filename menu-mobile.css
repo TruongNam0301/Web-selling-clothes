@@ -1,16 +1,16 @@
 
 #swapper{
     position: absolute;
-    position: fixed;
     min-width: 260px;
-    height: 999px;
-    background-color: antiquewhite;
-    left:-260px;
+    height: 800px;
+    background-color: white;
+    left:-280px;
     transition: 0.5s linear;
     border: 1px solid black;
     top:0;
+    box-shadow: 0px 0px 15px 1px rgba(133,129,133,0.92);
+    overflow: scroll;
 }
-
 .menu2{
     background-attachment: fixed;
     padding-top: 100px ;
@@ -21,30 +21,52 @@
 #swapper.active , .exit{
     left:0 !important;
 }
-.mb-list{
+.mb-list a{
     padding: 12px 0;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(0,0,0,.15);
 }
-.mb-list-clothing li{
-    padding: 12px 30px;
+.mb-list-clothing >li{
+    padding-top: 12px;
+    padding-left: 20px;
 }
 .mb-list-home{
-    border-top:1px solid black ;
+    border-top:1px solid rgba(0,0,0,.15);
 }
 span{
-    display: block;
+    float:right;
+    margin-right: 12px;
     cursor: pointer;
 }
-.mb-item >li{
-    border-bottom: 1px solid black;
+.mb-item{
+    display: block;
+}
+.mb-item li{
+    padding-top: 12px;
+    margin-left: 25px;
 }
 #menu-exit{
-    padding-left: 200px;
+    width:250px;
+    margin-top: 20px;
     top: 20px;;
     position: absolute;
     z-index: 100;
-}
-#menu-exit{
-    left:-260px;
+    left:-280px;
     transition: 0.5s linear;
+}
+#menu-exit .fas{
+    float:right;
+    
+}
+.mg-left-right {
+    margin:0 50px;
+}
+@media (min-width:800px) {
+    #menu-click{
+        display: none;
+    }
+  }
+@media (max-width:500px) {
+    .mg-left-right {
+        margin:0 10px;
+    }
 }

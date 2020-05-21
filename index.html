@@ -1,6 +1,6 @@
 <html>
     <head>
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/65adf3fa6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -11,14 +11,14 @@
 
     <body>
         <div class="header">
-        <div class="mg-left-right " style="margin:0 50px;">
+        <div class="mg-left-right " >
                 <div class="row">
-                    <div class="col-lg-2 col-6">
+                    <div class="col-lg-2 col-7">
                         <div class="logo">
                         <img src="./image/Untitled.png" width="100px" height="100px" style="float:left">
                         </div>
-                        <div class="icon-menu" style="float:left">
-                            <a href="#"><i id="menu-click" onclick="menuActive()" class="fas fa-bars fa-lg"></i></i></a>
+                        <div class="icon-menu2">
+                            <a href="#"><i id="menu-click" onclick="menuActive()" class="fas fa-bars fa-lg" ></i></i></a>
                         </div>
                     </div>
                     <div class="col-lg-8 d-none d-lg-block">
@@ -27,7 +27,7 @@
                                 
                                 <li class="menu-item home"><a href="#"> HOME</a></li>
 
-                                <li class="menu-item clothing"><a href="#">CLOTHING</a>
+                                <li class="menu-item clothing"><a href="#">CLOTHING <i class="fas fa-angle-down"></i></a>
                                     <div class='list-clothing'>
                                         <ul class="item-clothing">
                                             <li class="first"> <a href="#">item1 </a>
@@ -69,7 +69,7 @@
                                     </div>
                                 </li>
 
-                                <li class="menu-item accessories"><a href="#">ACCESSORIES</a>
+                                <li class="menu-item accessories"><a href="#">ACCESSORIES<i class="fas fa-angle-down"></i></a>
                                     <div class='dropdown-menu list-accessories'>
                                         <ul class=" item-accessories">
                                             <li> <a href="#">item1</a></li>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-2 col-6">
+                    <div class="col-lg-2 col-5">
                         <div class="icon-menu">
                             <div class="icon-search">
                                 <a href="#"><i class="fas fa-search fa-lg"></i></a>
@@ -106,16 +106,20 @@
         </div>
     </div>
  </div>
+
+
+
+
  <div class="main-swap">
- <div id="menu-exit"><i onclick="menuExit()" class="fas fa-times"></i></div>
+ <div id="menu-exit"><i onclick="menuExit()" class="fas fa-times fa-lg"></i></div>
  <div id="swapper">
    
  <div class="menu2">
     <ul >
-        <li class="mb-list mb-list-home">Home</li>
-        
-        <li class="mb-list title-main"><span onclick="myFunction()">Clothing</span>
 
+        <li class="mb-list mb-list-home"><a href="#"> Home </a></li>
+
+        <li class="mb-list title-main"> <a href="#">Clothing  <span onclick="myFunction('clothing')"><i class="fas fa-angle-down"></i></span></a>
             <div id="clothing" class="mb-clothing" style="display:none;">
                 <ul class="mb-list-clothing">
                     <li><a href="#">item1</a>
@@ -128,7 +132,6 @@
                             </ul>
                         </div>
                     </li>
-
                     <li><a href="#">item2</a>
                         <div class="mb-item">
                             <ul>
@@ -139,13 +142,33 @@
                             </ul>
                         </div>
                     </li>
+                    <li><a href="#">item3</a>
+                        <div class="mb-item">
+                            <ul>
+                                <li><a href="#">ddd</a></li>
+                                <li><a href="#">dddd</a></li>
+                                <li><a href="#">ddd</a></li>
+                                <li><a href="#">ddd</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </li>
-  
-        <li class="mb-list">ACCESSORIES</li>
-        <li class="mb-list">about us</li>
-        <li class="mb-list">contact</li>
+        <li class="mb-list title-main"><a href="#">accessories <span onclick="myFunction('accessories')"><i class="fas fa-angle-down"></i></span></a>
+            <div id="accessories" class="mb-accessories" style="display:none;">
+                <ul class="mb-list-clothing">
+                    <li><a href="#">item1</a>  
+                    </li>
+                    <li><a href="#">item2</a>
+                    </li>
+                    <li><a href="#">item3</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="mb-list"><a href="#">about us</a></li></li>
+        <li class="mb-list"><a href="#">contact</a></li>
 
     </ul>
 </div>

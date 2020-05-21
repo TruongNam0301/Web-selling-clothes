@@ -1,8 +1,7 @@
-function myFunction(){
-    var s=document.getElementById("clothing");
+function myFunction(string){
+    var s=document.getElementById(string);
     if(s.style.display=="block") s.style.display="none";
     else if(s.style.display="none") s.style.display="block";
-    
 }
 function menuActive(){
     
