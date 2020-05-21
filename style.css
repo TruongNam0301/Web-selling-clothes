@@ -3,6 +3,8 @@
     padding: 0;
     box-sizing: border-box;
 }   
+
+
 a{
     display: block;
     text-decoration: none !important;
@@ -18,7 +20,6 @@ li{
     justify-content: center;
 }
 .menu-item{
-    
     position: relative;
     line-height: 100px;
     padding:0 12px;
@@ -69,6 +70,8 @@ li{
     height: 305px;
     width: 600px;
     display: none;
+    z-index: 100;
+    background-color: #fff;
 }
 .accessories:hover .dropdown-menu{
     display:block

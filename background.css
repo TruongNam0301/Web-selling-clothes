@@ -1,0 +1,66 @@
+.background{
+    width:100%;
+    height:700px;
+    background-color: white;
+    background-image: url(./image/background_2_tonemapped.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.wall {
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+    transition: 0.5s;
+    opacity: 0;
+}
+.background:hover .wall{
+    opacity: 1;
+ }
+.wall {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #890620;
+    font-size: larger;
+}
+.introduce{
+    margin: 50px 200px;
+}
+.introduce .image-swapper{
+    padding: 20px;
+    height:400px;
+    background-image: url(./image/beach.jpg);
+}
+.introduce .image-swapper .image-product{
+    background-position: center;
+    height: 100%;
+    background-image: url(./image/product1.jpg);
+    background-size: contain;
+    animation: change-product 5s infinite;
+    background-repeat: no-repeat;
+}
+.text-swapper{
+    padding: 20px;
+    height:400px;
+    background-color: antiquewhite;
+}
+.text-swapper .text{
+    word-wrap: break-word;
+    height: 100%;
+    text-align: center;
+}
+@keyframes change-product {
+    0%{
+        background-image: url(./image/product1.jpg);
+    }
+    35%{
+        background-image: url(./image/product2.jpg);
+    }
+    65%{
+        background-image: url(./image/product3.jpg);
+    }
+    85%{
+        background-image: url(./image/product4.jpg);
+    }
+}
