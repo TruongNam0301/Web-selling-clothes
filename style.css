@@ -73,8 +73,11 @@ li{
 .accessories:hover .dropdown-menu{
     display:block
 }
-.clothing:hover .list-clothing{
+.clothing:hover .list-clothing {
     display: block;
+}
+.menu-item:hover .hov {
+    color: #890620 !important;
 }
 .menu a:hover{
     color: #890620 !important;

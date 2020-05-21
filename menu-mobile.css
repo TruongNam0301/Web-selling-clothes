@@ -25,6 +25,9 @@
     padding: 12px 0;
     border-bottom: 1px solid rgba(0,0,0,.15);
 }
+.mb-list >a{
+    color: #890620 !important;
+}
 .mb-list-clothing >li{
     padding-top: 12px;
     padding-left: 20px;
@@ -36,6 +39,7 @@ span{
     float:right;
     margin-right: 12px;
     cursor: pointer;
+    color:black!important;
 }
 .mb-item{
     display: block;
