@@ -1,4 +1,4 @@
-.background{
+.main .background{
     width:100%;
     height:700px;
     background-color: white;
@@ -6,16 +6,7 @@
     background-size: cover;
     background-position: center;
 }
-.wall {
-    height: 100%;
-    background-color: rgba(0,0,0,0.3);
-    transition: 0.5s;
-    opacity: 0;
-}
-.background:hover .wall{
-    opacity: 1;
- }
-.wall {
+.main .background .wall {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -23,14 +14,21 @@
     align-items: center;
     color: #890620;
     font-size: larger;
+    background-color: rgba(0,0,0,0.3);
+    transition: 0.5s;
+    opacity: 0;
 }
+.main .background:hover .wall{
+    opacity: 1;
+ }
 .introduce{
     margin: 50px 200px;
 }
 .introduce .image-swapper{
     padding: 20px;
     height:400px;
-    background-image: url(./image/beach.jpg);
+    background-image: url(./image/japan_tonemapped.jpg);
+    background-size: contain;
 }
 .introduce .image-swapper .image-product{
     background-position: center;
@@ -40,15 +38,49 @@
     animation: change-product 5s infinite;
     background-repeat: no-repeat;
 }
-.text-swapper{
+.introduce .text-swapper{
     padding: 20px;
     height:400px;
-    background-color: antiquewhite;
+    background-color: inherit;
 }
-.text-swapper .text{
+.introduce .text-swapper .text{
     word-wrap: break-word;
     height: 100%;
     text-align: center;
+}
+.introduce .best-sale .image-product{
+    margin: 10px 0;
+   
+}
+.introduce .best-sale .image-product .pic img{
+    width: 100%;
+    height: 300px;
+    border: 1px solid black;
+   
+}
+.introduce .best-sale .image-product .frames{
+    width: 100%;
+    height: 100px;
+    border: 1px solid black;
+    background-color: antiquewhite;
+    text-align: center;
+}
+.introduce .best-sale .image-product .pic{
+    position: relative;
+}
+.introduce .best-sale .image-product .pic::before{
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: .2;
+    transition:transform 1s;
+}
+.introduce .best-sale .image-product .pic:hover::before{
+    transform: rotateY(90deg);
 }
 @keyframes change-product {
     0%{
@@ -63,4 +95,40 @@
     85%{
         background-image: url(./image/product4.jpg);
     }
+}
+@media (max-width:500px) {
+    .background {
+        width:400px;
+        height:300px;
+    }
+    .introduce .image-swapper{
+        padding: 20px;
+        height:300px;
+    }
+    .introduce .text-swapper{
+        padding: 20px;
+        height:400px;   
+    }
+}
+.icon-search i{
+    position: relative;
+}
+.search-swapper{
+    
+    position: absolute;
+    width: 300px;
+    height: 55px;
+    top:100%;
+    left:-80px;
+    z-index: 1001;
+    background-color: fff;
+    border-top: 2px solid #890620;
+}
+.search{
+    padding: 5px;
+    text-align: center;
+}
+input{
+    height:35px;
+    border:1px solid #890620;
 }

@@ -69,7 +69,7 @@ span{
         display: none;
     }
   }
-@media (max-width:500px) {
+  @media (max-width:500px) {
     .mg-left-right {
         margin:0 10px;
     }
