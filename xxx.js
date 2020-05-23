@@ -14,7 +14,7 @@ function menuExit(){
 }
 var iconSearch =document.querySelector(".icon-search");
 var searchSwapper=document.querySelector(".icon-menu .search-swapper");
-document.addEventListener("click",function iconSearchClick(){
+iconSearch.addEventListener("click",function iconSearchClick(){
     if(searchSwapper.style.display)  searchSwapper.style.display="";
     else{
         searchSwapper.style.display="none"

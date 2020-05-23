@@ -112,21 +112,23 @@
 }
 .icon-search i{
     position: relative;
+    z-index: 1001;
 }
 .search-swapper{
-    
     position: absolute;
     width: 300px;
     height: 55px;
     top:100%;
     left:-80px;
-    z-index: 1001;
-    background-color: fff;
+    background-color: #fff;
     border-top: 2px solid #890620;
+    z-index: 1000;
+   
 }
 .search{
     padding: 5px;
     text-align: center;
+    
 }
 input{
     height:35px;
