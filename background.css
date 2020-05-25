@@ -94,24 +94,6 @@
         background-image: url(./image/product4.jpg);
     }
 }
-@media screen and (max-width: 600px){
-    .introduce{
-        margin: 10px 0;
-    }
-    .main .background {
-        width:400px;
-        height:600px;
-    }
-    .introduce .image-swapper{
-        padding: 20px;
-        height:300px;
-    }
-    .introduce .text-swapper{
-        padding: 20px;
-        height:400px;   
-    }
-}
-
 .icon-search i{
     position: relative;
 }
@@ -145,4 +127,24 @@ input{
 }
 .footer .mg-footer .col {
     height:300px;
+}
+@media screen and (max-width: 600px){
+    .introduce{
+        margin: 10px 0;
+    }
+    .main .background {
+        width:400px;
+        height:600px;
+    }
+    .introduce .image-swapper{
+        padding: 20px;
+        height:300px;
+    }
+    .introduce .text-swapper{
+        padding: 20px;
+        height:400px;   
+    }
+    .footer .mg-footer{
+        padding: 0 10px;
+    }
 }
