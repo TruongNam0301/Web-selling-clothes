@@ -21,9 +21,6 @@
 .main .background:hover .wall{
     opacity: 1;
  }
-.introduce{
-    margin: 50px 200px;
-}
 .introduce .image-swapper{
     padding: 20px;
     height:400px;
@@ -115,17 +112,16 @@ input{
     height:35px;
     border:1px solid #890620;
 }
-.footer .mg-footer{
+.footer{
     background-color:black ;
-    padding: 0 200px;
     color:white;
 }
-.footer .mg-footer .row .col{
+.footer .row .col{
     display:flex;
     flex-direction: column;
     justify-content: center;
 }
-.footer .mg-footer .col {
+.footer .col {
     height:300px;
 }
 @media screen and (max-width: 600px){
@@ -144,7 +140,7 @@ input{
         padding: 20px;
         height:400px;   
     }
-    .footer .mg-footer{
+    .footer {
         padding: 0 10px;
     }
 }
