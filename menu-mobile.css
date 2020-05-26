@@ -14,9 +14,9 @@
 .menu2{
     background-attachment: fixed;
     padding-top: 100px ;
-   display: flex;
+    display: flex;
     flex-direction: column;
-   width:260px;  
+    width:260px;  
 }
 #swapper.active , .exit{
     left:0 !important;
@@ -64,6 +64,58 @@ span{
 .mg-left-right {
     margin:0 50px;
 }
+
+.login-content,.regis-content{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+.login-regis-swapper input{
+    height: 30px;
+    margin: 15px;
+    height: 35px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(137, 6, 32);
+    border-image: initial;
+    border-radius: 5px;
+}
+.forgot-pass a{
+    float: right;
+    margin-right: 18px;
+}
+.lg-rg-button{
+    margin:20px 0 ;
+    height:50px;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+}
+.lg-rg-button div{
+ margin: auto;
+ cursor: pointer;
+}
+.login-regis-swapper{
+    position: fixed;
+     height: 800px;
+     background-color: white;
+    border: 1px solid black;
+     top:0;
+     right:0;
+     box-shadow: 0px 0px 15px 1px rgba(133,129,133,0.92);
+     z-index: 1001;
+     transition: 0.5s linear;
+     transform: translateX(100%);
+ }
+ .lg-rg-button div:hover{
+     color:rgb(137, 6, 32)!important;
+ }
+
+
+
 @media (min-width:800px) {
     #menu-click{
         display: none;

@@ -9,6 +9,7 @@
         <title>Exercise</title>
     </head>
     <body>
+        <!--menu-bar-->
         <div class="header">
         <div class="mg-left-right " >
                 <div class="row">
@@ -116,20 +117,62 @@
         </div>
     </div>
  </div>
+ <!--login-->
+ <div class="login-regis-swapper">
+    
+    <div class="login-regis">
+    
+      <div class="lg-rg-button">
+         <div class="login">
+          Login
+          </div>
+         <div class="register">
+          Register
+          </div>
+          <div class="exit-form-login"><i class="fas fa-times fa-lg"></i></div>
+       </div>
+    
+        <div class="login-form">
+          <div class="login-swapper">
+            <form class="login-content">
+              <input type="text" id="username" name="username" class="lg-uesrname" placeholder="USERNAME">
+              <input type="text" id="password" name="password" class="lg-password" placeholder="PASSWORD">
+              <div class="forgot-pass"><a href="#"> Forgot your password</a></div>
+              <input type="submit" value="login">
+            </form>
+          </div>
+        </div>
+        </div>
+    
+    
+        <div class="regis-form" style="display:none">
+          <div class="regis-swapper">
+            <form class="regis-content">
+             <input type="text" id="name" name="username" class="rname" placeholder="name">
+             <input type="text" id="regis-username" name="rgusername" class="rg-uesrname" placeholder="USERNAME">
+             <input type="text" id="confirm-username" name="cfusername" class="cf-uesrname" placeholder="CONFIRM USERNAME">
+             <input type="password" id="regis-password" name="rgpassword" class="rg-password" placeholder="PASSWORD">
+             <input type="password" id="confirm-password" name="cfpassword" class="cf-password" placeholder="PASSWORD">
+             <input type="submit" value="register">
+             </form>
+         </div>
+        </div>
+    
+    </div>
 <!--main-->
  <div class="main">
      <!--section1-->
-    <section class=section1>
-        <div class=row>
-            <div class="col-12">
+    <section class="section1">
+        
+        
                 <div class="background">
                     <div class="wall">
                         <p>HNH</p>
                         <p>HUMAN & HEART</p>
                     </div>
                 </div>
-            </div>
-        </div>
+         
+ 
     </section>
  
      <!--section2-->
@@ -151,7 +194,45 @@
                         </div>
                     </div>
                 </div>
+            
             </div>
+<!--carousel-->
+        <div class="container mt-3">
+
+            <h2>Carousel</h2>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ul>
+                
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="./image/slide1.jpg" alt="pic1" width="1100" height="400">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="./image/slide2.jpg" alt="pic2" width="1100" height="400">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="./image/slide3.jpg" alt="pic3" width="1100" height="400">
+                    </div>
+                </div>
+                
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+
+        </div>
+
             <div class="best-sale">
                 <h1>
                     best sale of shop
@@ -320,6 +401,12 @@
         </div>
     </div>  
 </div>
+
+
+
+
+
+
 
 
         <script src="xxx.js"></script>
