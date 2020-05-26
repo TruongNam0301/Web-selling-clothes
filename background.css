@@ -120,15 +120,15 @@ input{
 .footer{
     background-color:black ;
     color:white;
+    
 }
-.footer .row .col{
+.footer .row .column{
     display:flex;
     flex-direction: column;
     justify-content: center;
+    height:250px;
 }
-.footer .col {
-    height:300px;
-}
+
 @media screen and (max-width: 600px){
     .introduce{
         margin: 10px 0;
@@ -148,4 +148,5 @@ input{
     .footer {
         padding: 0 10px;
     }
+
 }
