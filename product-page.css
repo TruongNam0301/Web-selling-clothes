@@ -1,0 +1,27 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.check-product-board{
+    margin-top: 200px;
+    background-color: antiquewhite;
+}
+.check-product-board .product{
+    padding: 10px 10px;
+    border-top: 1px solid black;
+}
+.product-view {
+    margin-top: 200px;
+    text-align: center;
+}
+.product-view .product{
+    border: 1px solid black;
+}
+.product-view .product .item{
+    width: 100%;
+    height:auto;
+}
+.product-view .product .item-info{
+    background-color: #ffe;
+    padding: 25px 18px;
+}
