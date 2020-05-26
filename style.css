@@ -11,6 +11,13 @@ a{
 li{
 	list-style: none;
 }
+.header{
+	background-color: #fff;
+	position: fixed;
+	z-index: 10;
+	width: 100%;
+	
+}
 .header .mg-left-right .menu-bar .menu{
 	margin: 0;
 	display: flex;
