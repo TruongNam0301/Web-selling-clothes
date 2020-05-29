@@ -6,7 +6,7 @@ body{
     height:400px;
     background-color: white;
     background-image: url(./image/product-bg.jpg);
-    background-size: cover;
+    background-size:contain;
     background-position: center;
 }
 .check-product-board{
