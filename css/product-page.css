@@ -5,7 +5,7 @@ body{
 .background{
     height:400px;
     background-color: white;
-    background-image: url(./image/product-bg.jpg);
+    background-image: url(../image/product-bg.jpg);
     background-size:contain;
     background-position: center;
 }

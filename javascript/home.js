@@ -7,13 +7,15 @@ if (document.readyState == 'loading') {
      ChangeLoginRegister();
      OpenAndExitLogin();
  }
-//search-icon
+
+//click search-icon 
 function displayONOFF(string){
     var s=document.getElementsByClassName(string)[0];
     if(s.style.display=="block") s.style.display="none";
     else if(s.style.display="none") s.style.display="block";
 }
-//menu-mobile
+
+//open and exit menu-mobile by add class "active"
 function menuActive(){
     document.getElementById("swapper").classList.add("active");
     document.getElementById("menu-exit").classList.add("exit");
@@ -22,7 +24,8 @@ function menuExit(){
     document.getElementById("swapper").classList.remove("active");
     document.getElementById("menu-exit").classList.remove("exit");
 }
-//login
+
+//change login to register function
 function ChangeLoginRegister(){
     var loginForm=document.querySelector(".login-form");
     var regisForm=document.querySelector(".regis-form");
@@ -38,17 +41,17 @@ function ChangeLoginRegister(){
         loginForm.style.display="none";
     })
 }
-
+//open and exit login register form function
 function OpenAndExitLogin(){
     var iconLg=document.querySelector(".icon-login");
     var iconExitLg=document.querySelector(".exit-form-login");
-    var lgrsSwapper=document.querySelector(".login-regis-swapper");
+    var LoginRegisSwapper=document.querySelector(".login-regis-swapper");
     iconLg.addEventListener("click",function(){
-        if(lgrsSwapper.style.visibility!="visible")
-        lgrsSwapper.style.transform=" translateX(0)";
+        if( LoginRegisSwapper.style.visibility!="visible")
+         LoginRegisSwapper.style.transform=" translateX(0)";
     })
     iconExitLg.addEventListener("click",function(){
-    lgrsSwapper.style.transform="translateX(100%)";
+    LoginRegisSwapper.style.transform="translateX(100%)";
     })
 }
 
