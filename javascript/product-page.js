@@ -4,9 +4,16 @@ if (document.readyState == 'loading') {
     ready()
 }
 
+if (localStorage.length>0){
+    arrCart= JSON.parse(localStorage.getItem("cart"));
+}
+else {
+    var arrCart=[];
+}
 
 function ready(){
     var addCartButton=document.getElementsByClassName("add-cart-btn");
+   
     for (var i=0;i<addCartButton.length;++i){
         var button=addCartButton[i];
         button.addEventListener("click",addToCartClicked)
@@ -25,33 +32,29 @@ function ready(){
     })
     
 }
-    
+ 
 function addToCartClicked (){
     var button =event.target;
     var productRow=button.parentElement.parentElement.parentElement;
     var imageSrc=productRow.getElementsByClassName("item")[0].src;
     var title= productRow.getElementsByClassName("item-title")[0].innerText;
     var price= productRow.getElementsByClassName("item-price")[0].innerText;
-    addToCart(imageSrc,title,price);
+    var objectProduct={image:imageSrc,title:title,price:price};
+    
+    var checked=arrCart.find(function(object){
+        if(object.image===objectProduct.image) {
+            alert("the item was available in the cart");
+            return 1;
+        }
+    })
+     if(typeof(checked)!=='object'){
+        arrCart.push(objectProduct);
+        localStorage.setItem("cart",JSON.stringify(arrCart));
+     }
+       
 }
 
-function addToCart(imageSrc,title,price){
-    var cartRow =document.createElement("div");
-    cartRow.classList.add("cart-row");
-    var cartItems=document.getElementsByClassName("cart-items")[0];
-    var cartRowContent=`
-    <div class="cart-item cart-column">
-        <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
-        <span class="cart-item-title">${title}</span>
-    </div>
-    <span class="cart-price cart-column">${price}</span>
-    <div class="cart-quantity cart-column">
-        <input class="cart-quantity-input" type="number" value="1">
-        <button class="btn btn-danger" type="button">REMOVE</button>
-    </div>
-    `
-    cartRow.innerHTML=cartRowContent;
-    cartItems.append(cartRow);
-}
+
+
 
 
