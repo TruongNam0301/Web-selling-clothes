@@ -85,13 +85,13 @@
     0%{
         background-image: url(../image/product1.jpg);
     }
-    35%{
+    30%{
         background-image: url(../image/product2.jpg);
     }
-    65%{
+    60%{
         background-image: url(../image/product3.jpg);
     }
-    85%{
+    90%{
         background-image: url(../image/product4.jpg);
     }
 } 
