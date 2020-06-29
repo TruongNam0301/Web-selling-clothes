@@ -1,33 +1,32 @@
 <?php
   $conn = mysqli_connect("localhost", "root","","sellclothes");
-  // Check connection
+
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
   }
-  if(isset($_POST['idType'])){
+
+  if(isset($_POST['idType'])&&isset($_POST['page'])){
     $idType = $_POST['idType'];
+    $page = $_POST['page'];
+    $start = ($page-1)*6;
     if($idType == 0){
-      $sql="SELECT name,price,picture FROM clothes";
+      $sql="SELECT name,price,picture FROM clothes LIMIT $start,6";
     }
     else{
-      $sql = "SELECT name,price,picture FROM clothes WHERE id_type = $idType " ;
+      $sql = "SELECT name,price,picture FROM clothes WHERE id_type = $idType LIMIT $start,6" ;
     }
   }
 
   $result = mysqli_query($conn,$sql);
-  
-  
-    if (mysqli_num_rows($result) > 0){
-      while($row = mysqli_fetch_array($result)) {
-        OutputDataGridView($row['name'],$row['price'],$row['picture']);
-      }
+
+  if (mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_array($result)) {
+      OutputDataGridView($row['name'],$row['price'],$row['picture']);
     }
-    else{
-      echo "empty data";
-    };
-
-  
-
+  }
+  else{
+    echo "empty data";
+  };
 
   function OutputDataGridView ($name,$price,$image){
     $str = <<<EOD
@@ -42,7 +41,6 @@
               </div>
           </div>
       </div>
-
     EOD;
     echo $str;
   }

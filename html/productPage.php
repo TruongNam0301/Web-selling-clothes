@@ -30,26 +30,28 @@
                     <div class="col-lg-3">
                         <div class="check-product-board">
                             <div class="list-product">
-                                <div class="product jacket">
-                                    <input type="radio" class="check" name = "type" value ="0" checked="checked">
+                                <div class="product">
+                                    <input type="radio" class="check" name = "type" value ="0" checked ="checked">
                                     <label>all</label>
                                 </div>
-                                <div class="product jacket">
-                                    <input type="radio" class="check" name = "type" value ="1">
-                                    <label>Jacket</label>
-                                </div>
-                                <div class="product t-shirt">
-                                    <input type="radio" class="check" name = "type" value ="2">
-                                    <label>t-shirt</label>
-                                </div>
-                                <div class="product shirt">
-                                    <input type="radio" class="check" name = "type" value ="3">
-                                    <label>shirt</label>
-                                </div>
-                                <div class="product jean">
-                                    <input type="radio" class="check" name = "type" value ="4">
-                                    <label>jean</label>
-                                </div>
+                                <?php
+                                $conn = mysqli_connect("localhost", "root","","sellclothes");
+                                if (!$conn) {
+                                  die("Connection failed: " . mysqli_connect_error());
+                                }
+                                $sql = "SELECT * FROM typeclothes";
+                                $result = mysqli_query($conn,$sql);
+                                if(mysqli_num_rows($result)>0){
+                                    while($row = mysqli_fetch_array($result)){
+                                        echo <<<EOD
+                                        <div class="product">
+                                            <input type="radio" class="check" name = "type" value ="$row[id_type]">
+                                            <label>$row[name_type]</label>
+                                        </div>
+                                        EOD;
+                                    }
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -65,30 +67,56 @@
                             </div>
                     <!--grid-view-->
                             <div class="product-gridview">
-                                <div class= 'row gridView' >
-                                </div>
+                                <div class= 'row gridView' ></div>
+                                <div class="pagination"> </div>
                             </div>
+                            
                             <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
                             <script type = "text/javascript">
-                                function loadData (val=0){
+                                function loadData (val=0,page=1){
                                     $.ajax({ 
                                         type: 'POST', 
-                                        data: {idType:val},
+                                        data: {idType:val,page:page},
                                         url: "connect.php",   
-                                        async: false,
                                         success : function(text){
                                             $('.gridView').html(text);
                                         }
-                                        }) 
+                                    }) 
+                                }
+                                function loadPagination(val){
+                                    $.ajax({ 
+                                        type: 'POST', 
+                                        data: {idType:val},
+                                        url: "pagination.php",   
+                                        success : function(text){
+                                            $('.pagination').html(text);
+                                        }
+                                    }) 
                                 }
                                 $(document).ready(function(){
-                                    loadData();
+                                    let val = <?php if(isset($_GET['idType'])){
+                                        echo $_GET['idType'];
+                                    }
+                                    else {
+                                        echo 0;
+                                    }
+                                    ?>;
+                                    let page = <?php if(isset($_GET['page'])){
+                                        echo $_GET['page'];
+                                    }
+                                    else {
+                                        echo 1;
+                                    }
+                                    ?>;
+                                    loadData(val,page);
+                                    loadPagination(val);   
                                     $(".check").on("click",function (){  
                                         val= $(this).val(); 
                                         loadData(val);
-                                    })    
+                                        loadPagination(val);
+                                    })
                                 })
-                               
+                                
                             </script>
                         </div>
                     </div>
