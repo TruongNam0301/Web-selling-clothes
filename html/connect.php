@@ -29,21 +29,21 @@
   };
 
   function OutputDataGridView ($id,$name,$price,$image){
-    $str = <<<EOD
-      <div class="col-lg-4">
-          <div class="product sanpham">
-          <a href="product.php?id=$id">
-              <div class="image-item">
+    $str = "
+      <div class='col-lg-4'>
+          <div class='product sanpham'>
+          <a href='product.php?id=$id'>
+              <div class='image-item'>
                   <img src='../image/image_product/$image' class='item' >
               </div>
-              <div class="item-detail">
-                  <span class="item-title">$name</span>
-                  <span class="item-price">$price</span>
+              <div class='item-detail'>
+                  <span class='item-title'>$name</span>
+                  <span class='item-price'>$price</span>
               </div>
               </a>
           </div>
-      </div>
-    EOD;
+      </div>";
+    
     echo $str;
   }
   mysqli_close($conn);
