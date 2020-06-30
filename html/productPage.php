@@ -73,6 +73,7 @@
                             
                             <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
                             <script type = "text/javascript">
+
                                 function loadData (val=0,page=1){
                                     $.ajax({ 
                                         type: 'POST', 
@@ -83,16 +84,20 @@
                                         }
                                     }) 
                                 }
-
-                                function loadPagination(val){
+                               
+                                function loadPagination(val,page=1){
                                     $.ajax({ 
                                         type: 'POST', 
-                                        data: {idType:val},
+                                        data: {idType:val,page:page},
                                         url: "pagination.php",   
                                         success : function(text){
                                             $('.pagination').html(text);
+                                            $('.sanpham').click(function(){
+                                                console.log($(this).data("id"))
+                                            })
                                         }
                                     }) 
+                                    
                                 }
                                 
                                 $(document).ready(function(){
@@ -112,13 +117,21 @@
                                     ?>;
                                     $( "[name=type]" ).val( [val.toString()])
                                     loadData(val,page);
-                                    loadPagination(val);   
+                                    loadPagination(val,page);   
                                     $(".check").on("click",function (){  
                                         val= $(this).val(); 
                                         loadData(val);
                                         loadPagination(val);
-                                    })
+                                    });
+                                    
+                                    
                                 })
+                                    
+                            
+                                   
+                    
+                                
+                                
                                 
                             </script>
                         </div>
