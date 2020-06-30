@@ -68,7 +68,9 @@ EOD;
                     <!--grid-view-->
                             <div class="product-gridview">
                                 <div class= 'row gridView' ></div>
-                                <div class="pagination"> </div>
+                                <div class="pagination"> 
+
+                                </div>
                             </div>
                             
                             <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -90,6 +92,12 @@ EOD;
                                         url: "pagination.php",   
                                         success : function(text){
                                             $('.pagination').html(text);
+                                            $(".pagination input").on("click",function(){
+                                                var page = $(this).val();
+                                                $(".pagination input").css({'background-color':'aqua'});
+                                                $(this).css({'background-color':'yellow'});
+                                                loadData(val,page);
+                                            });
                                         }
                                     }) 
                                 }
@@ -114,7 +122,10 @@ EOD;
                                         val= $(this).val(); 
                                         loadData(val);
                                         loadPagination(val);
-                                    })
+                                        
+                                    });
+                                 
+                                    
                                 })
                                 
                             </script>

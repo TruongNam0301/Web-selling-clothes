@@ -1,9 +1,3 @@
-<html>
-    <head>
-        <style>
-            .btn.current{background: #f00; color:#fff; border: 1px solid #000} /*change it however you like*/
-        </style>
-    </head>
 <?php
     $conn = mysqli_connect("localhost", "root","","sellclothes");
     if (!$conn) {
@@ -27,13 +21,13 @@
     $numPage = ceil($totalSP / $numSP) ;
     $currentPage = $_POST['page'];
     
-
     for ($i=1;$i<=$numPage;$i++){
-        if($i==$currentPage)
+        /*if($i==$currentPage)
             echo "<a style='margin:10px; background-color:red' class= 'btn btn-primary '  href='productPage.php?idType=$idType&&page=$i'>".$i. "</a>";
         else
-            echo "<a style='margin:10px' class= 'btn btn-primary '  href='productPage.php?idType=$idType&&page=$i'>".$i. "</a>";
+            echo "<a style='margin:10px' class= 'btn btn-primary '  href='productPage.php?idType=$idType&&page=$i'>".$i. "</a>";*/
+            echo "<input type='button' style='margin:10px' class= 'btn btn-primary' id='myBtn' value='{$i}'>";
     }
+     mysqli_close($conn);
 ?>
 
-</html>

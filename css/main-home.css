@@ -151,3 +151,20 @@ input{
     }
 
 }
+
+
+.pagination input{
+    color:black;
+    background-color: aqua;
+}
+
+.pagination input:hover{
+    color:black;
+    background-color: yellow;
+}
+
+
+.pagination input:active{
+    color:black;
+    background-color: yellow;
+}
