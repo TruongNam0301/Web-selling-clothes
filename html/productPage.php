@@ -43,12 +43,12 @@
                                 $result = mysqli_query($conn,$sql);
                                 if(mysqli_num_rows($result)>0){
                                     while($row = mysqli_fetch_array($result)){
-                                        echo <<<EOD
-                                        <div class="product">
-                                            <input type="radio" class="check" name = "type" value ="$row[id_type]">
+                                        echo "
+                                        <div class='product'>
+                                            <input type='radio' class='check' name = 'type' value ='$row[id_type]'>
                                             <label>$row[name_type]</label>
                                         </div>
-                                        EOD;
+                                        ";
                                     }
                                 }
                                 ?>
