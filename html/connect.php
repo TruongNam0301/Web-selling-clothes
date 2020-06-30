@@ -29,6 +29,7 @@
   };
 
   function OutputDataGridView ($name,$price,$image){
+    $money=number_format($price,0,",",".");
 $str = <<<EOD
 <div class="col-lg-4">
 <div class="product">
@@ -36,8 +37,9 @@ $str = <<<EOD
 <img src='../image/image_product/$image' class='item' >
 </div>
 <div class="item-detail">
-<span class="item-title">$name</span>
-<span class="item-price">$price</span>
+<p align="center" class="item-title">$name :</p>
+<p align="center" class="item-price">$money <b>VND</b></p>
+
 </div>
 </div>
 </div>
