@@ -92,12 +92,11 @@
                                         url: "pagination.php",   
                                         success : function(text){
                                             $('.pagination').html(text);
-                                        
-                                        }      
-                                    })     
+                                           
+                                           
+                                        }
+                                    })
                                 }
-                                
-                                
                  
                                     
                                 

@@ -1,7 +1,8 @@
 
 <?php
-   $val= $_GET['id'];
-    echo $val;
+
+   echo $_GET['id'];
+
     
 ?>
 
