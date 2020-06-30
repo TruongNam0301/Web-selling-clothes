@@ -31,7 +31,7 @@
                         <div class="check-product-board">
                             <div class="list-product">
                                 <div class="product">
-                                    <input type="radio" class="check" name = "type" value ="0" checked ="checked">
+                                    <input type="radio" class="check" name = "type" value ="0" >
                                     <label>all</label>
                                 </div>
                                 <?php
@@ -83,6 +83,7 @@
                                         }
                                     }) 
                                 }
+
                                 function loadPagination(val){
                                     $.ajax({ 
                                         type: 'POST', 
@@ -93,6 +94,7 @@
                                         }
                                     }) 
                                 }
+                                
                                 $(document).ready(function(){
                                     let val = <?php if(isset($_GET['idType'])){
                                         echo $_GET['idType'];
@@ -108,6 +110,7 @@
                                         echo 1;
                                     }
                                     ?>;
+                                    $( "[name=type]" ).val( [val.toString()])
                                     loadData(val,page);
                                     loadPagination(val);   
                                     $(".check").on("click",function (){  
