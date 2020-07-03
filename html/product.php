@@ -200,10 +200,10 @@
             </div>
             <label for="size">Choose size: </label>
             <select name="size" id="size" style="margin-left: 14px;">
-                <option value="m">m</option>
-                <option value="sm">sm</option>
-                <option value="l">l</option>
-                <option value="xl">xl</option>
+                <option value="M">M</option>
+                <option value="SM">SM</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
             </select>
         </div>
         

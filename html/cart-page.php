@@ -54,29 +54,33 @@
                         cartItem($row['picture'],$row['name'],$row['price'],$item['quantity'],$item['size'],$i);
                     }
                 }
+              
                 function cartItem ($image,$title,$price,$quantity,$size,$i){
-                    $str ="
-                    <div class= 'cart-row'>
-                    <div class='cart-item cart-column'>
-                        <img class='cart-item-image' src='../image/image_product/$image' width='100' height='100'>
-                        <span class='cart-item-title'>$title</span>
-                    </div>
-                    <span class='cart-price cart-column'>$price</span>
-                    <div class='cart-quantity cart-column'>
-                        <input class='cart-quantity-input' type='number' min='1' value='$quantity'> 
-                    </div>
-                    <div class='cart-quantity cart-column'>
-                    <select name='size' id='size' style='margin-right: 14px; value = $size'>
-                        <option value='m'>M</option>
-                        <option value='sm'>SM</option>
-                        <option value='l'>L</option>
-                        <option value='xl'>XL</option>
-                    </select>
-                    <button class='btn btn-danger remove-item' data-index=$i  type='button'>REMOVE</button>
-                    </div>
-                </div>
-        ";
-        echo $str;
+                    $check_size=array("M","SM","L","XL");
+                    echo "<div class= 'cart-row'>";
+                    echo "<div class='cart-item cart-column'>";
+                    echo "<img class='cart-item-image' src='../image/image_product/$image' width='100' height='100'>";
+                    echo "<span class='cart-item-title'>$title</span>";
+                    echo "</div>";
+                    echo "<span class='cart-price cart-column'>$price</span>";
+                    echo "<div class='cart-quantity cart-column'>";
+                    echo "<input class='cart-quantity-input' type='number' min='1' value='$quantity'> ";
+                    echo "</div>";
+                    echo "<div class='cart-quantity cart-column'>";
+                    echo "<select name='size' id='size' style='margin-right: 14px;'> ";
+                    foreach($check_size as $x){
+                        if($x==$size){
+                           echo "<option value='$x' selected='selected'>$x</option>";
+                        }
+                        else{
+                            echo "<option value='$x'>".$x."</option>";
+                        }
+                    }
+                    echo "</select>";
+                    echo "<button class='btn btn-danger remove-item' data-index=$i  type='button'>REMOVE</button>";
+                    echo "</div>";
+                echo "</div>";
+        
                 }
 ?>
 
