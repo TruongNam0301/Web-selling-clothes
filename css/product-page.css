@@ -56,6 +56,7 @@ body{
 
 .product-listview .products .item-detail .item-title {
    font-size: large;
+  
 }
 
 .product-listview .products .item-detail .item-price {
@@ -87,7 +88,21 @@ body{
 .product-gridview .product:hover img{
     transform: scale(1.2,1.2);
 }
-
+.view-detail {
+    text-transform: uppercase;
+    height: 30px;
+    transition: .5s ease;
+    opacity: 1;
+    text-align: center;
+    transition-timing-function: ease;
+    transform: translate(0px,30px);
+}
+.product-gridview .product:hover .view-detail {
+    transform: translate(0px,0px);
+    color: azure;
+    background-color: #333;
+    opacity: 1;
+}
  .cart-header {
     font-weight: bold;
     font-size: 1.25em;

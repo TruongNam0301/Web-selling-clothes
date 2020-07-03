@@ -106,9 +106,10 @@
             position:relative;
             top:1px;
         }
-        .incre:hover ,.decre:hover{
-            background-color: #6c6f73;
+        #decre{
+            margin-left: 20px;
         }
+
         #incre, #decre{
             box-shadow:inset 0px 1px 0px 0px #ffffff;
             background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
@@ -144,7 +145,7 @@
 <script src="https://kit.fontawesome.com/65adf3fa6d.js" crossorigin="anonymous"></script>
 <div class='container'>
 <div class="row">
-<div class="col-6">
+<div class="col-md-6">
     <div class= 'image-product'>
     <img src="../image/image_product/<?php echo $product_pic?>" width="500" height="600"/>
     </div>
@@ -152,7 +153,7 @@
 
 
 
-<div class="col-6" style="color:#555756">
+<div class="col-md-6" style="color:#555756">
     <div class= 'infor-product'>
         <button id="returnBTN" onclick="goBack()"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Go Back</button>
         <h1><?php echo $product_name?></h1>
@@ -173,7 +174,7 @@
        
         <div class="pickOptions">
             <div style="display:flex;flex-direction:row; margin-bottom:10px">
-                <p >so luong: </p>
+                <p style="margin-top:5px">so luong: </p>
                 
                 <button id="decre"><i class="fa fa-minus"  aria-hidden="true"></i></button>
                 <input class="soluong" style="height:40px;width:40px;text-align:center" value="1">
