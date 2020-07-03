@@ -92,16 +92,10 @@
                                         url: "pagination.php",   
                                         success : function(text){
                                             $('.pagination').html(text);
-                                        
-                                        }      
-                                    })     
+                                        }
+                                    })
                                 }
-                                
-                                
                  
-                                    
-                                
-                                
                                 $(document).ready(function(){
                                     let val = <?php if(isset($_GET['idType'])){
                                         echo $_GET['idType'];

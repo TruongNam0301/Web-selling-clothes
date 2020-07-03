@@ -2,7 +2,6 @@
 <?php
     $val= $_GET['id'];
 
-
     $product_name;
     $product_price;
     $product_pic;
@@ -172,6 +171,7 @@
             </div>
         </div>
         <hr>
+       
         <div class="pickOptions">
             <div style="display:flex;flex-direction:row; margin-bottom:10px">
                 <p style="margin-top:5px">so luong: </p>
@@ -208,7 +208,27 @@
         </div>
         
         <div class="CartButton"><button id="addToCartButton">ADD TO CART</button></div>
+        <a href = 'cart-page.php' >ssssssssssssssssssssssss</a>
         </div>
+        <script>
+            function postCart (id,quantity,size,action){
+                $.post( 'xulygiohang.php', { id:id,quantity:quantity,size:size,action:action },function(res){
+                   if(res==1) alert('alredy in cart bro');
+                   else console.log(res);
+                } );
+            }
+            $(document).ready(function(){
+                $('.CartButton').on('click',function(){
+                    let quantity = $('.soluong').val();
+                    let size = $('#size').val();
+                    let id = <?php echo $_GET['id'] ?>;
+                    let action = 'add'
+                    postCart(id,quantity,size,action);  
+                });
+            })
+
+
+        </script>
     </div>
 </div>
 </div>
