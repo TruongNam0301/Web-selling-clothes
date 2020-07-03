@@ -29,9 +29,8 @@ if(isset($_POST['id'])&&$_POST['action']=='add'){
 else if($_POST['action']=='delete'){
     if(isset($_POST['index'])){
         $index=$_POST['index'];
-        array_splice($_SESSION['cart'],$index);
-        print_r( $_SESSION['cart']);
-    }
+         unset($_SESSION['cart'][$index]);
+    
 }
-
+}
 ?>

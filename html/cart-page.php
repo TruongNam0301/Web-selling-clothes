@@ -46,7 +46,7 @@
                 if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
                 }
-                for($i=0;$i<sizeof($_SESSION['cart']);$i++){
+                foreach($_SESSION['cart'] as $i=>$val){
                     $item = $_SESSION['cart'][$i];
                     $sql = "SELECT * FROM clothes WHERE id=$item[id]";
                     $result = mysqli_query($conn,$sql);
@@ -55,27 +55,27 @@
                     }
                 }
                 function cartItem ($image,$title,$price,$quantity,$size,$i){
-                    $str =<<< EOD
+                    $str ="
                     <div class= 'cart-row'>
-                    <div class="cart-item cart-column">
-                        <img class="cart-item-image" src="../image/image_product/$image" width="100" height="100">
-                        <span class="cart-item-title">$title</span>
+                    <div class='cart-item cart-column'>
+                        <img class='cart-item-image' src='../image/image_product/$image' width='100' height='100'>
+                        <span class='cart-item-title'>$title</span>
                     </div>
-                    <span class="cart-price cart-column">$price</span>
-                    <div class="cart-quantity cart-column">
-                        <input class="cart-quantity-input" type="number" min='1' value="$quantity"> 
+                    <span class='cart-price cart-column'>$price</span>
+                    <div class='cart-quantity cart-column'>
+                        <input class='cart-quantity-input' type='number' min='1' value='$quantity'> 
                     </div>
-                    <div class="cart-quantity cart-column">
-                    <select name="size" id="size" style="margin-right: 14px; value = $size">
-                        <option value="m">M</option>
-                        <option value="sm">SM</option>
-                        <option value="l">L</option>
-                        <option value="xl">XL</option>
+                    <div class='cart-quantity cart-column'>
+                    <select name='size' id='size' style='margin-right: 14px; value = $size'>
+                        <option value='m'>M</option>
+                        <option value='sm'>SM</option>
+                        <option value='l'>L</option>
+                        <option value='xl'>XL</option>
                     </select>
-                    <button class="btn btn-danger remove-item" data-index=$i  type="button">REMOVE</button>
+                    <button class='btn btn-danger remove-item' data-index=$i  type='button'>REMOVE</button>
                     </div>
                 </div>
-        EOD;
+        ";
         echo $str;
                 }
 ?>
@@ -91,7 +91,6 @@
         
        <script>
         $(document).ready(function(){
-            updateQuantity();   
             $('.remove-item').on('click',function(){
                 let index = $(this).data('index');
                 let deleteButton =$(this).parents('.cart-row');
@@ -100,6 +99,7 @@
                     type:'POST',
                     data:{index:index,action:'delete'},
                     success: function(res){
+                        console.log(index);
                        deleteButton.remove();
                     }
                 })
