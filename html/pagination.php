@@ -17,7 +17,7 @@
     }
     $check =  mysqli_query($conn,$sql2);
     $totalSP = mysqli_num_rows($check);
-    $numSP = 6;
+    $numSP = 12;
     $numPage = ceil($totalSP / $numSP) ;
     $currentPage = $_POST['page'];
     

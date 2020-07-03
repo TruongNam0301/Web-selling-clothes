@@ -117,7 +117,7 @@
                                         echo 1;
                                     }
                                     ?>;
-                                    $( "[name=type]" ).val( [val.toString()])
+                                    $( "[name=type]" ).val( [val.toString()]);
                                     loadData(val,page);
                                     loadPagination(val,page);   
                                     $(".check").on("click",function (){  

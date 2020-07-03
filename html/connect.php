@@ -10,7 +10,7 @@
     $page = $_POST['page'];
     $start = ($page-1)*6;
     if($idType == 0){
-      $sql="SELECT id,name,price,picture FROM clothes LIMIT $start,6";
+      $sql="SELECT id,name,price,picture FROM clothes LIMIT $start,12";
     }
     else{
       $sql = "SELECT id,name,price,picture FROM clothes WHERE id_type = $idType LIMIT $start,6" ;
