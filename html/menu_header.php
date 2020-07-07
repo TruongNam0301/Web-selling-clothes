@@ -119,13 +119,15 @@
     </div>
     <div class="regis-form" style="display:none">
         <div class="regis-swapper">
-            <form class="regis-content">
-                <input type="text" id="name" name="username" class="rname" placeholder="name">
+            <form class="regis-content" method="post" action="server.php">
+                
+                <input type="text" id="name" name="rusername" class="rname" placeholder="name">
                 <input type="text" id="regis-username" name="rg-username" class="rg-username" placeholder="USERNAME">
                 <input type="text" id="confirm-username" name="cf-username" class="cf-username" placeholder="CONFIRM USERNAME">
                 <input type="password" id="regis-password" name="rg-password" class="rg-password" placeholder="PASSWORD">
                 <input type="password" id="confirm-password" name="cf-password" class="cf-password" placeholder="PASSWORD">
-                <input type="submit" value="register">
+                <input type="submit"  name="reg_user" class="reg_user" value="register">
+                <div class="error_signup"></div>
             </form>
         </div>
     </div>
