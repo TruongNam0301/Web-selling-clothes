@@ -110,9 +110,10 @@
             <div class="login-swapper">
                 <form class="login-content">
                 <input type="text" id="username" name="username" class="lg-uesrname" placeholder="USERNAME">
-                <input type="text" id="password" name="password" class="lg-password" placeholder="PASSWORD">
+                <input type="password" id="password" name="password" class="lg-password" placeholder="PASSWORD">
                 <div class="forgot-pass"><a href="#"> Forgot your password</a></div>
                 <input type="submit" value="login">
+                <div class="error_login"></div>
                 </form>
             </div>
         </div>

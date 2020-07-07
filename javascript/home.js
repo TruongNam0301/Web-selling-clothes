@@ -7,6 +7,8 @@ if (document.readyState == 'loading') {
  function ready(){
      ChangeLoginRegister();
      OpenAndExitLogin();
+
+     //prevent space input
      $("input.lg-uesrname, input.lg-password, input.rname, input.rg-username, input.cf-username, input.rg-password, input.cf-password").on({
         keydown: function(e) {
             if (e.which === 32)
@@ -16,6 +18,8 @@ if (document.readyState == 'loading') {
             this.value = this.value.replace(/\s/g, "");
         }
     });
+
+    //sign up form function
     $("form.regis-content").submit(function(e){
         var name = $("#name").val();
         var username= $("#regis-username").val();
@@ -34,6 +38,19 @@ if (document.readyState == 'loading') {
          });
     });
 
+    //login form function
+    $("form.login-content").submit(function(e){
+        var lg_name = $("#username").val();
+        var lg_password=$("#password").val();
+        
+        console.log(lg_name,lg_password);
+        e.preventDefault();
+        $(".error_login").load("server.php", {
+            lg_name : lg_name,
+            lg_password : lg_password,
+            login: "ok",
+         });
+    });
  }
 
 //click search-icon 

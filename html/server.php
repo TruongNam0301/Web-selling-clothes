@@ -42,13 +42,45 @@
                 }
             }
             if ($error_user==false) {
-                $password = md5($password);//encrypt the password before saving in the database
+                $password = password_hash($password, PASSWORD_BCRYPT, array('cost'=>12));//encrypt the password before saving in the database
                 $query = "INSERT INTO accounts  (id, username, password) VALUES(NULL, '$username', '$password')";
                 mysqli_query($db, $query);
                 echo "<p style='color:green' >sign up success!!!</p>";
             }
         }
     }
-    else
-        echo "fail to get data plz check again!!!";
+
+    if(isset($_POST['login'])){
+        $lg_name=$_POST['lg_name'];
+        $lg_password=$_POST['lg_password'];
+        $empty_error=false;
+        if(empty($lg_name)){
+            echo "<p>username is empty please fill it</p>";
+            $empty_error=true;
+        }
+        if(empty($lg_password)){
+            echo "<p>password is empty please fill it</p>";
+            $empty_error=true;
+        }
+        if($empty_error==false){
+            $user_check_query = "SELECT * FROM accounts WHERE username='$lg_name' LIMIT 1";
+            $result = mysqli_query($db, $user_check_query);
+            $user = mysqli_fetch_assoc($result);
+            $hashed_password= $user['password'];
+            if($user){  
+                if(password_verify($lg_password,$hashed_password )){
+
+                    echo "<p style='color:green' >login success!!!</p>";
+        
+                    }
+                else{
+                    
+                    echo '<p>Password is invalid</p>';
+                    echo $hashed_password ;
+                }
+            }
+            else
+                echo "<p>wrong username please check it again!</p>";
+        }
+    }
 ?>
