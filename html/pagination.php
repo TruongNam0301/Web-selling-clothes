@@ -17,15 +17,14 @@
     }
     $check =  mysqli_query($conn,$sql2);
     $totalSP = mysqli_num_rows($check);
-    $numSP = 6;
+    $numSP = 12;
     $numPage = ceil($totalSP / $numSP) ;
     $currentPage = $_POST['page'];
-    
-
+    $idType = $_POST['idType'];
     for ($i=1;$i<=$numPage;$i++){
         if($i==$currentPage)
-            echo "<a style='margin:10px; background-color:red' class= 'btn btn-primary '  href='productPage.php?idType=$idType&&page=$i'>".$i. "</a>";
+            echo "<a style='margin:10px; background-color:red' class= 'btn btn-primary '  href='productPage.php?page=$i'>".$i. "</a>";
         else
-            echo "<a style='margin:10px' class= 'btn btn-primary '  href='productPage.php?idType=$idType&&page=$i'>".$i. "</a>";
+            echo "<a style='margin:10px' class= 'btn btn-primary '  href='productPage.php?page=$i'>".$i. "</a>";
     }
 ?>

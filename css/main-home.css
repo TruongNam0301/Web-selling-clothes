@@ -5,6 +5,20 @@
     background-size: cover;
     background-position: center;
 }
+.count {
+    position: absolute;
+    top: 30px;
+    right:71px;
+    width: 18px;
+    height: 18px;
+    color: white;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    display: inline-block;
+    background-color: red;
+    border-radius: 50%;
+}
 .main .background .wall {
     height: 100%;
     display: flex;

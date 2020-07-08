@@ -26,6 +26,7 @@
 ?>
 
 <head>
+
     <style type="text/css">
         #addToCartButton{
             box-shadow:inset 0px 38px 0px -24px #e67a73;
@@ -81,31 +82,7 @@
             height:100px ;
             
         }
-        #returnBTN{
-            box-shadow:inset 0px 1px 0px 0px #fff6af;
-            background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-            background-color:#ffec64;
-            border-radius:6px;
-            border:1px solid #ffaa22;
-            display:inline-block;
-            cursor:pointer;
-            color:#333333;
-            font-family:Arial;
-            font-size:15px;
-            font-weight:bold;
-            padding:15px 31px;
-            text-decoration:none;
-            text-shadow:0px 1px 0px #ffee66;
-            font-size: 20px;
-        }
-        #returnBTN:hover {
-            background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-            background-color:#ffab23;
-        }
-        #returnBTN:active {
-            position:relative;
-            top:1px;
-        }
+        
         #decre{
             margin-left: 20px;
         }
@@ -143,7 +120,21 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <script src="https://kit.fontawesome.com/65adf3fa6d.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../css/menubar.css">
+<link rel="stylesheet" type="text/css" href="../css/menu-mobile.css">
+<link rel="stylesheet" type="text/css" href="../css/main-home.css">
+<link rel="stylesheet" type="text/css" href="../css/product-page.css">
+ <?php
+    include 'menu_header.php'; 
+?>
+<section class="section1">
+                <div class="background">
+                    <div class="wall">
+                    </div>
+                </div>
+            </section>
 <div class='container'>
+    
 <div class="row">
 <div class="col-md-6">
     <div class= 'image-product'>
@@ -153,9 +144,9 @@
 
 
 
+
 <div class="col-md-6" style="color:#555756">
     <div class= 'infor-product'>
-        <button id="returnBTN" onclick="goBack()"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Go Back</button>
         <h1><?php echo $product_name?></h1>
         <h2>
             <?php 
@@ -200,24 +191,27 @@
             </div>
             <label for="size">Choose size: </label>
             <select name="size" id="size" style="margin-left: 14px;">
-                <option value="m">m</option>
-                <option value="sm">sm</option>
-                <option value="l">l</option>
-                <option value="xl">xl</option>
+                <option value="M">M</option>
+                <option value="SM">SM</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
             </select>
         </div>
         
         <div class="CartButton"><button id="addToCartButton">ADD TO CART</button></div>
-        <a href = 'cart-page.php' >ssssssssssssssssssssssss</a>
         </div>
         <script>
             function postCart (id,quantity,size,action){
                 $.post( 'xulygiohang.php', { id:id,quantity:quantity,size:size,action:action },function(res){
-                   if(res==1) alert('alredy in cart bro');
-                   else console.log(res);
+                   if(res==-1) alert('alredy in cart bro');
+                   else {
+                       console.log(res);
+                          $('.count').load('count.php');
+                   }
                 } );
             }
             $(document).ready(function(){
+                $('.count').load('count.php')
                 $('.CartButton').on('click',function(){
                     let quantity = $('.soluong').val();
                     let size = $('#size').val();
@@ -226,9 +220,10 @@
                     postCart(id,quantity,size,action);  
                 });
             })
-
-
         </script>
     </div>
 </div>
 </div>
+<?php
+    include 'footer.php'; 
+?>

@@ -1,5 +1,6 @@
 <?php
-    echo <<< 'EOD'
+    session_start();
+    echo <<< EOD
     <div class="header" >
     <div class="mg-left-right " >
         <div class="row">
@@ -85,7 +86,10 @@
                         </div>
                     </div>
                     <div class="icon-bag">
+                    
                         <a href="../html/cart-page.php"><i class="fas fa-shopping-bag fa-lg"></i></a>
+                       <div class= 'count'>
+                       </div>
                     </div>
                     <div class="icon-login">
                         <div class="icon-login">
@@ -192,5 +196,6 @@
         </div>
     </div>  
 </div>
+
 EOD;
 ?>

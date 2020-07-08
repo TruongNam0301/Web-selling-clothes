@@ -97,13 +97,7 @@
                                 }
                  
                                 $(document).ready(function(){
-                                    let val = <?php if(isset($_GET['idType'])){
-                                        echo $_GET['idType'];
-                                    }
-                                    else {
-                                        echo 0;
-                                    }
-                                    ?>;
+                                    val =  sessionStorage.getItem("check");
                                     let page = <?php if(isset($_GET['page'])){
                                         echo $_GET['page'];
                                     }
@@ -111,24 +105,20 @@
                                         echo 1;
                                     }
                                     ?>;
-                                    $( "[name=type]" ).val( [val.toString()])
+                                    if(val===null) val = 0 ;
+                                    $( "[name=type]" ).val( [val.toString()]);
                                     loadData(val,page);
                                     loadPagination(val,page);   
                                     $(".check").on("click",function (){  
                                         val= $(this).val(); 
+                                        sessionStorage.setItem("check", val)
                                         loadData(val);
                                         loadPagination(val);
-                                    });
-                                    
-                                    
+                                    });   
                                 })
                                     
                             
-                                   
-                    
-                                
-                                
-                                
+
                             </script>
                         </div>
                     </div>
@@ -142,7 +132,6 @@
 
 <!--script-->
     <script src="../javascript/home.js"></script>
-    <script src="../javascript/product-page.js"></script>
     
     </body>
 </html>

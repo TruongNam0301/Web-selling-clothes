@@ -7,6 +7,9 @@ if (document.readyState == 'loading') {
      ChangeLoginRegister();
      OpenAndExitLogin();
  }
+ $(document).ready(function(){
+     $('.count').load('count.php');
+ })
 
 //click search-icon 
 function displayONOFF(string){

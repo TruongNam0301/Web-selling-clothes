@@ -10,7 +10,7 @@
     $page = $_POST['page'];
     $start = ($page-1)*6;
     if($idType == 0){
-      $sql="SELECT id,name,price,picture FROM clothes LIMIT $start,6";
+      $sql="SELECT id,name,price,picture FROM clothes LIMIT $start,12";
     }
     else{
       $sql = "SELECT id,name,price,picture FROM clothes WHERE id_type = $idType LIMIT $start,6" ;
@@ -21,19 +21,19 @@
 
   if (mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_array($result)) {
-      OutputDataGridView($row['id'],$row['name'],$row['price'],$row['picture']);
+      OutputDataGridView($idType,$row['id'],$row['name'],$row['price'],$row['picture']);
     }
   }
   else{
     echo "empty data";
   };
 
-  function OutputDataGridView ($id,$name,$price,$image){
+  function OutputDataGridView ($idType,$id,$name,$price,$image){
     $p=number_format($price,0,",",".");
     $str = "
       <div class='col-lg-4'>
           <div class='product sanpham'>
-          <a href='product.php?id=$id'>
+          <a href='product.php?idType=$idType&&id=$id'>
               <div class='image-item'>
                   <img src='../image/image_product/$image' class='item' style='z-index:-1' >
                   <div class='view-detail' >

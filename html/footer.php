@@ -1,4 +1,5 @@
 <?php
+
     echo <<<'EOD'
     <section class="footer">
                     <div class=container>

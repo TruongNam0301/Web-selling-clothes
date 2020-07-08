@@ -1,15 +1,25 @@
-
-if (document.readyState == 'loading') {
-    document.addEventListener('DOMContentLoaded', ready)
-    
-} else {
-    ready()
-}
-
-function ready(){
-    updateCartTotal(); 
-   
-}
+ $(document).ready(function(){
+      $('.count').load('count.php');
+     updateCartTotal();
+     $('.cart-quantity-input').on('change',function(){
+         updateCartTotal();
+     })
+    $('.remove-item').on('click',function(){
+        let index = $(this).data('index');
+        let deleteButton =$(this).parents('.cart-row');
+        $.ajax({
+            url:'xulygiohang.php',
+            type:'POST',
+            data:{index:index,action:'delete'},
+            success: function(res){
+                deleteButton.remove();
+                updateCartTotal();
+                $('.count').load("count.php")
+            }
+        })
+        
+    })
+})
 function updateCartTotal(){
     var cartItems=document.getElementsByClassName("cart-items")[0];
     var cartRow=cartItems.getElementsByClassName("cart-row");
