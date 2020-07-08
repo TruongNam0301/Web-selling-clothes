@@ -1,5 +1,13 @@
 <?php
-    echo <<< 'EOD'
+    session_start();
+    if(isset($_SESSION['account'])){
+        $acc=$_SESSION['account'];
+    }
+    else{
+        $acc='user';
+    }
+?>
+<html>  
     <div class="header" >
     <div class="mg-left-right " >
         <div class="row">
@@ -16,7 +24,7 @@
                     <ul class="menu">
                         <li class="menu-item home"><a href="../html/home.php"> HOME</a></li>
                         <li class="menu-item clothing"><a class="hov" href="../html/productPage.php">CLOTHING <i class="fas fa-angle-down"></i></a>
-                            <div class='list-clothing'>
+                            <div class="list-clothing">
                                 <ul class="item-clothing">
                                     <li class="first"> <a href="#">item1 </a>
                                         <div class="second">
@@ -57,7 +65,7 @@
                             </div>
                         </li>
                         <li class="menu-item accessories"><a class="hov" href="#">ACCESSORIES<i class="fas fa-angle-down"></i></a>
-                            <div class='dropdown-menu list-accessories'>
+                            <div class="dropdown-menu list-accessories">
                                 <ul class=" item-accessories">
                                     <li> <a href="#">item1</a></li>
                                     <li><a href="#"> item1</a></li>
@@ -72,6 +80,11 @@
                 </div>
             </div>
             <div class="col-lg-2 col-7">
+            <?php
+                echo "<div class='acc'>Hello, $acc  </div>";
+                if($acc=='admin')
+                    echo "<p><a href='../html/admin.php'>ADJUST ITEM</a></p>"
+            ?>
                 <div class="icon-menu">
                     <div class="icon-search">
                     <i onclick="displayONOFF('search-swapper')" class="fas fa-search fa-lg"></i>
@@ -195,5 +208,4 @@
         </div>
     </div>  
 </div>
-EOD;
-?>
+</html>

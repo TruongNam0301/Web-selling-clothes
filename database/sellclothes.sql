@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 29, 2020 lúc 03:01 PM
+-- Thời gian đã tạo: Th7 08, 2020 lúc 10:42 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
--- Phiên bản PHP: 7.4.6
+-- Phiên bản PHP: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,17 +28,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accounts` (
-  `id` int(4) NOT NULL,
-  `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int(11) NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `accounts`
---
-
-INSERT INTO `accounts` (`id`, `username`, `password`) VALUES
-(1, 'nam', '1');
 
 -- --------------------------------------------------------
 
@@ -93,7 +86,39 @@ INSERT INTO `clothes` (`id`, `id_type`, `name`, `price`, `picture`) VALUES
 (20, 3, 'ao thun4', '100000', 'product14.jpg'),
 (21, 3, 'ao thun5', '100000', 'product15.jpg'),
 (22, 3, 'ao thun6', '100000', 'product16.jpg'),
-(23, 3, 'ao thun7', '100000', 'product17.jpg');
+(23, 3, 'ao thun7', '100000', 'product17.jpg'),
+(24, 1, 'ao khoac5', '400000', 'product25.jpg'),
+(25, 1, 'ao khoac6', '500000', 'product26.jpg'),
+(26, 1, 'ao khoac7', '350000', 'product27.jpg'),
+(27, 1, 'ao khoac8', '250000', 'product28.jpg'),
+(28, 1, 'ao khoac9', '300000', 'product29.jpg'),
+(29, 1, 'ao khoac10', '300000', 'product30.jpg'),
+(30, 1, 'ao khoac11', '300000', 'product31.jpg'),
+(31, 1, 'ao khoac12', '350000', 'product32.jpg'),
+(32, 1, 'ao khoac13', '450000', 'product33.jpg'),
+(33, 1, 'ao khoac14', '200000', 'product34.jpg'),
+(34, 4, 'quan jean3', '100000', 'product35.jpg'),
+(35, 4, 'quan jean4', '150000', 'product36.jpg'),
+(36, 3, 'ao thun8', '100000', 'product37.jpg'),
+(37, 3, 'ao thun9', '100000', 'product38.jpg'),
+(38, 3, 'ao thun10', '100000', 'product39.jpg'),
+(39, 3, 'ao thun11', '100000', 'product40.jpg'),
+(40, 3, 'ao thun12', '100000', 'product41.jpg'),
+(41, 3, 'ao thun13', '100000', 'product42.jpg'),
+(42, 3, 'ao thun14', '100000', 'product43.jpg'),
+(43, 2, 'ao somi10', '100000', 'product44.jpg'),
+(44, 2, 'ao somi11', '100000', 'product45.jpg'),
+(45, 2, 'ao somi12', '100000', 'product46.jpg'),
+(46, 2, 'ao somi13', '100000', 'product47.jpg'),
+(47, 2, 'ao somi14', '100000', 'product48.jpg'),
+(48, 2, 'ao somi15', '100000', 'product49.jpg'),
+(49, 2, 'ao somi16', '100000', 'product50.jpg'),
+(50, 2, 'ao somi17', '100000', 'product51.jpg'),
+(51, 2, 'ao somi18', '100000', 'product52.jpg'),
+(52, 2, 'ao somi19', '100000', 'product53.jpg'),
+(53, 2, 'ao somi20', '100000', 'product54.jpg'),
+(54, 2, 'ao somi21', '100000', 'product55.jpg'),
+(55, 2, 'ao somi21', '100000', 'product56.jpg');
 
 -- --------------------------------------------------------
 
@@ -125,16 +150,9 @@ INSERT INTO `typeclothes` (`id_type`, `name_type`) VALUES
 CREATE TABLE `users` (
   `id` int(4) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phoneNumber` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phoneNumber` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `users`
---
-
-INSERT INTO `users` (`id`, `name`, `address`, `phoneNumber`) VALUES
-(1, 'Trương Văn Nam', 'tphcm', '0123456789');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -181,7 +199,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `bills`
@@ -193,7 +211,7 @@ ALTER TABLE `bills`
 -- AUTO_INCREMENT cho bảng `clothes`
 --
 ALTER TABLE `clothes`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT cho bảng `typeclothes`
@@ -205,7 +223,7 @@ ALTER TABLE `typeclothes`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
