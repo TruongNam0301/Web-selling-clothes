@@ -129,4 +129,5 @@ div .acc{
 	font-style: italic;
 	font-variant: small-caps;
 	text-transform: none;
+	transform: translate(-10px,20px);
 }

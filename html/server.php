@@ -102,4 +102,25 @@
                 echo "<p>wrong username please check it again!</p>";
         }
     }
+    if(isset($_POST['update'])){
+        $info =$_POST['info'];
+        $address =$_POST['address'];
+        $phone=$_POST['phone'];
+        $empty_error=false;
+        if(empty($address)){
+            $empty_error=true;
+        }
+        if(empty($phone)){
+            $empty_error=true;
+        }
+        if($empty_error==true){
+            echo "please fill the empty";
+        }
+        if($empty_error==false){
+            $sql = "UPDATE users SET address='$address', phoneNumber='$phone' WHERE id=$info";
+            if($result=mysqli_query($db,$sql)){
+                echo "<p style='color:green' >update success!!!</p>";
+            }
+        }
+    }
 ?>

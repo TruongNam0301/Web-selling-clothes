@@ -7,7 +7,7 @@
 }
 .count {
     position: absolute;
-    top: 30px;
+    top: 70px;
     right:71px;
     width: 18px;
     height: 18px;
@@ -18,6 +18,7 @@
     display: inline-block;
     background-color: red;
     border-radius: 50%;
+    
 }
 .main .background .wall {
     height: 100%;
@@ -111,6 +112,7 @@
 } 
 .icon-search i{
     position: relative;
+    
 }
 .search-swapper{
     position: absolute;
@@ -120,7 +122,35 @@
     left:-80px;
     background-color: #fff;
     border-top: 2px solid #890620;
-    z-index: 1000;
+    z-index: 1001;
+}
+.update-info{
+    position: absolute;
+    width: 300px;
+    height: 150px;
+    top:100%;
+    left:-80px;
+    background-color: #fff;
+    border-top: 2px solid #890620;
+    z-index: 1001;
+}
+.update input{
+   
+    margin: 5px;
+    height: 35px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(137, 6, 32);
+    border-image: initial;
+    border-radius: 5px;
+}
+.error_update{
+    height: 10px;
+    margin: 10px;
+    color:red;
+}
+.update .btn{
+    transform: translate(80px, 0px);
 }
 .search{
     padding: 5px;

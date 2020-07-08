@@ -46,8 +46,8 @@
                 if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
                 }
-                foreach($_SESSION['cart'] as $i=>$val){
-                    $item = $_SESSION['cart'][$i];
+                foreach(@$_SESSION['cart'] as $i=>$val){
+                    $item = @$_SESSION['cart'][$i];
                     $sql = "SELECT * FROM clothes WHERE id=$item[id]";
                     $result = mysqli_query($conn,$sql);
                     while($row = mysqli_fetch_array($result)){

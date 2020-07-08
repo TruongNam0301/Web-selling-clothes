@@ -80,6 +80,14 @@
                 </div>
             </div>
             <div class="col-lg-2 col-7">
+            <?php
+                echo "<div class='acc'>Hello, $acc ";
+            ?>
+                <i onclick="displayONOFF('update-info')" class='fa fa-pencil-square'></i>
+                
+            <?php
+                echo "</div>";
+            ?>
             
                 <div class="icon-menu">
                     <div class="icon-search">
@@ -94,9 +102,9 @@
                         </div>
                     </div>
                     <div class="icon-bag">
-                    
+                        
                         <a href="../html/cart-page.php"><i class="fas fa-shopping-bag fa-lg"></i></a>
-                       <div class= 'count'>
+                        <div class= 'count'>
                        </div>
                     </div>
                     <div class="icon-login">
@@ -104,6 +112,17 @@
                             <a href="#"><i class="fas fa-lock-open fa-lg"></i></a>
                         </div>
                     </div>
+                    
+                </div>
+                <div class="update-info" style="display: block;">
+                        <form class="update">
+                            <input type="hidden" id="users_info" name="users_info" class="users_info" value=<?php echo "$acc" ?> >
+                            <input type="text" id="address" name="address" class="address" placeholder="Address">
+                            <input type="text" id="phone" name="phone" class="phone" placeholder="Phone Number">
+                            <div class="error_update"></div>
+                            <input type="submit" class="btn btn-danger" value="UPDATE"></button>
+                            
+                        </form>
                 </div>
             </div>
         </div>

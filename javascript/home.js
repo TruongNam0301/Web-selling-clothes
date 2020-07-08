@@ -9,7 +9,7 @@ if (document.readyState == 'loading') {
      OpenAndExitLogin();
      $('.count').load('count.php');
      //prevent space input
-     $("input.lg-uesrname, input.lg-password, input.rname, input.rg-username, input.cf-username, input.rg-password, input.cf-password").on({
+     $("input.lg-uesrname, input.lg-password, input.rg-username, input.cf-username, input.rg-password, input.cf-password").on({
         keydown: function(e) {
             if (e.which === 32)
             return false;
@@ -49,6 +49,22 @@ if (document.readyState == 'loading') {
             lg_name : lg_name,
             lg_password : lg_password,
             login: "ok",
+         });
+    });
+
+    //update info form function
+    $("form.update").submit(function(e){
+        var info=$("#users_info").val();
+        var address = $("#address").val();
+        var phone=$("#phone").val();
+        
+        console.log(info,address,phone);
+        e.preventDefault();
+        $(".error_update").load("server.php", {
+            info : info,
+            address : address,
+            phone:phone,
+            update: "ok",
          });
     });
  }
