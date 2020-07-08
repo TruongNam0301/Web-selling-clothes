@@ -27,6 +27,7 @@ else if($_POST['action']=='delete'){
     if(isset($_POST['index'])){
         $index=$_POST['index'];
          unset($_SESSION['cart'][$index]);
-    }
+    
+}
 }
 ?>

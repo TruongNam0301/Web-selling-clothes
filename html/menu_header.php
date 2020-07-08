@@ -1,6 +1,13 @@
 <?php
     session_start();
-    echo <<< EOD
+    if(isset($_SESSION['account'])){
+        $acc=$_SESSION['account'];
+    }
+    else{
+        $acc='user';
+    }
+?>
+<html>  
     <div class="header" >
     <div class="mg-left-right " >
         <div class="row">
@@ -17,7 +24,7 @@
                     <ul class="menu">
                         <li class="menu-item home"><a href="../html/home.php"> HOME</a></li>
                         <li class="menu-item clothing"><a class="hov" href="../html/productPage.php">CLOTHING <i class="fas fa-angle-down"></i></a>
-                            <div class='list-clothing'>
+                            <div class="list-clothing">
                                 <ul class="item-clothing">
                                     <li class="first"> <a href="#">item1 </a>
                                         <div class="second">
@@ -58,7 +65,7 @@
                             </div>
                         </li>
                         <li class="menu-item accessories"><a class="hov" href="#">ACCESSORIES<i class="fas fa-angle-down"></i></a>
-                            <div class='dropdown-menu list-accessories'>
+                            <div class="dropdown-menu list-accessories">
                                 <ul class=" item-accessories">
                                     <li> <a href="#">item1</a></li>
                                     <li><a href="#"> item1</a></li>
@@ -73,6 +80,11 @@
                 </div>
             </div>
             <div class="col-lg-2 col-7">
+            <?php
+                echo "<div class='acc'>Hello, $acc  </div>";
+                if($acc=='admin')
+                    echo "<p><a href='../html/admin.php'>ADJUST ITEM</a></p>"
+            ?>
                 <div class="icon-menu">
                     <div class="icon-search">
                     <i onclick="displayONOFF('search-swapper')" class="fas fa-search fa-lg"></i>
@@ -114,22 +126,25 @@
             <div class="login-swapper">
                 <form class="login-content">
                 <input type="text" id="username" name="username" class="lg-uesrname" placeholder="USERNAME">
-                <input type="text" id="password" name="password" class="lg-password" placeholder="PASSWORD">
+                <input type="password" id="password" name="password" class="lg-password" placeholder="PASSWORD">
                 <div class="forgot-pass"><a href="#"> Forgot your password</a></div>
                 <input type="submit" value="login">
+                <div class="error_login"></div>
                 </form>
             </div>
         </div>
     </div>
     <div class="regis-form" style="display:none">
         <div class="regis-swapper">
-            <form class="regis-content">
-                <input type="text" id="name" name="username" class="rname" placeholder="name">
+            <form class="regis-content" method="post" action="server.php">
+                
+                <input type="text" id="name" name="rusername" class="rname" placeholder="name">
                 <input type="text" id="regis-username" name="rg-username" class="rg-username" placeholder="USERNAME">
                 <input type="text" id="confirm-username" name="cf-username" class="cf-username" placeholder="CONFIRM USERNAME">
                 <input type="password" id="regis-password" name="rg-password" class="rg-password" placeholder="PASSWORD">
                 <input type="password" id="confirm-password" name="cf-password" class="cf-password" placeholder="PASSWORD">
-                <input type="submit" value="register">
+                <input type="submit"  name="reg_user" class="reg_user" value="register">
+                <div class="error_signup"></div>
             </form>
         </div>
     </div>
@@ -196,6 +211,10 @@
         </div>
     </div>  
 </div>
+<<<<<<< HEAD
 
 EOD;
 ?>
+=======
+</html>
+>>>>>>> 3ff0f679ca244322ceb849176f39e7bf0efe57b1
