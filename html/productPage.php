@@ -105,10 +105,7 @@
                                         echo 1;
                                     }
                                     ?>;
-<<<<<<< HEAD
-                                    if(val===null) val = 0 ;
-=======
->>>>>>> 3ff0f679ca244322ceb849176f39e7bf0efe57b1
+                                    if(val==null) val =0;
                                     $( "[name=type]" ).val( [val.toString()]);
                                     loadData(val,page);
                                     loadPagination(val,page);   

@@ -80,11 +80,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-7">
-            <?php
-                echo "<div class='acc'>Hello, $acc  </div>";
-                if($acc=='admin')
-                    echo "<p><a href='../html/admin.php'>ADJUST ITEM</a></p>"
-            ?>
+            
                 <div class="icon-menu">
                     <div class="icon-search">
                     <i onclick="displayONOFF('search-swapper')" class="fas fa-search fa-lg"></i>
@@ -211,10 +207,4 @@
         </div>
     </div>  
 </div>
-<<<<<<< HEAD
-
-EOD;
-?>
-=======
 </html>
->>>>>>> 3ff0f679ca244322ceb849176f39e7bf0efe57b1

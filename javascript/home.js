@@ -7,7 +7,7 @@ if (document.readyState == 'loading') {
  function ready(){
      ChangeLoginRegister();
      OpenAndExitLogin();
-
+     $('.count').load('count.php');
      //prevent space input
      $("input.lg-uesrname, input.lg-password, input.rname, input.rg-username, input.cf-username, input.rg-password, input.cf-password").on({
         keydown: function(e) {
@@ -52,9 +52,7 @@ if (document.readyState == 'loading') {
          });
     });
  }
- $(document).ready(function(){
-     $('.count').load('count.php');
- })
+
 
 //click search-icon 
 function displayONOFF(string){
