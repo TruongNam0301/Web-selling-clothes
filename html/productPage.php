@@ -35,22 +35,7 @@
                                     <label>all</label>
                                 </div>
                                 <?php
-                                $conn = mysqli_connect("localhost", "root","","sellclothes");
-                                if (!$conn) {
-                                  die("Connection failed: " . mysqli_connect_error());
-                                }
-                                $sql = "SELECT * FROM typeclothes";
-                                $result = mysqli_query($conn,$sql);
-                                if(mysqli_num_rows($result)>0){
-                                    while($row = mysqli_fetch_array($result)){
-                                        echo "
-                                        <div class='product'>
-                                            <input type='radio' class='check' name = 'type' value ='$row[id_type]'>
-                                            <label>$row[name_type]</label>
-                                        </div>
-                                        ";
-                                    }
-                                }
+                                    include_once("../Controller/product-radio.php");
                                 ?>
                             </div>
                         </div>
@@ -67,33 +52,29 @@
                             </div>
                     <!--grid-view-->
                             <div class="product-gridview">
-                                <div class= 'row gridView' ></div>
-                                <div class="pagination"> </div>
+                                <div class="row gridView">
+                                  
+                                </div>
+                                <div class="pagination"> 
+                                
+                                </div>
                             </div>
                             
                             <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
                             <script type = "text/javascript">
 
                                 function loadData (val=0,page=1){
-                                    $.ajax({ 
-                                        type: 'POST', 
-                                        data: {idType:val,page:page},
-                                        url: "connect.php",   
-                                        success : function(text){
-                                            $('.gridView').html(text);
-                                        }
-                                    }) 
+                                    $(".gridView").load("../Controller/product-gridview.php", {
+                                        idType : val,
+                                        page : page,
+                                    });
                                 }
                                
                                 function loadPagination(val,page=1){
-                                    $.ajax({ 
-                                        type: 'POST', 
-                                        data: {idType:val,page:page},
-                                        url: "pagination.php",   
-                                        success : function(text){
-                                            $('.pagination').html(text);
-                                        }
-                                    })
+                                    $(".pagination").load("../Controller/product-pagination.php", {
+                                        idType : val,
+                                        page : page,
+                                    });
                                 }
                  
                                 $(document).ready(function(){

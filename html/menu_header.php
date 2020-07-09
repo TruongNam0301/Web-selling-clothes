@@ -114,7 +114,7 @@
                     </div>
                     
                 </div>
-                <div class="update-info" style="display: block;">
+                <div class="update-info" style="display: none;">
                         <form class="update">
                             <input type="hidden" id="users_info" name="users_info" class="users_info" value=<?php echo "$acc" ?> >
                             <input type="text" id="address" name="address" class="address" placeholder="Address">
