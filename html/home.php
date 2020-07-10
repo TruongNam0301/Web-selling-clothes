@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="../css/menubar.css">
         <link rel="stylesheet" type="text/css" href="../css/menu-mobile.css">
         <link rel="stylesheet" type="text/css" href="../css/main-home.css">
-        <title>Exercise</title>
+        <title>H&H</title>
     </head>
     <body >
         <div class="all">
@@ -127,10 +127,6 @@
                     include 'footer.php';
                 ?>
             </div>
-        </div>
-
-<!--script-->
-        <script src="../javascript/home.js"></script>
-        
+        </div> 
     </body>
 </html>

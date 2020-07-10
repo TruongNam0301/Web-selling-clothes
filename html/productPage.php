@@ -110,9 +110,5 @@
                 include 'footer.php';
             ?>
         </div>
-
-<!--script-->
-    <script src="../javascript/home.js"></script>
-    
     </body>
 </html>

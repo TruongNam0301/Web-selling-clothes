@@ -1,5 +1,5 @@
  $(document).ready(function(){
-      $('.count').load('count.php');
+    $('.count').load('../View/item-count.php') 
      updateCartTotal();
      $('.cart-quantity-input').on('change',function(){
          updateCartTotal();
@@ -8,13 +8,13 @@
         let index = $(this).data('index');
         let deleteButton =$(this).parents('.cart-row');
         $.ajax({
-            url:'xulygiohang.php',
+            url:'../Controller/xulygiohang.php',
             type:'POST',
             data:{index:index,action:'delete'},
             success: function(res){
                 deleteButton.remove();
                 updateCartTotal();
-                $('.count').load("count.php")
+                $('.count').load('../View/item-count.php') 
             }
         })
         

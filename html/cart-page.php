@@ -1,8 +1,6 @@
-
 <html>
     <head>
         <title>product</title>
-        <title>About us</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://kit.fontawesome.com/65adf3fa6d.js" crossorigin="anonymous"></script>
@@ -41,48 +39,8 @@
                 </div>
                 <div class="cart-items">
                 <?php
-                $conn = mysqli_connect("localhost", "root","","sellclothes");
-
-                if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-                }
-                foreach(@$_SESSION['cart'] as $i=>$val){
-                    $item = @$_SESSION['cart'][$i];
-                    $sql = "SELECT * FROM clothes WHERE id=$item[id]";
-                    $result = mysqli_query($conn,$sql);
-                    while($row = mysqli_fetch_array($result)){
-                        cartItem($row['picture'],$row['name'],$row['price'],$item['quantity'],$item['size'],$i);
-                    }
-                }
-              
-                function cartItem ($image,$title,$price,$quantity,$size,$i){
-                    $check_size=array("M","SM","L","XL");
-                    echo "<div class= 'cart-row'>";
-                    echo "<div class='cart-item cart-column'>";
-                    echo "<img class='cart-item-image' src='../image/image_product/$image' width='100' height='100'>";
-                    echo "<span class='cart-item-title'>$title</span>";
-                    echo "</div>";
-                    echo "<span class='cart-price cart-column'>$price</span>";
-                    echo "<div class='cart-quantity cart-column'>";
-                    echo "<input class='cart-quantity-input' type='number' min='1' value='$quantity'> ";
-                    echo "</div>";
-                    echo "<div class='cart-quantity cart-column'>";
-                    echo "<select name='size' id='size' style='margin-right: 14px;'> ";
-                    foreach($check_size as $x){
-                        if($x==$size){
-                           echo "<option value='$x' selected='selected'>$x</option>";
-                        }
-                        else{
-                            echo "<option value='$x'>".$x."</option>";
-                        }
-                    }
-                    echo "</select>";
-                    echo "<button class='btn btn-danger remove-item' data-index=$i  type='button'>REMOVE</button>";
-                    echo "</div>";
-                echo "</div>";
-        
-                }
-?>
+                    include_once ("../Controller/cart.php");
+                ?>
 
                 </div>
                 <div class="cart-total">
@@ -102,12 +60,13 @@
                 let index = $(this).data('index');
                 let deleteButton =$(this).parents('.cart-row');
                 $.ajax({
-                    url:'xulygiohang.php',
+                    url:'../Controller/xulygiohang.php',
                     type:'POST',
                     data:{index:index,action:'delete'},
                     success: function(res){
                         console.log(index);
                        deleteButton.remove();
+                       $('.count').load('../View/item-count.php')  
                     }
                 })
                 

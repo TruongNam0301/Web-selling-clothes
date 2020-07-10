@@ -4,7 +4,7 @@
         $acc=$_SESSION['account'];
     }
     else{
-        $acc='user';
+        $acc='';
     }
 ?>
 <html>  
@@ -80,15 +80,11 @@
                 </div>
             </div>
             <div class="col-lg-2 col-7">
-            <?php
-                echo "<div class='acc'>Hello, $acc ";
-            ?>
-                <i onclick="displayONOFF('update-info')" class='fa fa-pencil-square'></i>
-                
-            <?php
-                echo "</div>";
-            ?>
-            
+            <div class="show-user" style=" height: 50px;,  width: 150px;transform: translate(0px, 30px);">
+                <?php 
+                    include_once("../View/display-user.php")
+                ?>
+            </div>
                 <div class="icon-menu">
                     <div class="icon-search">
                     <i onclick="displayONOFF('search-swapper')" class="fas fa-search fa-lg"></i>
@@ -227,3 +223,4 @@
     </div>  
 </div>
 </html>
+<script src="../javascript/home.js"></script>
