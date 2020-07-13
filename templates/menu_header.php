@@ -1,6 +1,5 @@
 <?php
 session_start();
-$config['rewrite_short_tags'] = FALSE;
 include_once('../controllers/AccountCtr.php');
 $AccountCtr = new AccountCtr();
 $AccountCtr->register();   
@@ -55,10 +54,10 @@ $AccountCtr->updateUserInfor();
                     <div class="icon-search">
                     <i onclick="displayONOFF('search-swapper')" class="fas fa-search fa-lg"></i>
                     <div class="search-swapper" style="display: none;">
-                        <form>
+                    <form  method='POST' class="search-content" action="search.php">
                             <div class="search">
-                                <input type="text"style="height:30px;" >
-                                <button type="button" class="btn btn-danger" >SEARCH</button>
+                                <input type="text" name="search-key"style="height:30px;" >
+                                <button type="submit" id="search-button" class="btn btn-danger" >SEARCH</button>
                             </div>
                         </form>
                         </div>
@@ -125,9 +124,7 @@ $AccountCtr->updateUserInfor();
             }
         ?>
     </div>
-    
 </div>
-
 <!--menu-mobile-->
 <div class="main-swap">
     <div id="menu-exit"><i onclick="menuExit()" class="fas fa-times fa-lg"></i></div>

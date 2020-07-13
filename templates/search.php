@@ -12,47 +12,30 @@
         <link rel="stylesheet" type="text/css" href="../css/main-home.css">
     </head>
     <body>
+    
     <?php include_once('menu_header.php');?>
         <div class="container">
             <div class="view-swap">
                 
         <!--grid-view-->
-                <div class="product-gridview"> </div>   
+                <div class="product-gridview">
+                <?php
+                    include_once('../controllers/ClothesCtr.php'); 
+                    @$key=$_POST['search-key'];
+                    $ClothesCtr = new ClothesCtr();
+                    $ClothesCtr->Search($key);
+
+                ?>
+                 </div>   
             </div>
         </div>
+        <?php
+            include_once('footer.php');
+        ?>
     </body>
-   <?php
-   echo $_GET['idType'];
-   ?>
-    <script>
-        function loadData (val=0,page=1){
-            $.ajax({
-                url:'../views/action.php',
-                data: {type:val,page:page,action:'show',num:3,limit:16,idType:0},
-                type: 'POST',
-                success: function (value){
-                    $('.product-gridview').html(value);
-                }
-             })
-        }  
-        $(document).ready(function(){
-            let val = <?php if(isset($_GET['idType'])){
-                echo $_GET['idType'];
-            }
-            else {
-                echo 0;
-            }
-            ?>;
-            let page = <?php if(isset($_GET['page'])){
-                echo $_GET['page'];
-            }
-            else {
-                echo 1;
-            }
-            ?>;
-            loadData(val,page);
-        })
-    </script>
+   
+   
+   
     
     <script src="./../javascript/home.js"></script>
 </html>

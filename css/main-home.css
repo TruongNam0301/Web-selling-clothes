@@ -130,16 +130,17 @@
     padding: 5px;
     text-align: center;
 }
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+}
 input{
     height:35px;
     border:1px solid #890620;
 }
-.footer{
-    margin-top: 200px;
-    bottom:0;
-    background-color:black ;
-    color:white;
-}
+
 .footer .row .col{
     margin:50px 0;
     display:flex;

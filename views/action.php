@@ -1,6 +1,6 @@
 <?php
-    include_once('../../controllers/ClothesCtr.php');
-    include_once('../../controllers/CartCtr.php');
+    include_once('../controllers/ClothesCtr.php');
+    include_once('../controllers/CartCtr.php');
     session_start();
     $ClothesCtr = new ClothesCtr();
     #showlistclothes

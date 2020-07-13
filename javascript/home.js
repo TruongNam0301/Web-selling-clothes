@@ -103,3 +103,4 @@ function OpenAndExitLogin(){
     })
 }
 
+//function jump to search page

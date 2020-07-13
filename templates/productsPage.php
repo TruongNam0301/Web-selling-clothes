@@ -23,7 +23,7 @@
                                 <label>all</label>
                             </div>
                             <?php
-                            $config['rewrite_short_tags'] = FALSE;
+                          
                             include_once('../controllers/TypeClothesCtr.php');
                             $ClothesCtr = new TypeClothesCtr();
                             $ClothesCtr->getTypeClothes();
@@ -54,7 +54,7 @@
     
         function loadData (val=0,page=1,type){
             $.ajax({
-                    url:'../views/cartPage/action.php',
+                    url:'../views/action.php',
                     data: {type:val,page:page,action:'show',num:4,limit:6,idType:type},
                     type: 'POST',
                     success: function (value){
