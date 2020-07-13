@@ -6,9 +6,8 @@
         function __construct(){
             $this->db = new DataProvider(); 
         }
-        public function getTypeClothes(){
-          
-            $sql = "SELECT * FROM typeclothes";
+        public function getTypeClothes($type){
+            $sql = "SELECT * FROM typeclothes WHERE type= $type";
             $types = $this->db->FetchAll($sql);
             $typeClothes = array();
             if($this->db->NumRows($sql)){

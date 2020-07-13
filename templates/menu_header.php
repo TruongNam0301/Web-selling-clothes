@@ -23,39 +23,14 @@ $AccountCtr->updateUserInfor();
                 <div class="menu-bar">
                     <ul class="menu">
                         <li class="menu-item home"><a href="home.php"> HOME</a></li>
-                        <li class="menu-item clothing"><a class="hov" href="productsPage.php">CLOTHING <i class="fas fa-angle-down"></i></a>
+                        <li class="menu-item clothing">CLOTHING <i class="fas fa-angle-down"></i></a>
                             <div class="list-clothing">
-                            
                                 <ul class="item-clothing">
-                                    <li class="first"> ÁO 
-                                        <div class="second">
-                                            <ul class="list-item">
-                                                <li><a href="product-page.php?idType=3">SHIRT</a></li>
-                                                <li><a href="product-page.php?idType=2">T-SHIRT</a></li>
-                                                <li><a href="product-page.php?idType=1">JACKET</a></li>
-                                                <li><a href="#">HOODIES</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="first"> QUẦN 
-                                        <div class="second">
-                                            <ul class="list-item">
-                                                <li><a href="product-page.php?idType=4">JEAN</a></li>
-                                                <li><a href="#">KAKI</a></li>
-                                                <li><a href="#">SHORT</a></li>
-                                                
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="first"> GIÀY
-                                        <div class="second">
-                                            <ul class="list-item">
-                                                <li><a href="#">SANDALS</a></li>
-                                                <li><a href="#">SPORTS</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    
+                                    <?php
+                                        include_once('../controllers/TypeCtr.php');
+                                        $Type = new TypeCtr();
+                                        $Type->getType();
+                                    ?>
                                 </ul>
                             </div>
                         </li>

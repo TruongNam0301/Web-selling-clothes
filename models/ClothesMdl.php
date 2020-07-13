@@ -7,10 +7,9 @@ class ClothesMdl {
 		$this->db = new DataProvider(); 
 	}
 
-    public function getClothes($page,$limit){
-		
+    public function getClothes($page,$limit,$type){
     	$start = ($page-1)*6;
-		$sql = "SELECT * FROM clothes LIMIT $start,$limit";
+		$sql = "SELECT * FROM clothes INNER JOIN typeclothes on clothes.id_type=typeclothes.id_type INNER JOIN types ON typeclothes.type=types.id where types.id=$type LIMIT $start,$limit";
 		$cloth = $this->db->FetchAll($sql);
 		$clothes = array();
 		if( $this->db->NumRows($sql)){
@@ -21,7 +20,6 @@ class ClothesMdl {
 		}
 	} 
 	public function getClothesByType($val,$page,$limit){
-		
 		$start = ($page-1)*$limit;
 		$sql = "SELECT * FROM clothes WHERE id_type = $val LIMIT $start,$limit";
 		$cloth = $this->db->FetchAll($sql);
@@ -33,8 +31,8 @@ class ClothesMdl {
 			return $clothes;
 		}
 	}
-	public function getNumRows(){
-		$sql = "SELECT id FROM clothes";
+	public function getNumRows($type){
+		$sql = "SELECT * FROM clothes INNER JOIN typeclothes on clothes.id_type=typeclothes.id_type INNER JOIN types ON typeclothes.type=types.id where types.id=$type";
 		return $this->db->NumRows($sql);
 	} 
 	public function getNumRowsById($val){

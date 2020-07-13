@@ -28,7 +28,7 @@
         function loadData (val=0,page=1){
             $.ajax({
                 url:'../views/cartPage/action.php',
-                data: {type:val,page:page,action:'show',num:3,limit:8},
+                data: {type:val,page:page,action:'show',num:3,limit:16,idType:0},
                 type: 'POST',
                 success: function (value){
                     $('.product-gridview').html(value);

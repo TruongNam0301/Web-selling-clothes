@@ -23,6 +23,7 @@
                                 <label>all</label>
                             </div>
                             <?php
+                            $config['rewrite_short_tags'] = FALSE;
                             include_once('../controllers/TypeClothesCtr.php');
                             $ClothesCtr = new TypeClothesCtr();
                             $ClothesCtr->getTypeClothes();
@@ -51,10 +52,10 @@
     </body>
     <script>
     
-        function loadData (val=0,page=1){
+        function loadData (val=0,page=1,type){
             $.ajax({
                     url:'../views/cartPage/action.php',
-                    data: {type:val,page:page,action:'show',num:4,limit:6},
+                    data: {type:val,page:page,action:'show',num:4,limit:6,idType:type},
                     type: 'POST',
                     success: function (value){
                         $('.product-gridview').html(value);
@@ -72,13 +73,24 @@
                 echo 1;
             }
             ?>;
+            let type = <?php if(isset($_GET['type'])){
+                echo $_GET['type'];
+            }
+            else {
+                echo 0;
+            }
+            ?>;
+            console.log(type);
              $( "[name=type]" ).val( [val.toString()]);
-            loadData(val,page);
+            loadData(val,page,type);
             $(".check").on("click",function (){  
                 val= $(this).val(); 
                 sessionStorage.setItem("check", val)
-                loadData(val);
+                loadData(val,page=1,type);
             })
+            $('.aa').click(function(){
+                sessionStorage.setItem("check", 0)
+            });
         })
     </script>
     
