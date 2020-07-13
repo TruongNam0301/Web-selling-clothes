@@ -24,11 +24,16 @@ class ClothesCtr{
     public function Search($key){
         $num =3;
         if($key=='')
-            echo 'NO RESULT';
+            echo '<div align="center" class="error-search">NO RESULT</div>';
         else{    
         $ClothesMdl = new ClothesMdl();
         $Clothes = $ClothesMdl -> Search($key);
-        include_once('../views/productPage/listclothes.php');
+        if($Clothes==-1){
+            echo '<div align="center" class="error-search">NO RESULT</div>';
+        }
+        else{
+            include_once('../views/productPage/listclothes.php');
+    }
     }
     }
 }

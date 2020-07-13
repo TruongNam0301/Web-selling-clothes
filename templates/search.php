@@ -37,5 +37,5 @@
    
    
     
-    <script src="./../javascript/home.js"></script>
+    <script src="../javascript/home.js"></script>
 </html>

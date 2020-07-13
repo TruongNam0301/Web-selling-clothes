@@ -56,7 +56,7 @@ class ClothesMdl {
 			return $clothes;
 		}
 		else
-			return "NO RESULT";
+			return -1;
 	}
 }
 
