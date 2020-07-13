@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 08, 2020 lúc 10:42 AM
+-- Thời gian đã tạo: Th7 13, 2020 lúc 07:22 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -32,6 +32,35 @@ CREATE TABLE `accounts` (
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `accounts`
+--
+
+INSERT INTO `accounts` (`id`, `username`, `password`) VALUES
+(1, '1', '$2y$12$1D6YqS60LMfeJXQWXZGyEullYQqcOEJ5d7a.6FhxP9UHtbyRcpHfu'),
+(2, '', '$2y$12$rKJ117Wv3xOB60p0IkXVPudAxaxBSYbW3ikaJOmAPcCOWGnaMLM0m'),
+(3, 'hieu0907', '$2y$12$yxrk.gxYLuxeLjK2SGxEw.qO6PwQZubwDg9xu2eDSaiqjN7E1h0oy'),
+(4, 'test', '$2y$12$rOGOyJb9.vkboCuZT7tuCurYg4/8A7YD5DsVjKNEo4jKPnkfvTTrG'),
+(5, 't', '$2y$12$qUsm.3XBtKBeRD3MxIp.R./ueq99JaE93LLMYsMK00f18FYma.YcC'),
+(6, 't2', '$2y$12$aKtIbe7ssmj5Evd2mS3hM./oJs5a0H8g4xL1UW4FccjgYB43riEh2'),
+(7, 'finaltest', '$2y$12$V.eKs6UkwimAGWZikU0AwuC/O5TdTuL6cBBaREt1h5j6KKqVEn8Sy'),
+(8, 'f', '$2y$12$XHEvJkFadPiTLdso8eWuxePwSb8XqTUJgdP/oPNL93BbEgizH1JLi'),
+(9, 'test2020', 'test2020'),
+(10, 'test2020', 'test2020'),
+(11, '1', '1234'),
+(12, '1', '1234'),
+(13, 'test11', 'test11'),
+(14, 'test11', 'test11'),
+(15, '2222', '2222'),
+(16, '2222', '2222'),
+(17, 'nam', '1234'),
+(18, 'nam', '1234'),
+(19, 'nam', '12345'),
+(20, 'test101', 'test101'),
+(21, '1113', '1113'),
+(22, '1011', '1011'),
+(23, 'testtest', 'testtest');
 
 -- --------------------------------------------------------
 
@@ -128,18 +157,39 @@ INSERT INTO `clothes` (`id`, `id_type`, `name`, `price`, `picture`) VALUES
 
 CREATE TABLE `typeclothes` (
   `id_type` int(11) NOT NULL,
-  `name_type` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL
+  `name_type` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `typeclothes`
 --
 
-INSERT INTO `typeclothes` (`id_type`, `name_type`) VALUES
-(1, 'jacket'),
-(2, 't-shirt'),
-(3, 'shirt'),
-(4, 'jean');
+INSERT INTO `typeclothes` (`id_type`, `name_type`, `type`) VALUES
+(1, 'jacket', 1),
+(2, 't-shirt', 1),
+(3, 'shirt', 1),
+(4, 'jean', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `types`
+--
+
+CREATE TABLE `types` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `types`
+--
+
+INSERT INTO `types` (`id`, `name`) VALUES
+(1, 'ÁO'),
+(2, 'QUẦN'),
+(3, 'GIÀY');
 
 -- --------------------------------------------------------
 
@@ -150,10 +200,26 @@ INSERT INTO `typeclothes` (`id_type`, `name_type`) VALUES
 CREATE TABLE `users` (
   `id` int(4) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phoneNumber` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `image`, `address`, `phoneNumber`) VALUES
+(1, '1', '', '123', '321'),
+(5, 't', '', NULL, NULL),
+(6, 't2', '', NULL, NULL),
+(7, 'finaltest', '', NULL, NULL),
+(8, 'f', '', '$address', '$phone'),
+(14, 'test11', 'user-image.png', NULL, NULL),
+(16, '2', 'user-image.png', NULL, NULL),
+(18, 'nam', 'user-image.png', NULL, NULL),
+(19, 'nam', 'user-image.png', NULL, NULL),
+(21, '1113', 'user-image.png', NULL, NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -184,7 +250,14 @@ ALTER TABLE `clothes`
 -- Chỉ mục cho bảng `typeclothes`
 --
 ALTER TABLE `typeclothes`
-  ADD PRIMARY KEY (`id_type`);
+  ADD PRIMARY KEY (`id_type`),
+  ADD KEY `fk_types` (`type`);
+
+--
+-- Chỉ mục cho bảng `types`
+--
+ALTER TABLE `types`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `users`
@@ -200,7 +273,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `bills`
@@ -224,7 +297,7 @@ ALTER TABLE `typeclothes`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -242,6 +315,12 @@ ALTER TABLE `bills`
 --
 ALTER TABLE `clothes`
   ADD CONSTRAINT `Clothes_fk0` FOREIGN KEY (`id_type`) REFERENCES `typeclothes` (`id_type`);
+
+--
+-- Các ràng buộc cho bảng `typeclothes`
+--
+ALTER TABLE `typeclothes`
+  ADD CONSTRAINT `fk_types` FOREIGN KEY (`type`) REFERENCES `types` (`id`);
 
 --
 -- Các ràng buộc cho bảng `users`
