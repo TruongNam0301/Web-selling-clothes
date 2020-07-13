@@ -33,9 +33,21 @@ include_once('../models/UsersMdl.php');
                     $id=$AccountMdl-> addAccount($username,$password);
                     $UsersMdl = new UsersMdl();
                     $UsersMdl -> addUser($id,$name);
-                    echo 'success';
+                    ?>
+                        <script type="text/javascript">
+                            alert('Register complete!');
+                            window.location.href='';
+                        </script>
+                    <?php
                 }
-                else echo 'already';
+                else{
+                    ?>
+                    <script type="text/javascript">
+                        alert('Account already exist!');
+                        window.location.href='';
+                    </script>
+                <?php
+                }
             }
         }
         public function updateUserInfor(){

@@ -79,10 +79,10 @@ $AccountCtr->updateUserInfor();
                     <div class="icon-search">
                     <i onclick="displayONOFF('search-swapper')" class="fas fa-search fa-lg"></i>
                     <div class="search-swapper" style="display: none;">
-                        <form>
+                    <form  method='POST' class="search-content" action="search.php">
                             <div class="search">
-                                <input type="text"style="height:30px;" >
-                                <button type="button" class="btn btn-danger" >SEARCH</button>
+                                <input type="text" name="search-key"style="height:30px;" >
+                                <button type="submit" id="search-button" class="btn btn-danger" >SEARCH</button>
                             </div>
                         </form>
                         </div>

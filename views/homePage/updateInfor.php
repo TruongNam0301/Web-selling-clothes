@@ -2,7 +2,7 @@
 .inputfile {
 	position:static;
     margin-top:20px;
-    margin-left:13px;
+    margin-left:15px;
 }
 .inputfile + label {
     position:relative;

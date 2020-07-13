@@ -45,6 +45,19 @@ class ClothesMdl {
 		$sql="SELECT * FROM clothes WHERE id= $id";
 		return $this->db->FetchAll($sql);
 	}
+	public function Search($key){
+		$sql="SELECT * FROM `clothes` WHERE name like '%$key%'";
+		$cloth = $this->db->FetchAll($sql);
+		$clothes = array();
+		if( $this->db->NumRows($sql)){
+			foreach($cloth as $cloth){
+				$clothes[]=$cloth;
+			}
+			return $clothes;
+		}
+		else
+			return "NO RESULT";
+	}
 }
 
 ?>
