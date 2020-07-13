@@ -55,7 +55,7 @@
         function loadData (val=0,page=1,type){
             $.ajax({
                     url:'../views/action.php',
-                    data: {type:val,page:page,action:'show',num:4,limit:6,idType:type},
+                    data: {type:val,page:page,action:'show',num:4,limit:15,idType:type},
                     type: 'POST',
                     success: function (value){
                         $('.product-gridview').html(value);

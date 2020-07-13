@@ -1,6 +1,6 @@
 .main .background{
     height:700px;
-    background-color: white;
+    background-color:inherit;
     background-image: url(../image/background_2_tonemapped.jpg);
     background-size: cover;
     background-position: center;
@@ -140,7 +140,12 @@ input{
     height:35px;
     border:1px solid #890620;
 }
-
+.footer{
+    background-color:black;
+    color:white;
+    margin-top:200px;
+    bottom: 0;
+}
 .footer .row .col{
     margin:50px 0;
     display:flex;

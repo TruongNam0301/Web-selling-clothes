@@ -10,10 +10,10 @@ class ClothesMdl {
     public function getClothes($page,$limit,$type){
     	$start = ($page-1)*6;
 		$sql = "SELECT * FROM clothes INNER JOIN typeclothes on clothes.id_type=typeclothes.id_type INNER JOIN types ON typeclothes.type=types.id where types.id=$type LIMIT $start,$limit";
-		$cloth = $this->db->FetchAll($sql);
+		$clothArr = $this->db->FetchAll($sql);
 		$clothes = array();
 		if( $this->db->NumRows($sql)){
-			foreach($cloth as $cloth){
+			foreach($clothArr as $cloth){
 				$clothes[]=$cloth;
 			}
 			return $clothes;
