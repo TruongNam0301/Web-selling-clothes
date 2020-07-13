@@ -1,8 +1,8 @@
 <style>
 .inputfile {
-    float:right;
 	position: static;
     margin-top:20px;
+    margin-left:13px;
 }
 .inputfile + label {
     position:relative;
