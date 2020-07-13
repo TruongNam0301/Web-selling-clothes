@@ -1,4 +1,8 @@
-
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 #swapper{
     position: absolute;
     min-width: 260px;
@@ -65,7 +69,9 @@ span{
 .mg-left-right {
     margin:0 50px;
 }
-
+input{
+    margin-left:20px;
+}
 .login-content,.regis-content{
     width: 350px;
     display: flex;
@@ -74,15 +80,19 @@ span{
     border-radius: 4px;
     box-sizing: border-box;
   }
-.login-regis-swapper input{
+.login-regis-swapper input[type=text] ,input[type=password],input[type=submit]{
     height: 30px;
-    margin: 15px;
+    margin:20px 15px 10px;
     height: 35px;
     border-width: 1px;
     border-style: solid;
     border-color: rgb(137, 6, 32);
     border-image: initial;
     border-radius: 5px;
+}
+.login-regis-swapper input[type=file] {
+    border:none;
+    Outline: none;
 }
 .forgot-pass a{
     float: right;
@@ -100,9 +110,11 @@ span{
  cursor: pointer;
 }
 .login-regis-swapper{
+    
     position: fixed;
+    width:350px;
      height: 800px;
-     background-color: white;
+     background-color: white !important;
     border: 1px solid black;
      top:0;
      right:0;
@@ -115,7 +127,7 @@ span{
      color:rgb(137, 6, 32)!important;
  }
 
-
+ 
 
 @media (min-width:800px) {
     #menu-click{

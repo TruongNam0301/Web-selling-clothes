@@ -1,20 +1,44 @@
- $(document).ready(function(){
-      $('.count').load('count.php');
+$(document).ready(function(){
      updateCartTotal();
      $('.cart-quantity-input').on('change',function(){
          updateCartTotal();
+          let index = $(this).data('index');
+          let value= $(this).val();
+          $.ajax({
+            url:'../views/cartPage/action.php',
+            type:'POST',
+            data:{index:index,quantity:value,action:'update'},
+            success: function(res){
+                console.log(res);   
+            }
+        })
      })
+
+     $('.size').on('change',function(){
+          let index = $(this).data('index');
+          let value= $(this).val();
+          $.ajax({
+            url:'../views/cartPage/action.php',
+            type:'POST',
+            data:{index:index,size:value,action:'update'},
+            success: function(res){
+                console.log(res);   
+            }
+        })
+     })
+
     $('.remove-item').on('click',function(){
         let index = $(this).data('index');
         let deleteButton =$(this).parents('.cart-row');
         $.ajax({
-            url:'xulygiohang.php',
+            url:'../views/cartPage/action.php',
             type:'POST',
             data:{index:index,action:'delete'},
             success: function(res){
+                console.log(res);
                 deleteButton.remove();
                 updateCartTotal();
-                $('.count').load("count.php")
+                $('.count').load('../views/cartPage/countItem.php');
             }
         })
         

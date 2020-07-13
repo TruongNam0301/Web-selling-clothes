@@ -5,6 +5,10 @@
     background-size: cover;
     background-position: center;
 }
+.text-input{
+    padding: 20px 18px;
+    Outline: none;
+}
 .count {
     position: absolute;
     top: 30px;

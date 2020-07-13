@@ -7,51 +7,53 @@ if (document.readyState == 'loading') {
  function ready(){
      ChangeLoginRegister();
      OpenAndExitLogin();
-     $('.count').load('count.php');
-     //prevent space input
-     $("input.lg-uesrname, input.lg-password, input.rname, input.rg-username, input.cf-username, input.rg-password, input.cf-password").on({
-        keydown: function(e) {
-            if (e.which === 32)
-            return false;
-        },
-        change: function() {
-            this.value = this.value.replace(/\s/g, "");
-        }
-    });
-
-    //sign up form function
-    $("form.regis-content").submit(function(e){
-        var name = $("#name").val();
-        var username= $("#regis-username").val();
-        var cf_username=$("#confirm-username").val();
-        var password=$("#regis-password").val();
-        var cf_password=$("#confirm-password").val();
-        console.log(name,username,password);
-        e.preventDefault();
-        $(".error_signup").load("server.php", {
-            name : name,
-            username : username,
-            cf_username : cf_username,
-            password : password,
-            cf_password : cf_password,
-            register: "ok",
-         });
-    });
+     validateRegisterForm();
+    $('.count').load('../views/cartPage/countItem.php');
+    };
 
     //login form function
-    $("form.login-content").submit(function(e){
-        var lg_name = $("#username").val();
-        var lg_password=$("#password").val();
-        
-        console.log(lg_name,lg_password);
-        e.preventDefault();
-        $(".error_login").load("server.php", {
-            lg_name : lg_name,
-            lg_password : lg_password,
-            login: "ok",
-         });
+ function validateRegisterForm() {
+    $(".regis-content").validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            "name":{
+                required: true,
+            },
+            "username": {
+                required: true,
+                maxlength: 15
+            },
+            "password": {
+                required: true,
+                minlength: 4
+            },
+            "re-password": {
+                equalTo: "#password",
+                minlength: 4
+                
+            }
+        },
+        messages: {
+            "name":{
+                required: "* Bắt buộc nhập name",
+            },
+            "username": {
+                required: "* Bắt buộc nhập username",
+                maxlength: "* Hãy nhập tối đa 15 ký tự"
+            },
+            "password": {
+                required: "* Bắt buộc nhập password",
+                minlength: "* Hãy nhập ít nhất 4 ký tự"
+            },
+            "re-password": {
+                equalTo: "* Hai password phải giống nhau",
+                minlength: "* Hãy nhập ít nhất 4 ký tự"
+            }
+        }
     });
- }
+}  
 
 
 //click search-icon 

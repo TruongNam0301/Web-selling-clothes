@@ -1,12 +1,12 @@
 <?php
-    session_start();
-    if(isset($_SESSION['account'])){
-        $acc=$_SESSION['account'];
-    }
-    else{
-        $acc='user';
-    }
+session_start();
+$config['rewrite_short_tags'] = FALSE;
+include_once('../controllers/AccountCtr.php');
+$AccountCtr = new AccountCtr();
+$AccountCtr->register();   
+$AccountCtr->updateUserInfor();   
 ?>
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <html>  
     <div class="header" >
     <div class="mg-left-right " >
@@ -22,55 +22,49 @@
             <div class="col-lg-8 d-none d-lg-block">
                 <div class="menu-bar">
                     <ul class="menu">
-                        <li class="menu-item home"><a href="../html/home.php"> HOME</a></li>
-                        <li class="menu-item clothing"><a class="hov" href="../html/productPage.php">CLOTHING <i class="fas fa-angle-down"></i></a>
+                        <li class="menu-item home"><a href="home.php"> HOME</a></li>
+                        <li class="menu-item clothing"><a class="hov" href="productsPage.php">CLOTHING <i class="fas fa-angle-down"></i></a>
                             <div class="list-clothing">
                                 <ul class="item-clothing">
-                                    <li class="first"> <a href="#">item1 </a>
+                                    <li class="first"> ÁO 
                                         <div class="second">
                                             <ul class="list-item">
-                                                <li><a href="#">aaaaaa</a></li>
-                                                <li><a href="#">aaaaaa</a></li>
-                                                <li><a href="#">aaaaaa</a></li>
-                                                <li><a href="#">aaaaaa</a></li>
+                                                <li><a href="product-page.php?idType=3">SHIRT</a></li>
+                                                <li><a href="product-page.php?idType=2">T-SHIRT</a></li>
+                                                <li><a href="product-page.php?idType=1">JACKET</a></li>
+                                                <li><a href="#">HOODIES</a></li>
                                             </ul>
                                         </div>
                                     </li>
-                                    <li class="first"> <a href="#">item2 </a>
+                                    <li class="first"> QUẦN 
                                         <div class="second">
                                             <ul class="list-item">
-                                                <li><a href="#">bbbbbb</a></li>
-                                                <li><a href="#">bbbbbb</a></li>
-                                                <li><a href="#">bbbbb</a></li>
-                                                <li><a href="#">bbb</a></li>
+                                                <li><a href="product-page.php?idType=4">JEAN</a></li>
+                                                <li><a href="#">KAKI</a></li>
+                                                <li><a href="#">SHORT</a></li>
+                                                
                                             </ul>
                                         </div>
                                     </li>
-                                    <li class="first"> <a href="#">item3</a>
+                                    <li class="first"> GIÀY
                                         <div class="second">
                                             <ul class="list-item">
-                                                <li><a href="#">cccccc</a></li>
-                                                <li><a href="#">cccccc</a></li>
+                                                <li><a href="#">SANDALS</a></li>
+                                                <li><a href="#">SPORTS</a></li>
                                             </ul>
                                         </div>
                                     </li>
-                                    <li class="first"><a href="#"> item4</a>
-                                        <div class="second">
-                                            <ul class="list-item">
-                                                <li><a href="#">ddddd</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </li>
                         <li class="menu-item accessories"><a class="hov" href="#">ACCESSORIES<i class="fas fa-angle-down"></i></a>
                             <div class="dropdown-menu list-accessories">
                                 <ul class=" item-accessories">
-                                    <li> <a href="#">item1</a></li>
-                                    <li><a href="#"> item1</a></li>
-                                    <li><a href="#"> item1</a></li>
-                                    <li> <a href="#">item1</a></li>
+                                    <li> <a href="#">HATS</a></li>
+                                    <li><a href="#"> JEWERLS</a></li>
+                                    <li><a href="#"> </a></li>
+                                    <li> <a href="#"></a></li>
                                 </ul>
                             </div>
                         </li>
@@ -87,21 +81,22 @@
                     <div class="search-swapper" style="display: none;">
                         <form>
                             <div class="search">
-                                <input type="text">
-                                <button type="button" class="btn btn-danger">SEARCH</button>
+                                <input type="text"style="height:30px;" >
+                                <button type="button" class="btn btn-danger" >SEARCH</button>
                             </div>
                         </form>
                         </div>
                     </div>
                     <div class="icon-bag">
                     
-                        <a href="../html/cart-page.php"><i class="fas fa-shopping-bag fa-lg"></i></a>
+                        <a href="cart.php"><i class="fas fa-shopping-bag fa-lg"></i></a>
                        <div class= 'count'>
+                       
                        </div>
                     </div>
                     <div class="icon-login">
                         <div class="icon-login">
-                            <a href="#"><i class="fas fa-lock-open fa-lg"></i></a>
+                           <i class="fas fa-lock-open fa-lg"></i>
                         </div>
                     </div>
                 </div>
@@ -120,30 +115,41 @@
         </div>
         <div class="login-form">
             <div class="login-swapper">
-                <form class="login-content">
-                <input type="text" id="username" name="username" class="lg-uesrname" placeholder="USERNAME">
-                <input type="password" id="password" name="password" class="lg-password" placeholder="PASSWORD">
-                <div class="forgot-pass"><a href="#"> Forgot your password</a></div>
-                <input type="submit" value="login">
-                <div class="error_login"></div>
+                <form  method='POST' class="login-content">
+                    <input type="text" name="username" class='text-input' placeholder="USERNAME">
+                    <input type="password"  name="password" class='text-input' placeholder="PASSWORD">
+                    <div class='error-login'></div>
+                    <div class="forgot-pass"><a href="#"> Forgot your password</a></div>
+                    <input type="submit" class='login-button' name="btn_submit" value="login">
                 </form>
             </div>
         </div>
     </div>
     <div class="regis-form" style="display:none">
         <div class="regis-swapper">
-            <form class="regis-content" method="post" action="server.php">
-                
-                <input type="text" id="name" name="rusername" class="rname" placeholder="name">
-                <input type="text" id="regis-username" name="rg-username" class="rg-username" placeholder="USERNAME">
-                <input type="text" id="confirm-username" name="cf-username" class="cf-username" placeholder="CONFIRM USERNAME">
-                <input type="password" id="regis-password" name="rg-password" class="rg-password" placeholder="PASSWORD">
-                <input type="password" id="confirm-password" name="cf-password" class="cf-password" placeholder="PASSWORD">
-                <input type="submit"  name="reg_user" class="reg_user" value="register">
+            <form class="regis-content" method="post" >
+                <input type="text"  name="name" class='text-input' placeholder="name">
+                <input type="text"  name="username" class='text-input' placeholder="USERNAME">
+                <input type="password"  name="password" class='text-input ' id='password' placeholder="PASSWORD">
+                <input type="password"  name="re-password" class='text-input' id='re-password' class="cf-password" placeholder="PASSWORD">
+                <input type="submit"  name="regis_submit" class="regis_button" value="register">
                 <div class="error_signup"></div>
             </form>
         </div>
     </div>
+    <div class='user'>
+        <?php
+            if(isset($_SESSION['user'])){
+                $user=$_SESSION['user'];
+                include_once('../views/homePage/user.php');
+            }
+            else {
+                $AccountCtr = new AccountCtr();
+                $AccountCtr->checkLogin(1,1);   
+            }
+        ?>
+    </div>
+    
 </div>
 
 <!--menu-mobile-->
@@ -207,4 +213,9 @@
         </div>
     </div>  
 </div>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 </html>

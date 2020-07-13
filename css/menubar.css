@@ -13,20 +13,22 @@ li{
 }
 .header{
 	background-color: #fff;
-	
 	z-index: 10;
 	width: 100%;
 	
 }
-.error {
-  width: 92%; 
-  margin: 0px auto; 
-  padding: 10px; 
-  border: 1px solid #a94442; 
-  color: #a94442; 
-  background: #f2dede; 
-  border-radius: 5px; 
-  text-align: left;
+.update-swapper{
+	transition: 0.5s linear;
+	transform: translateY(-190px);
+}
+.active-update-form{
+	transform: translateY(0%);
+	transition: 0.45s linear;
+}
+.error ,.error-login {
+	color: #a94442;
+	text-align: left;
+	padding:0 15px;
 }
 .header .mg-left-right .menu-bar .menu{
 	margin: 0;
@@ -114,19 +116,5 @@ li{
 	flex-direction: row;
 	justify-content:flex-start ;
 }
-.error_signup,.error_login{
-	color:red;
-	padding-left: 5px;
-}
-div .acc{
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size: 25px;
-	letter-spacing: 1.8px;
-	word-spacing: 1.4px;
-	color: #000000;
-	font-weight: 700;
-	text-decoration: rgb(68, 68, 68);
-	font-style: italic;
-	font-variant: small-caps;
-	text-transform: none;
-}
+
+

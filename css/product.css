@@ -1,0 +1,81 @@
+#addToCartButton{
+    display:inline-block;
+    cursor:pointer;
+    font-size:16px;
+    text-decoration:none;
+    background-color:#e22e21;
+    color:white;
+    height: 50px;
+    width:130px;
+    border-radius: 10px;
+    border: none;
+    Outline: none;
+    margin-top: 20px;
+}
+#addToCartButton:hover {
+background-color:#AEECEF;
+color:black;
+}
+#addToCartButton:active {
+    position:relative;
+    top:1px;
+}
+.soluong{
+    margin-left: 0;
+}
+hr {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+.pickOptions {
+    float: left;
+    padding: 20px;
+    width: 250px;
+    height:100px ;
+}
+
+
+#decre{
+    margin-left: 20px;
+}
+
+#incre, #decre{
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+    background-color:#f9f9f9;
+    border-radius:0px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    cursor:pointer;
+    color:#666666;
+    font-family:Arial;
+    font-size:10px;
+    font-weight:bold;
+    padding:2px 0px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #ffffff;
+    width: 20px;
+    height: 40px;
+}
+#incre:hover,#decre:hover {
+    background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+    background-color:#e9e9e9;
+}
+#incre:active,#decre:active {
+    position:relative;
+    top:1px;
+}
