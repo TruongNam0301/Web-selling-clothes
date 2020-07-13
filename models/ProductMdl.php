@@ -1,11 +1,15 @@
 <?php
+    include_once("DataProvider.php");
     class ProductMdl{
+        private $db;
+
+        function __construct(){
+            $this->db = new DataProvider(); 
+        }
+
         public function getProduct($id){
-            $conn = mysqli_connect ("localhost","root","","sellclothes");
             $sql="SELECT * FROM clothes WHERE id= $id";
-            $result = mysqli_query($conn,$sql);
-            $row=mysqli_fetch_assoc($result);
-            return $row;
+            return $this->db->Fetch($sql);
         }
     }
 

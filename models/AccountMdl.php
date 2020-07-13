@@ -1,23 +1,27 @@
 <?php
+    include_once("DataProvider.php");
     class AccountMdl{
+        private $db;
+
+        function __construct(){
+            $this->db = new DataProvider(); 
+        }
         public function checkAccount($username,$password){
-            $conn = mysqli_connect ("localhost","root","","sellclothes");
             $sql = "SELECT * FROM `accounts` WHERE username='$username' AND password='$password'";
-            $result = mysqli_query($conn,$sql);
-            $count = mysqli_num_rows($result);
-		    if($count >0){
-                return $id = mysqli_fetch_assoc($result);
+		    if($this->db->NumRows($sql) >0){
+                return $this->db->Fetch($sql);
             }
             else return 0;
         }
         public function addAccount($username,$password){
-            $conn = mysqli_connect ("localhost","root","","sellclothes");
             $sql = "INSERT INTO `accounts`( username, password) VALUES ('$username','$password')";
-            if (mysqli_query($conn, $sql)) {
-                return  $last_id = mysqli_insert_id($conn);
-              } else {
+            $last_id = $this->db->ExecuteQueryInsert($sql);
+            if ($last_id){
+                return  $last_id;
+            } 
+            else{
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-              }
+            }
             return 1;
         }
     }
