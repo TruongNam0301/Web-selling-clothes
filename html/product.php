@@ -202,22 +202,23 @@
         </div>
         <script>
             function postCart (id,quantity,size,action){
-                $.post( 'xulygiohang.php', { id:id,quantity:quantity,size:size,action:action },function(res){
+                $.post( '../Controller/xulygiohang.php', { id:id,quantity:quantity,size:size,action:action },function(res){
                    if(res==-1) alert('alredy in cart bro');
                    else {
                        console.log(res);
-                          $('.count').load('count.php');
+                       $('.count').load('../View/item-count.php') 
                    }
                 } );
             }
             $(document).ready(function(){
-                $('.count').load('count.php')
+                $('.count').load('../View/item-count.php')
                 $('.CartButton').on('click',function(){
                     let quantity = $('.soluong').val();
                     let size = $('#size').val();
                     let id = <?php echo $_GET['id'] ?>;
                     let action = 'add'
-                    postCart(id,quantity,size,action);  
+                    postCart(id,quantity,size,action);
+                    $('.count').load('../View/item-count.php')  
                 });
             })
         </script>
@@ -227,3 +228,4 @@
 <?php
     include 'footer.php'; 
 ?>
+ 

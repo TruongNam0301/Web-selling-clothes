@@ -7,7 +7,7 @@ if (document.readyState == 'loading') {
  function ready(){
      ChangeLoginRegister();
      OpenAndExitLogin();
-     $('.count').load('count.php');
+     $('.count').load('../View/item-count.php');
      //prevent space input
      $("input.lg-uesrname, input.lg-password, input.rg-username, input.cf-username, input.rg-password, input.cf-password").on({
         keydown: function(e) {
@@ -28,13 +28,12 @@ if (document.readyState == 'loading') {
         var cf_password=$("#confirm-password").val();
         console.log(name,username,password);
         e.preventDefault();
-        $(".error_signup").load("server.php", {
+        $(".error_signup").load("../Controller/account-signup.php", {
             name : name,
             username : username,
             cf_username : cf_username,
             password : password,
             cf_password : cf_password,
-            register: "ok",
          });
     });
 
@@ -45,10 +44,10 @@ if (document.readyState == 'loading') {
         
         console.log(lg_name,lg_password);
         e.preventDefault();
-        $(".error_login").load("server.php", {
+        $(".error_login").load("../Controller/account-login.php", {
             lg_name : lg_name,
             lg_password : lg_password,
-            login: "ok",
+            
          });
     });
 
@@ -60,11 +59,11 @@ if (document.readyState == 'loading') {
         
         console.log(info,address,phone);
         e.preventDefault();
-        $(".error_update").load("server.php", {
+        $(".error_update").load("../Controller/account-infoupdate.php", {
             info : info,
             address : address,
             phone:phone,
-            update: "ok",
+            
          });
     });
  }

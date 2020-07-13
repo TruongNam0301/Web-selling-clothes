@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="../css/menubar.css">
         <link rel="stylesheet" type="text/css" href="../css/menu-mobile.css">
         <link rel="stylesheet" type="text/css" href="../css/main-home.css">
-        <title>Exercise</title>
+        <title>H&H</title>
     </head>
     <body >
         <div class="all">
@@ -127,15 +127,6 @@
                     include 'footer.php';
                 ?>
             </div>
-        </div>
-
-<!--script-->
-        <script src="../javascript/home.js"></script>
-        
-<<<<<<< HEAD
-=======
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
->>>>>>> 3ff0f679ca244322ceb849176f39e7bf0efe57b1
+        </div> 
     </body>
 </html>
