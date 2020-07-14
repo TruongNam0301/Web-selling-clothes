@@ -1,5 +1,5 @@
 <?php
-echo "<li class='first' type-id=$type[id]><a class='aa' href='productsPage.php?type=$type[id]'> $type[name] </a> <div class='second'>";
+echo "<li class='first' type-id=$type[id]><a class='aa' href='productsPage.php?type=$type[id]'> $type[nametype] </a> <div class='second'>";
 foreach($TypeClothes as $typeCloth){
    $str =<<<EOD
         <ul class="list-item">

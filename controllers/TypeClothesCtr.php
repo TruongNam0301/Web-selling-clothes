@@ -9,7 +9,7 @@ class TypeClothesCtr{
     public function getTypeClothesByType($type){
         $TypeClothesMdl = new TypeClothesMdl();
         $TypeClothes = $TypeClothesMdl->getTypeClothesByType($type['id']);
-        if($TypeClothes == null) echo "<li class='first' type-id=$type[id]> <a class='aa' href='#'> $type[name] </a>  <div class='second'></div></li>";
+        if($TypeClothes == null) echo "<li class='first' type-id=$type[id]> <a class='aa' href='#'> $type[nametype] </a>  <div class='second'></div></li>";
         else{
             include('../views/homePage/clothing.php');
         }
