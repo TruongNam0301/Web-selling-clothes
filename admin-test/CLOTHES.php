@@ -1,8 +1,10 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 include_once("../admin-test/models/DataProvider.php");
 if(isset($_POST["update-clothes"])) {
     $file = $_FILES['file'];
-    print_r($file);
     $fileName = $file['name'];
                 $fileTmpName = $file['tmp_name'];
                 $fileSize = $file['size'];
@@ -18,7 +20,8 @@ if(isset($_POST["update-clothes"])) {
              
                     $sql = "UPDATE `clothes` SET id_type='$type',name='$name', price='$price' WHERE id = '$id' ";
                     if ($db->ExecuteQuery($sql)) {
-                        echo "New record created successfully";
+                        echo "<script type='text/javascript'>alert('Update ". $name ." Success');</script>";
+                        
                     } else {
                         echo "Error: " . $sql . "<br>" ;
                     }
@@ -41,7 +44,8 @@ if(isset($_POST["update-clothes"])) {
                                 $image = $fileNameNew;
                                 $sql = "UPDATE `clothes` SET id_type='$type',name='$name' ,price='$price', picture='$image'  WHERE id = '$id' ";
                                     if ($db->ExecuteQuery($sql)) {
-                                        echo "New record created successfully";
+                                        echo "<script type='text/javascript'>alert('Update". $name ."Success');</script>";
+                                       
                                     } else {
                                         echo "Error: " . $sql . "<br>" ;
                                     }
@@ -58,8 +62,31 @@ if(isset($_POST["update-clothes"])) {
                         echo "can't up this file";
                     }
                 }
-            }
+}
+
+if(isset($_POST["del-clothes"])){
+    $db=new DataProvider();
+    $delete_id = $_POST["del-id"];
+    $delete_name=$_POST["del-name"];
+   
+    $sql = "DELETE FROM clothes WHERE id=$delete_id ; SET @num := 0; UPDATE clothes SET id = @num := (@num+1); ALTER TABLE clothes AUTO_INCREMENT = 1";
+    if ($db->ExecuteMultiQuery($sql)){
+        echo "<script type='text/javascript'>alert('Delete ". $delete_name ." Success');</script>";
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_SESSION['postdata'] = $_POST;
+            unset($_POST);
+            header("Location: ".$_SERVER['PHP_SELF']);
+            exit;
+        }
+    }
+    else{
+        echo "<script type='text/javascript'>alert('Delete ". $delete_name ." Fail');</script>";
+    }
+} 
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -182,18 +209,18 @@ if(isset($_POST["update-clothes"])) {
                         
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
   
       <div class="modal-body">
-        <form  method = 'post' action='' enctype="multipart/form-data" id='form'>
+        <form  method = 'post' action='' enctype="multipart/form-data" >
             <label>typeclothes</label>
                 <select name="types_clothes" id="types_clothes">
                     <option value="4">hoodies</option>
@@ -208,7 +235,7 @@ if(isset($_POST["update-clothes"])) {
             <input type='text' name='price' id='price'/><br/>
             <label>image</label>
             <input type='file' name='file' id='file' /><br/>
-            <img src="" id='image' alt="Italian Trulli" style='width:100px; height:50px'>
+            <img src="" id='image' alt="Italian Trulli" style='width:200px; height:200px'>
             <div align="center">  
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <input type='submit'  name="update-clothes" class="btn-save btn btn-primary" value='save' />
@@ -222,7 +249,41 @@ if(isset($_POST["update-clothes"])) {
     
     </div>
   </div>
-</div>          
+</div>
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  
+      <div class="modal-body">
+        <form  method = 'post' action='' enctype="multipart/form-data" >
+            <input type="hidden" name="del-id" id="del-id" />
+            <label>name</label>
+            <input type='text' name='del-name'  id='del-name'/><br/>
+            <label>price</label>
+            <input type='text' name='del-price' id='del-price'/><br/>
+            <label>image</label>
+            <img src="" id='del-image' alt="Italian Trulli" style='width:200px; height:200px'>
+            <div align="center">  
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type='submit'  name="del-clothes" class="btn-del btn btn-danger" value='delete' />
+            </div>  
+            
+        </form>
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    
+    </div>
+  </div>
+</div>
                        <div class='test'>
                        </div>
                         <div class="card mb-4">
@@ -258,7 +319,7 @@ if(isset($_POST["update-clothes"])) {
                                                     echo "<td class='name'>$item[name]</td>";
                                                     echo "<td class='price'>$p</td>";
                                                     echo "<td class='image'><img src='../admin-test/image/image_product/$item[picture]' class='item' style='width:100px; height:50px' ></td>";
-                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button><button class='btn-delete btn btn-danger'>DELETE</button></td>";
+                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#UpdateModal'>EDIT</button><button class='btn-delete btn btn-danger' data-toggle='modal' data-target='#DeleteModal'>DELETE</button></td>";
                                                 echo "</tr>";
                                             }                               
                                             ?>
@@ -276,19 +337,31 @@ if(isset($_POST["update-clothes"])) {
                         $(document).ready(function(){
                             
                             $('.btn-edit').on('click',function(){
-                                        let div = $(this).parent().parent();
-                                        id=div.find('.id').text();
-                                        name=div.find('.name').text();
-                                        price=div.find('.price').text();
-                                        image=div.find('.image').attr('src');
-                                        type = div.find('.type').text();
-                                        $('#name').val(name);
-                                        $('#price').val(price);
-                                        $('#image').attr('src',image);
-                                        $('#id').val(id);
-                                        $('#types_clothes option[value='+type+']').attr('selected','selected');
+                                let div = $(this).parent().parent();
+                                id=div.find('.id').text();
+                                name=div.find('.name').text();
+                                price=div.find('.price').text().replace('.','');
+                                image=div.find('.image img').attr('src');
+                                type = div.find('.type').text();
+                                $('#name').val(name);
+                                $('#price').val(price);
+                                $('#image').attr('src',image);
+                                $('#id').val(id);
+                                $('#types_clothes option[value='+type+']').attr('selected','selected');
                                
-                                    })
+                            })
+                            $('.btn-delete').on('click',function(){
+                                let div = $(this).parent().parent();
+                                id=div.find('.id').text();
+                                name=div.find('.name').text();
+                                price=div.find('.price').text().replace('.','');
+                                image=div.find('.image img').attr('src');
+                                type = div.find('.type').text();
+                                $('#del-id').val(id);
+                                $('#del-name').val(name);
+                                $('#del-price').val(price);
+                                $('#del-image').attr('src',image);
+                            })
                            
                         })
         

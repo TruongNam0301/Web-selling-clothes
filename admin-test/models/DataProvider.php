@@ -11,6 +11,24 @@ class DataProvider
 		mysqli_query($this->link,"set names 'utf8'");
 		return mysqli_query($this->link, $sql);
 	}
+	function ExecuteMultiQuery($sql){
+		if ($this->link->multi_query($sql)) {
+			do {
+				/* store first result set */
+				if ($result = $this->link->store_result()) {
+					while ($row = $result->fetch_row()) {
+						printf("%s\n", $row[0]);
+					}
+					$result->free();
+				}
+				/* print divider */
+				if ($this->link->more_results()) {
+					printf("-----------------\n");
+				}
+			} while ($this->link->next_result());
+			return 1;
+		}
+	}
 	function ExecuteQueryInsert($sql)
 	{
 		$result=$this->ExecuteQuery($sql);
