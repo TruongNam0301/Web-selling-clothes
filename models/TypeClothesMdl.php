@@ -8,13 +8,11 @@
         }
         public function getTypeClothes($type){
             $sql = "SELECT * FROM typeclothes WHERE type= $type";
-            $types = $this->db->FetchAll($sql);
-            $typeClothes = array();
+           
+          
             if($this->db->NumRows($sql)){
-               foreach($types as $types){
-                    $typeClothes[] = $types;
-                }
-                return $typeClothes;
+              
+                return $this->db->FetchAll($sql);
             }
             else{
                 return null;
@@ -22,15 +20,12 @@
            
         }
         public function getTypeClothesByType($typeId){
-            $conn = mysqli_connect("localhost","root","","sellclothes");
+           
             $sql = "SELECT * FROM typeclothes WHERE type = $typeId";
-            $result = mysqli_query($conn,$sql);
-            $typeClothes = array();
-            if(mysqli_num_rows($result)>0){
-                while($type = mysqli_fetch_assoc($result)){
-                    $typeClothes[] = $type;
-                }
-                return $typeClothes;
+            
+            if($this->db->NumRows($sql)){
+              
+                return $this->db->FetchAll($sql);
             }
             else{
                 return null;

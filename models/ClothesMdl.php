@@ -10,25 +10,18 @@ class ClothesMdl {
     public function getClothes($page,$limit,$type){
     	$start = ($page-1)*6;
 		$sql = "SELECT * FROM clothes INNER JOIN typeclothes on clothes.id_type=typeclothes.id_type INNER JOIN types ON typeclothes.type=types.id where types.id=$type LIMIT $start,$limit";
-		$clothArr = $this->db->FetchAll($sql);
-		$clothes = array();
-		if( $this->db->NumRows($sql)){
-			foreach($clothArr as $cloth){
-				$clothes[]=$cloth;
-			}
-			return $clothes;
+		if($this->db->NumRows($sql)){
+			return $this->db->FetchAll($sql);
 		}
 	} 
 	public function getClothesByType($val,$page,$limit){
+
 		$start = ($page-1)*$limit;
+
 		$sql = "SELECT * FROM clothes WHERE id_type = $val LIMIT $start,$limit";
-		$cloth = $this->db->FetchAll($sql);
-		$clothes = array();
-		if( $this->db->NumRows($sql)){
-			foreach($cloth as $cloth){
-				$clothes[]=$cloth;
-			}
-			return $clothes;
+
+		if($this->db->NumRows($sql)){
+			return $this->db->FetchAll($sql);
 		}
 	}
 	public function getNumRows($type){
@@ -45,16 +38,14 @@ class ClothesMdl {
 	}
 	public function Search($key){
 		$sql="SELECT * FROM `clothes` WHERE name like '%$key%'";
-		$cloth = $this->db->FetchAll($sql);
-		$clothes = array();
-		if( $this->db->NumRows($sql)){
-			foreach($cloth as $cloth){
-				$clothes[]=$cloth;
-			}
-			return $clothes;
+		
+		if($this->db->NumRows($sql)){
+              
+			return $this->db->FetchAll($sql);
 		}
-		else
+		else{
 			return -1;
+		}
 	}
 }
 

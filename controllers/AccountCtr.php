@@ -28,7 +28,7 @@ include_once('../models/UsersMdl.php');
                 $username = $_POST['username'];
                 $password = $_POST["password"];
                 $AccountMdl = new AccountMdl();
-                $Account = $AccountMdl -> checkAccount($username,$password);
+                $Account = $AccountMdl -> checkAccountExist($username);
                 if($Account==0){
                     $id=$AccountMdl-> addAccount($username,$password);
                     $UsersMdl = new UsersMdl();

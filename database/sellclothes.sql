@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 13, 2020 lúc 07:22 AM
+-- Thời gian đã tạo: Th7 14, 2020 lúc 06:58 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -38,29 +38,7 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`) VALUES
-(1, '1', '$2y$12$1D6YqS60LMfeJXQWXZGyEullYQqcOEJ5d7a.6FhxP9UHtbyRcpHfu'),
-(2, '', '$2y$12$rKJ117Wv3xOB60p0IkXVPudAxaxBSYbW3ikaJOmAPcCOWGnaMLM0m'),
-(3, 'hieu0907', '$2y$12$yxrk.gxYLuxeLjK2SGxEw.qO6PwQZubwDg9xu2eDSaiqjN7E1h0oy'),
-(4, 'test', '$2y$12$rOGOyJb9.vkboCuZT7tuCurYg4/8A7YD5DsVjKNEo4jKPnkfvTTrG'),
-(5, 't', '$2y$12$qUsm.3XBtKBeRD3MxIp.R./ueq99JaE93LLMYsMK00f18FYma.YcC'),
-(6, 't2', '$2y$12$aKtIbe7ssmj5Evd2mS3hM./oJs5a0H8g4xL1UW4FccjgYB43riEh2'),
-(7, 'finaltest', '$2y$12$V.eKs6UkwimAGWZikU0AwuC/O5TdTuL6cBBaREt1h5j6KKqVEn8Sy'),
-(8, 'f', '$2y$12$XHEvJkFadPiTLdso8eWuxePwSb8XqTUJgdP/oPNL93BbEgizH1JLi'),
-(9, 'test2020', 'test2020'),
-(10, 'test2020', 'test2020'),
-(11, '1', '1234'),
-(12, '1', '1234'),
-(13, 'test11', 'test11'),
-(14, 'test11', 'test11'),
-(15, '2222', '2222'),
-(16, '2222', '2222'),
-(17, 'nam', '1234'),
-(18, 'nam', '1234'),
-(19, 'nam', '12345'),
-(20, 'test101', 'test101'),
-(21, '1113', '1113'),
-(22, '1011', '1011'),
-(23, 'testtest', 'testtest');
+(1, 'test', '$2y$12$sHWsdiUVv6AtoOhpRu//wukYs4pCtHv8oRzCwA0FO3inPejMGADMy');
 
 -- --------------------------------------------------------
 
@@ -210,16 +188,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `image`, `address`, `phoneNumber`) VALUES
-(1, '1', '', '123', '321'),
-(5, 't', '', NULL, NULL),
-(6, 't2', '', NULL, NULL),
-(7, 'finaltest', '', NULL, NULL),
-(8, 'f', '', '$address', '$phone'),
-(14, 'test11', 'user-image.png', NULL, NULL),
-(16, '2', 'user-image.png', NULL, NULL),
-(18, 'nam', 'user-image.png', NULL, NULL),
-(19, 'nam', 'user-image.png', NULL, NULL),
-(21, '1113', 'user-image.png', NULL, NULL);
+(1, 'test', 'user-image.png', NULL, NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -273,7 +242,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `bills`
@@ -297,7 +266,7 @@ ALTER TABLE `typeclothes`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
