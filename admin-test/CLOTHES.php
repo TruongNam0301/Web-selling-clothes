@@ -1,3 +1,66 @@
+<?php
+include_once("../admin-test/models/DataProvider.php");
+if(isset($_POST["update-clothes"])) {
+    $file = $_FILES['file'];
+    print_r($file);
+    $fileName = $file['name'];
+                $fileTmpName = $file['tmp_name'];
+                $fileSize = $file['size'];
+                $fileError = $file['error'];
+                $fileType = $file['type'];
+                if($fileSize==0&&$fileName==''){
+                    #just update name
+                    $db=new DataProvider();
+                    $id = $_POST['id'];
+                    $type = $_POST['types_clothes'];
+                    $name = $_POST['name'];
+                    $price = $_POST['price'];
+             
+                    $sql = "UPDATE `clothes` SET id_type='$type',name='$name', price='$price' WHERE id = '$id' ";
+                    if ($db->ExecuteQuery($sql)) {
+                        echo "New record created successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" ;
+                    }
+                }else{
+                    #update name & image
+                    $fileExt = explode('.',$fileName);
+                    $fileActualExt = strtolower(end($fileExt));
+                    $allowed = array('jpg','pnj','jpeg');
+                    if(in_array($fileActualExt,$allowed)){
+                        if($fileError==0){
+                        if($fileSize<1000000){
+                                $fileNameNew = uniqid('',true).".".$fileActualExt;
+                                $fileDestination = '../admin-test/image/image_product/'.$fileNameNew;
+                                move_uploaded_file($fileTmpName,$fileDestination);
+                                $db=new DataProvider();
+                                $id = $_POST['id'];
+                                $type = $_POST['types_clothes'];
+                                $name = $_POST['name'];
+                                $price = $_POST['price'];
+                                $image = $fileNameNew;
+                                $sql = "UPDATE `clothes` SET id_type='$type',name='$name' ,price='$price', picture='$image'  WHERE id = '$id' ";
+                                    if ($db->ExecuteQuery($sql)) {
+                                        echo "New record created successfully";
+                                    } else {
+                                        echo "Error: " . $sql . "<br>" ;
+                                    }
+                            }
+                            else{
+                                echo "file too big";
+                            }
+                        } 
+                        else{
+                            echo "error upload file";
+                        }
+                    }
+                    else{
+                        echo "can't up this file";
+                    }
+                }
+            }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -130,7 +193,7 @@
       </div>
   
       <div class="modal-body">
-        <form  method = 'post'  id='form'>
+        <form  method = 'post' action='' enctype="multipart/form-data" id='form'>
             <label>typeclothes</label>
                 <select name="types_clothes" id="types_clothes">
                     <option value="4">hoodies</option>
@@ -138,6 +201,7 @@
                     <option value="2">t-shirt</option>
                     <option value="3">shirt</option>
                 </select><br/>
+            <input type="hidden" name="id" id="id" />
             <label>name</label>
             <input type='text' name='name'  id='name'/><br/>
             <label>price</label>
@@ -147,8 +211,7 @@
             <img src="" id='image' alt="Italian Trulli" style='width:100px; height:50px'>
             <div align="center">  
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="hidden" name="action" id="action" />  
-                <input type='submit'  class="btn-save btn btn-primary" value='save' />
+                <input type='submit'  name="update-clothes" class="btn-save btn btn-primary" value='save' />
             </div>  
             
         </form>
@@ -169,7 +232,38 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive"  id='clothes_table'>
-                                    
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Id_Type</th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Pic</th>
+                                                <th>button</th>
+                                            </tr>
+                                        </thead>
+                                       
+                                        <tbody>
+                                        <?php 
+                                            include_once("../admin-test/models/DataProvider.php");
+                                            $db=new DataProvider();
+                                            $sql="SELECT * FROM `clothes`";
+                                            $array=$db->FetchAll($sql);
+                                            foreach($array as $item){
+                                                $p=number_format($item['price'],0,",",".");
+                                                echo "<tr>";
+                                                    echo "<td class='id'>$item[id]</td>";
+                                                    echo "<td class='type'>$item[id_type]</td>";
+                                                    echo "<td class='name'>$item[name]</td>";
+                                                    echo "<td class='price'>$p</td>";
+                                                    echo "<td class='image'><img src='../admin-test/image/image_product/$item[picture]' class='item' style='width:100px; height:50px' ></td>";
+                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button><button class='btn-delete btn btn-danger'>DELETE</button></td>";
+                                                echo "</tr>";
+                                            }                               
+                                            ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -178,16 +272,10 @@
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <script>
-                        function load_data(){  
-                            $.ajax({  
-                                url:"action.php",  
-                                method:"POST",  
-                                data:{action:'Load'},  
-            
-                                success:function(data)  
-                                {  
-                                    $('#clothes_table').html(data);  
-                                    $('.btn-edit').on('click',function(){
+                        
+                        $(document).ready(function(){
+                            
+                            $('.btn-edit').on('click',function(){
                                         let div = $(this).parent().parent();
                                         id=div.find('.id').text();
                                         name=div.find('.name').text();
@@ -197,38 +285,11 @@
                                         $('#name').val(name);
                                         $('#price').val(price);
                                         $('#image').attr('src',image);
-                                        $('#form').data('id',id);
+                                        $('#id').val(id);
                                         $('#types_clothes option[value='+type+']').attr('selected','selected');
                                
                                     })
-                                } 
-                              
-                            });  
-                        }  
-                        $(document).ready(function(){
-                            
-                            load_data();
-
-                            
-                            $('#form').on('submit',function(){
-                                let name=$('#name').val();
-                                let price=$('#price').val();
-                                let type=$('#types_clothes').val();
-                                let id = $('#form').data('id');
-                                var extension = $('#file').val().split('.').pop().toLowerCase();  
-                                let file = $('#file').val();
-                                console.log(id,name,price,type,extension);
-                                $.ajax({  
-                                    url:"action.php",  
-                                    method:"POST",  
-                                    data:new FormData(this),   
-                                    success:function(data)  
-                                    {  
-                                        ('.test').html(data);
-                                    }  
-                                })  
-                             
-                            })
+                           
                         })
         
                     </script>

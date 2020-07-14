@@ -32,8 +32,9 @@
         echo " </tbody>
         </table>";
      }
-     else if($_POST["action"] == "edit") {
-         echo "$_POST[name],$_POST[price],$_POST[file],$_POST[types_clothes]";
+     else if($_POST["action"] == "save") {
+        $file = $_FILES['file'];
+        print_r($file);
      }
 
 

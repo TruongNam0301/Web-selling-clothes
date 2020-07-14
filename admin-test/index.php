@@ -189,7 +189,7 @@
                                                 <th>Name</th>
                                                 <th>Price</th>
                                                 <th>Pic</th>
-                            
+                                                <th>button</th>
                                             </tr>
                                         </thead>
                                        
@@ -207,6 +207,7 @@
                                                     echo "<td>$item[name]</td>";
                                                     echo "<td>$p</td>";
                                                     echo "<td><img src='../admin-test/image/image_product/$item[picture]' class='item' style='width:100px; height:50px' ></td>";
+                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button><button class='btn-delete btn btn-danger'>DELETE</button></td>";
                                                 echo "</tr>";
                                             }                               
                                             ?>
