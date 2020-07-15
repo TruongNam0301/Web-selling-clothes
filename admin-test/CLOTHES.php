@@ -261,10 +261,10 @@ if(isset($_POST["update-clothes"])) {
             <label>price</label>
             <input type='text' name='price' id='price'/><br/>
             <label>image</label>
-            <input type='file' name='file' id='file' /><br/>
-            <div class='image-cloth'>
-            </div>
-            <div align="center" class='button-action'>  
+            <input type='file' name='file' id='file' onchange="readURL(this);" />
+            <img id="blah" src="#" alt="" style=" display: inline-block; float:left;"/><br/>
+            <img id="current-image" src=""  style="width:100px; height:100px;  display: inline-block;" /></br>
+            <div align="center" class='button-action' style="margin-top:20px">  
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>  
             
@@ -346,7 +346,7 @@ if(isset($_POST["update-clothes"])) {
                                         type = div.find('.type').text();
                                         $('#name').val(name);
                                         $('#price').val(price);
-                                        $('#image').attr('src',image);
+                                        $('#current-image').attr('src',image);
                                         $('#id').val(id);
                                         $('#types_clothes option[value='+type+']').attr('selected','selected');
                                        
@@ -401,7 +401,21 @@ if(isset($_POST["update-clothes"])) {
                                 });
                             }
                         })
-        
+                        function readURL(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    $('#blah')
+                                        .attr('src', e.target.result)
+                                        .width(100)
+                                        .height(100);
+                                    
+                                };
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
                     </script>
                 </footer>
             </div>
