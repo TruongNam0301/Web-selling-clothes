@@ -67,11 +67,6 @@ if(isset($_POST["update-clothes"])) {
         $fileSize = $file['size'];
         $fileError = $file['error'];
         $fileType = $file['type'];
-        $id = $_POST['id'];
-        $type = $_POST['types_clothes'];
-        $name = $_POST['name'];
-        $price = $_POST['price'];
-        
         
             #ADD CLOTHES
             $fileExt = explode('.',$fileName);
@@ -84,6 +79,10 @@ if(isset($_POST["update-clothes"])) {
                         $fileDestination = '../admin-test/image/image_product/'.$fileNameNew;
                         move_uploaded_file($fileTmpName,$fileDestination);
                         $db=new DataProvider();
+                        $id = $_POST['id'];
+                        $type = $_POST['types_clothes'];
+                        $name = $_POST['name'];
+                        $price = $_POST['price'];
                         $image = $fileNameNew;
                         $sql = "INSERT INTO `clothes`(id_type, name, price, picture) VALUES ('$type','$name','$price','$image')";
                             if ($db->ExecuteQuery($sql)) {
@@ -127,7 +126,6 @@ if(isset($_POST["update-clothes"])) {
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     </head>
     <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -330,11 +328,6 @@ if(isset($_POST["update-clothes"])) {
                 <footer class="py-4 bg-light mt-auto">
                     <script>
                         $(document).ready(function(){
-                            $('#form').on('submit',function(){
-                                let checkFile=$("#file").val();
-                                if(checkFile==''){ alert('ban chua chon anh'); return false}
-                                else return true;
-                            })
                             $('.btn-edit').on('click',function(){
                                         $( ".image-cloth" ).append("<img src='' id='image' alt='cloth-image' style='width:100px; height:50px'>");
                                         $( ".button-action" ).append( "<input type='submit'  name='update-clothes' class='btn-save btn btn-primary' value='save' />" );
@@ -364,11 +357,9 @@ if(isset($_POST["update-clothes"])) {
                                     }
                             })
                             $('.btn-add').on('click',function(){
-                                validateForm();
                                 $( "#image" ).remove();
                                 $( ".button-action" ).append( "<input type='submit'  name='add-clothes' class='btn-save btn btn-primary' value='add' />" );
                             })
-
                             $("#exampleModal").on("hidden.bs.modal", function () {
                                    let div = $(".button-action input").remove();
                                     $('#name').val('');
@@ -376,30 +367,42 @@ if(isset($_POST["update-clothes"])) {
                                     $('#id').val('');
                                     $('#types_clothes option[value=0]').attr('selected','selected');
                             });
-                            function validateForm() {
-                                $("#form").validate({
-                                    onfocusout: false,
-                                    onkeyup: false,
-                                    onclick: false,
-                                    rules: {
-                                        "name":{
-                                            required: true,
-                                        },
-                                        "price": {
-                                            required: true,
-                                        }
-                                    },
-                                    messages: {
-                                        "name":{
-                                            required: "* Bắt buộc nhập name"
-                                        },
-                                        "price": {
-                                            required: "* Bắt buộc nhập price"
-                                        
-                                        },
-                                    }
-                                });
-                            }
+                            function validateRegisterForm() {
+    $("#form").validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            "name":{
+                required: true,
+            },
+            "price": {
+                required: true,
+            },
+            "file": {
+                required: true,
+            },
+
+        },
+        messages: {
+            "name":{
+                required: "* Bắt buộc nhập name",
+            },
+            "username": {
+                required: "* Bắt buộc nhập username",
+                maxlength: "* Hãy nhập tối đa 15 ký tự"
+            },
+            "password": {
+                required: "* Bắt buộc nhập password",
+                minlength: "* Hãy nhập ít nhất 4 ký tự"
+            },
+            "re-password": {
+                equalTo: "* Hai password phải giống nhau",
+                minlength: "* Hãy nhập ít nhất 4 ký tự"
+            }
+        }
+    });
+}
                         })
         
                     </script>
