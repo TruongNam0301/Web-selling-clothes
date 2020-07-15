@@ -257,7 +257,7 @@ if(isset($_POST["update-clothes"])) {
                                                     echo "<td class='type'>$item[id_type]</td>";
                                                     echo "<td class='name'>$item[name]</td>";
                                                     echo "<td class='price'>$p</td>";
-                                                    echo "<td class='image'><img src='../admin-test/image/image_product/$item[picture]' class='item' style='width:100px; height:50px' ></td>";
+                                                    echo "<td ><img src='../admin-test/image/image_product/$item[picture]' class='image' style='width:100px; height:50px' ></td>";
                                                     echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button><button class='btn-delete btn btn-danger'>DELETE</button></td>";
                                                 echo "</tr>";
                                             }                               
@@ -281,6 +281,7 @@ if(isset($_POST["update-clothes"])) {
                                         name=div.find('.name').text();
                                         price=div.find('.price').text();
                                         image=div.find('.image').attr('src');
+                                        console.log(image);
                                         type = div.find('.type').text();
                                         $('#name').val(name);
                                         $('#price').val(price);
@@ -296,7 +297,9 @@ if(isset($_POST["update-clothes"])) {
                 </footer>
             </div>
         </div>
-      
+                        <script>if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    } </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
