@@ -1,4 +1,36 @@
+<?php
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    include_once("../admin-test/models/DataProvider.php");
+    if(isset($_POST['promote-user'])){
+        $id=$_POST['pro-id'];
+        $user=$_POST['pro-name'];
+        $db=new DataProvider();
+        $sql="UPDATE accounts SET lv=1 WHERE id=$id";
+        $db->ExecuteQuery($sql);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_SESSION['postdata'] = $_POST;
+            unset($_POST);
+            header("Location: ".$_SERVER['PHP_SELF']);
+            exit;
+        }
+    }
+    if(isset($_POST['demote-user'])){
+        $id=$_POST['de-id'];
+        $user=$_POST['de-name'];
+        $db=new DataProvider();
+        $sql="UPDATE accounts SET lv=0 WHERE id=$id";
+        $db->ExecuteQuery($sql);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_SESSION['postdata'] = $_POST;
+            unset($_POST);
+            header("Location: ".$_SERVER['PHP_SELF']);
+            exit;
+        }
+    }
 
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -158,19 +190,74 @@
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-area mr-1"></i>
-                                        Area Chart Example
+                                       <i class="fa fa-users" aria-hidden="true"></i>
+
+                                        User manager
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="User-Table" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>User Name</th>
+                                                    <th>Button</th>
+                                                </tr>
+                                            </thead>
+                                        
+                                            <tbody>
+                                            <?php 
+                                                include_once("../admin-test/models/DataProvider.php");
+                                                $db=new DataProvider();
+                                                $sql="SELECT * FROM `accounts`";
+                                                $array=$db->FetchAll($sql);
+                                                foreach($array as $user){ 
+                                                        echo "<tr>";
+                                                        echo "<td class='acc-id'>$user[id]</td>";
+                                                        echo "<td class='acc-username'>$user[username]</td>";
+                                                        if($user['lv']==0){
+                                                            echo "<td><button class='btn-promote btn btn-primary' data-toggle='modal' data-target='#PromoteModal'>PROMOTE</button>";
+                                                            echo "<button class='btn-demote btn btn-danger' data-toggle='modal' data-target='#DemoteModal' style='margin-left:10px' disabled>DEMOTE</button></td>";
+                                                        }
+                                                        else{
+                                                            echo "<td><button class='btn-promote btn btn-primary' data-toggle='modal' data-target='#PromoteModal' disabled>PROMOTE</button>";
+                                                            echo "<button class='btn-demote btn btn-danger' data-toggle='modal' data-target='#DemoteModal' style='margin-left:10px' >DEMOTE</button></td>";
+                                                        }
+                                                        echo "</tr>";
+                                                }                               
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-bar mr-1"></i>
-                                        Bar Chart Example
+                                    <i class="fa fa-barcode" aria-hidden="true"></i>
+
+                                        Bill Manager
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="Bill-Table" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>id_clothes</th>
+                                                    <th>Buyer</th>
+                                                    <th>Button</th>
+                                                </tr>
+                                            </thead>
+                                        
+                                            <tbody>
+                                            <?php 
+                                                include_once("../admin-test/models/DataProvider.php");
+                                                $db=new DataProvider();
+                                                $sql="SELECT * FROM `accounts`";
+                                                  
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -202,12 +289,12 @@
                                             foreach($array as $item){
                                                 $p=number_format($item['price'],0,",",".");
                                                 echo "<tr>";
-                                                    echo "<td>$item[id]</td>";
+                                                    echo "<td >$item[id]</td>";
                                                     echo "<td>$item[id_type]</td>";
                                                     echo "<td>$item[name]</td>";
                                                     echo "<td>$p</td>";
                                                     echo "<td><img src='../admin-test/image/image_product/$item[picture]' class='item' style='width:100px; height:50px' ></td>";
-                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button><button class='btn-delete btn btn-danger'>DELETE</button></td>";
+                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button><button class='btn-delete btn btn-danger' style='margin-left:10px'>DELETE</button></td>";
                                                 echo "</tr>";
                                             }                               
                                             ?>
@@ -243,3 +330,81 @@
         <script src="assets/demo/datatables-demo.js"></script>
     </body>
 </html>
+
+<div id="PromoteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">PROMOTION</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+      </div>
+      <div class="modal-body">
+        <form  method = 'post' action='' enctype="multipart/form-data" >
+            <input type="hidden" name="pro-id" id="pro-id" />
+            <h4>Are you sure want to promote <b><span id="pro-user"></span></b> ?</h4>
+            <input type='hidden' name='pro-name'  id='pro-name'/><br/>
+            <div align="center">  
+                
+                <input type='submit'  name="promote-user" class="btn-pro btn btn-primary" value='YES' />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+            </div>  
+            
+        </form>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+
+<div id="DemoteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">PROMOTION</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+      </div>
+      <div class="modal-body">
+        <form  method = 'post' action='' enctype="multipart/form-data" >
+            <input type="hidden" name="de-id" id="de-id" />
+            <h4>Are you sure want to demote <b><span id="de-user"></span></b> ?</h4>
+            <input type='hidden' name='de-name'  id='de-name'/><br/>
+            <div align="center">  
+                
+                <input type='submit'  name="demote-user" class="btn-de btn btn-primary" value='YES' />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+            </div>  
+            
+        </form>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('.btn-promote').on('click',function(){
+            let div = $(this).parent().parent();
+            id=div.find('.acc-id').text();
+            name=div.find('.acc-username').text();
+            $('#pro-id').val(id);
+            $('#pro-name').val(name);
+            $('#pro-user').text(name);              
+        })
+        $('.btn-demote').on('click',function(){
+            let div = $(this).parent().parent();
+            id=div.find('.acc-id').text();
+            name=div.find('.acc-username').text();
+            $('#de-id').val(id);
+            $('#de-name').val(name);
+            $('#de-user').text(name);              
+        })
+    })
+</script>

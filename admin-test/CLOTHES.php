@@ -4,61 +4,114 @@ if(isset($_POST["update-clothes"])) {
     $file = $_FILES['file'];
     print_r($file);
     $fileName = $file['name'];
-                $fileTmpName = $file['tmp_name'];
-                $fileSize = $file['size'];
-                $fileError = $file['error'];
-                $fileType = $file['type'];
-                if($fileSize==0&&$fileName==''){
-                    #just update name
-                    $db=new DataProvider();
-                    $id = $_POST['id'];
-                    $type = $_POST['types_clothes'];
-                    $name = $_POST['name'];
-                    $price = $_POST['price'];
-             
-                    $sql = "UPDATE `clothes` SET id_type='$type',name='$name', price='$price' WHERE id = '$id' ";
-                    if ($db->ExecuteQuery($sql)) {
-                        echo "New record created successfully";
-                    } else {
-                        echo "Error: " . $sql . "<br>" ;
-                    }
-                }else{
-                    #update name & image
-                    $fileExt = explode('.',$fileName);
-                    $fileActualExt = strtolower(end($fileExt));
-                    $allowed = array('jpg','pnj','jpeg');
-                    if(in_array($fileActualExt,$allowed)){
-                        if($fileError==0){
-                        if($fileSize<1000000){
-                                $fileNameNew = uniqid('',true).".".$fileActualExt;
-                                $fileDestination = '../admin-test/image/image_product/'.$fileNameNew;
-                                move_uploaded_file($fileTmpName,$fileDestination);
-                                $db=new DataProvider();
-                                $id = $_POST['id'];
-                                $type = $_POST['types_clothes'];
-                                $name = $_POST['name'];
-                                $price = $_POST['price'];
-                                $image = $fileNameNew;
-                                $sql = "UPDATE `clothes` SET id_type='$type',name='$name' ,price='$price', picture='$image'  WHERE id = '$id' ";
-                                    if ($db->ExecuteQuery($sql)) {
-                                        echo "New record created successfully";
-                                    } else {
-                                        echo "Error: " . $sql . "<br>" ;
-                                    }
+        $fileTmpName = $file['tmp_name'];
+        $fileSize = $file['size'];
+        $fileError = $file['error'];
+        $fileType = $file['type'];
+        if($fileSize==0&&$fileName==''){
+            #just update name
+            $db=new DataProvider();
+            $id = $_POST['id'];
+            $type = $_POST['types_clothes'];
+            $name = $_POST['name'];
+            $price = $_POST['price'];
+        
+            $sql = "UPDATE `clothes` SET id_type='$type',name='$name', price='$price' WHERE id = '$id' ";
+            if ($db->ExecuteQuery($sql)) {
+                echo "New record created successfully";
+            } else {
+                echo "Error: " . $sql . "<br>" ;
+            }
+        }else{
+            #update name & image
+            $fileExt = explode('.',$fileName);
+            $fileActualExt = strtolower(end($fileExt));
+            $allowed = array('jpg','pnj','jpeg');
+            if(in_array($fileActualExt,$allowed)){
+                if($fileError==0){
+                if($fileSize<1000000){
+                        $fileNameNew = uniqid('',true).".".$fileActualExt;
+                        $fileDestination = '../admin-test/image/image_product/'.$fileNameNew;
+                        move_uploaded_file($fileTmpName,$fileDestination);
+                        $db=new DataProvider();
+                        $id = $_POST['id'];
+                        $type = $_POST['types_clothes'];
+                        $name = $_POST['name'];
+                        $price = $_POST['price'];
+                        $image = $fileNameNew;
+                        $sql = "UPDATE `clothes` SET id_type='$type',name='$name' ,price='$price', picture='$image'  WHERE id = '$id' ";
+                            if ($db->ExecuteQuery($sql)) {
+                                echo "New record created successfully";
+                            } else {
+                                echo "Error: " . $sql . "<br>" ;
                             }
-                            else{
-                                echo "file too big";
-                            }
-                        } 
-                        else{
-                            echo "error upload file";
-                        }
                     }
                     else{
-                        echo "can't up this file";
+                        echo "file too big";
                     }
+                } 
+                else{
+                    echo "error upload file";
                 }
             }
+            else{
+                echo "can't up this file";
+            }
+        }
+    }
+    else if(isset($_POST["add-clothes"])){
+        $file = $_FILES['file'];
+        print_r($file);
+        $fileName = $file['name'];
+        $fileTmpName = $file['tmp_name'];
+        $fileSize = $file['size'];
+        $fileError = $file['error'];
+        $fileType = $file['type'];
+        $id = $_POST['id'];
+        $type = $_POST['types_clothes'];
+        $name = $_POST['name'];
+        $price = $_POST['price'];
+        
+        
+            #ADD CLOTHES
+            $fileExt = explode('.',$fileName);
+            $fileActualExt = strtolower(end($fileExt));
+            $allowed = array('jpg','pnj','jpeg');
+            if(in_array($fileActualExt,$allowed)){
+                if($fileError==0){
+                    if($fileSize<1000000){
+                        $fileNameNew = uniqid('',true).".".$fileActualExt;
+                        $fileDestination = '../admin-test/image/image_product/'.$fileNameNew;
+                        move_uploaded_file($fileTmpName,$fileDestination);
+                        $db=new DataProvider();
+                        $image = $fileNameNew;
+                        $sql = "INSERT INTO `clothes`(id_type, name, price, picture) VALUES ('$type','$name','$price','$image')";
+                            if ($db->ExecuteQuery($sql)) {
+                                echo "New record created successfully";
+                            } else {
+                                echo "Error: " . $sql . "<br>" ;
+                            }
+                    }
+                    else{
+                        echo "file too big";
+                    }
+                } 
+                else{
+                    echo "error upload file";
+                }
+            }
+            else{
+                echo "can't up this file";
+            }
+    }
+    if(isset($_POST['action'])){
+        if($_POST['action']==='delete'){
+        $db=new DataProvider();
+        $delete_id = $_POST["id"];
+        $sql = "DELETE FROM clothes WHERE id=$delete_id ; SET @num := 0; UPDATE clothes SET id = @num := (@num+1); ALTER TABLE clothes AUTO_INCREMENT = 1";
+        $db->ExecuteMultiQuery($sql);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -74,6 +127,7 @@ if(isset($_POST["update-clothes"])) {
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     </head>
     <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -198,8 +252,8 @@ if(isset($_POST["update-clothes"])) {
                 <select name="types_clothes" id="types_clothes">
                     <option value="4">hoodies</option>
                     <option value="1">jacket</option>
-                    <option value="2">t-shirt</option>
-                    <option value="3">shirt</option>
+                    <option value="3">t-shirt</option>
+                    <option value="2">shirt</option>
                 </select><br/>
             <input type="hidden" name="id" id="id" />
             <label>name</label>
@@ -208,10 +262,10 @@ if(isset($_POST["update-clothes"])) {
             <input type='text' name='price' id='price'/><br/>
             <label>image</label>
             <input type='file' name='file' id='file' /><br/>
-            <img src="" id='image' alt="Italian Trulli" style='width:100px; height:50px'>
-            <div align="center">  
+            <div class='image-cloth'>
+            </div>
+            <div align="center" class='button-action'>  
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type='submit'  name="update-clothes" class="btn-save btn btn-primary" value='save' />
             </div>  
             
         </form>
@@ -223,12 +277,14 @@ if(isset($_POST["update-clothes"])) {
     </div>
   </div>
 </div>          
-                       <div class='test'>
-                       </div>
+                    <!-- table-->
                         <div class="card mb-4">
-                            <div class="card-header">
+                            <div class="card-header" >
                                 <i class="fas fa-table mr-1"></i>
                                 Product List
+                                <div style="float:right">
+                                   <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#exampleModal'>Add New Clothes</button>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive"  id='clothes_table'>
@@ -258,7 +314,8 @@ if(isset($_POST["update-clothes"])) {
                                                     echo "<td class='name'>$item[name]</td>";
                                                     echo "<td class='price'>$p</td>";
                                                     echo "<td ><img src='../admin-test/image/image_product/$item[picture]' class='image' style='width:100px; height:50px' ></td>";
-                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button><button class='btn-delete btn btn-danger'>DELETE</button></td>";
+                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
+                                                    echo "<button class='btn-delete btn btn-danger'>DELETE</button></td>";
                                                 echo "</tr>";
                                             }                               
                                             ?>
@@ -272,10 +329,15 @@ if(isset($_POST["update-clothes"])) {
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <script>
-                        
                         $(document).ready(function(){
-                            
+                            $('#form').on('submit',function(){
+                                let checkFile=$("#file").val();
+                                if(checkFile==''){ alert('ban chua chon anh'); return false}
+                                else return true;
+                            })
                             $('.btn-edit').on('click',function(){
+                                        $( ".image-cloth" ).append("<img src='' id='image' alt='cloth-image' style='width:100px; height:50px'>");
+                                        $( ".button-action" ).append( "<input type='submit'  name='update-clothes' class='btn-save btn btn-primary' value='save' />" );
                                         let div = $(this).parent().parent();
                                         id=div.find('.id').text();
                                         name=div.find('.name').text();
@@ -288,9 +350,56 @@ if(isset($_POST["update-clothes"])) {
                                         $('#image').attr('src',image);
                                         $('#id').val(id);
                                         $('#types_clothes option[value='+type+']').attr('selected','selected');
-                               
+                                       
                                     })
-                           
+                            $('.btn-delete').on('click',function(){
+                                    let div = $(this).parent().parent();
+                                    id=div.find('.id').text();
+                                    var check = confirm("Are you sure to delete this clothes");
+                                    if(check==true){
+                                        $.post('',{id:id,action:'delete'},function(){
+                                            location.reload();
+                                            alert('delete success')
+                                        });
+                                    }
+                            })
+                            $('.btn-add').on('click',function(){
+                                validateForm();
+                                $( "#image" ).remove();
+                                $( ".button-action" ).append( "<input type='submit'  name='add-clothes' class='btn-save btn btn-primary' value='add' />" );
+                            })
+
+                            $("#exampleModal").on("hidden.bs.modal", function () {
+                                   let div = $(".button-action input").remove();
+                                    $('#name').val('');
+                                    $('#price').val('');
+                                    $('#id').val('');
+                                    $('#types_clothes option[value=0]').attr('selected','selected');
+                            });
+                            function validateForm() {
+                                $("#form").validate({
+                                    onfocusout: false,
+                                    onkeyup: false,
+                                    onclick: false,
+                                    rules: {
+                                        "name":{
+                                            required: true,
+                                        },
+                                        "price": {
+                                            required: true,
+                                        }
+                                    },
+                                    messages: {
+                                        "name":{
+                                            required: "* Bắt buộc nhập name"
+                                        },
+                                        "price": {
+                                            required: "* Bắt buộc nhập price"
+                                        
+                                        },
+                                    }
+                                });
+                            }
                         })
         
                     </script>
