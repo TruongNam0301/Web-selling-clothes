@@ -307,7 +307,7 @@ if(isset($_POST["update-clothes"])) {
                                             $sql="SELECT * FROM `clothes`";
                                             $array=$db->FetchAll($sql);
                                             foreach($array as $item){
-                                                $p=number_format($item['price'],0,",",".");
+                                                @$p=number_format($item['price'],0,",",".");
                                                 echo "<tr>";
                                                     echo "<td class='id'>$item[id]</td>";
                                                     echo "<td class='type'>$item[id_type]</td>";
@@ -315,7 +315,7 @@ if(isset($_POST["update-clothes"])) {
                                                     echo "<td class='price'>$p</td>";
                                                     echo "<td ><img src='../admin-test/image/image_product/$item[picture]' class='image' style='width:100px; height:50px' ></td>";
                                                     echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
-                                                    echo "<button class='btn-delete btn btn-danger'>DELETE</button></td>";
+                                                    echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
                                                 echo "</tr>";
                                             }                               
                                             ?>
@@ -341,9 +341,8 @@ if(isset($_POST["update-clothes"])) {
                                         let div = $(this).parent().parent();
                                         id=div.find('.id').text();
                                         name=div.find('.name').text();
-                                        price=div.find('.price').text();
+                                        price=div.find('.price').text().replace('.', '');
                                         image=div.find('.image').attr('src');
-                                        console.log(image);
                                         type = div.find('.type').text();
                                         $('#name').val(name);
                                         $('#price').val(price);
@@ -355,7 +354,8 @@ if(isset($_POST["update-clothes"])) {
                             $('.btn-delete').on('click',function(){
                                     let div = $(this).parent().parent();
                                     id=div.find('.id').text();
-                                    var check = confirm("Are you sure to delete this clothes");
+                                    name=div.find('.name').text();
+                                    var check = confirm("Are you sure to delete "+ name +" ?");
                                     if(check==true){
                                         $.post('',{id:id,action:'delete'},function(){
                                             location.reload();

@@ -88,6 +88,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="ACCOUNT.php">ACCOUNTS</a>
                                     <a class="nav-link" href="TYPES.php">TYPES</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">TYPESCLOTHES</a>
                                     <a class="nav-link" href="CLOTHES.php">CLOTHES</a>
@@ -189,45 +190,7 @@
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
-                                    <div class="card-header">
-                                       <i class="fa fa-users" aria-hidden="true"></i>
-
-                                        User manager
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="User-Table" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>User Name</th>
-                                                    <th>Button</th>
-                                                </tr>
-                                            </thead>
-                                        
-                                            <tbody>
-                                            <?php 
-                                                include_once("../admin-test/models/DataProvider.php");
-                                                $db=new DataProvider();
-                                                $sql="SELECT * FROM `accounts`";
-                                                $array=$db->FetchAll($sql);
-                                                foreach($array as $user){ 
-                                                        echo "<tr>";
-                                                        echo "<td class='acc-id'>$user[id]</td>";
-                                                        echo "<td class='acc-username'>$user[username]</td>";
-                                                        if($user['lv']==0){
-                                                            echo "<td><button class='btn-promote btn btn-primary' data-toggle='modal' data-target='#PromoteModal'>PROMOTE</button>";
-                                                            echo "<button class='btn-demote btn btn-danger' data-toggle='modal' data-target='#DemoteModal' style='margin-left:10px' disabled>DEMOTE</button></td>";
-                                                        }
-                                                        else{
-                                                            echo "<td><button class='btn-promote btn btn-primary' data-toggle='modal' data-target='#PromoteModal' disabled>PROMOTE</button>";
-                                                            echo "<button class='btn-demote btn btn-danger' data-toggle='modal' data-target='#DemoteModal' style='margin-left:10px' >DEMOTE</button></td>";
-                                                        }
-                                                        echo "</tr>";
-                                                }                               
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="col-xl-6">
