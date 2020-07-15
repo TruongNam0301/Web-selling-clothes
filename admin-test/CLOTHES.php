@@ -319,7 +319,7 @@ if(isset($_POST["del-clothes"])){
                                                     echo "<td class='name'>$item[name]</td>";
                                                     echo "<td class='price'>$p</td>";
                                                     echo "<td class='image'><img src='../admin-test/image/image_product/$item[picture]' class='item' style='width:100px; height:50px' ></td>";
-                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#UpdateModal'>EDIT</button><button class='btn-delete btn btn-danger' data-toggle='modal' data-target='#DeleteModal'>DELETE</button></td>";
+                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#UpdateModal'>EDIT</button><button class='btn-delete btn btn-danger' style='margin-left:10px' data-toggle='modal' data-target='#DeleteModal'>DELETE</button></td>";
                                                 echo "</tr>";
                                             }                               
                                             ?>
