@@ -264,7 +264,7 @@ if(isset($_POST["update-clothes"])) {
             <img src='' id='image' alt='cloth-image' style=' display:block;width:100px; height:50px'>
             <div class="modal-footer" align="center" style="margin-top:20px">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type='submit'  name='add-clothes' class='btn-save btn btn-primary' value='save' />
+                <input type='submit'  name='update-clothes' class='btn-save btn btn-primary' value='save' />
             </div>
         </form>
       </div>
@@ -302,7 +302,7 @@ if(isset($_POST["update-clothes"])) {
               </div>
             <div class="modal-footer" align="center" style="margin-top:20px">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type='submit'  name='add-clothes' class='btn-save btn btn-primary' value='add' />
+                <input type='submit'  name='add-clothes' class='btn-add btn btn-primary' value='add' />
             </div>
         </form>
       </div>

@@ -8,6 +8,7 @@
             $TypeClothesCtr = new TypeClothesCtr();
             foreach($typeArr as $type){
                 $typeClothes = $TypeClothesCtr->getTypeClothesByType($type);
+                include_once("../views/homePage/clothing.php");
             }
         }
     }

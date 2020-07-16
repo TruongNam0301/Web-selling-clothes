@@ -11,7 +11,7 @@
           
             $sql = "SELECT * FROM types";
             
-            $type = array();
+          
             if($this->db->NumRows($sql)>0){
                return $this->db->FetchAll($sql);
             }
