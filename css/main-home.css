@@ -5,7 +5,7 @@
     background-size: cover;
     background-position: center;
 }
-.text-input{
+.text-input,.text-name{
     padding: 20px 18px;
     Outline: none;
 }

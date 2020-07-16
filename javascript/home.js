@@ -9,7 +9,22 @@ if (document.readyState == 'loading') {
      OpenAndExitLogin();
      validateRegisterForm();
     $('.count').load('../views/cartPage/countItem.php');
-    };
+    $("input.text-input").on({
+        keydown: function(e) {
+          if (e.which === 32)
+            return false;
+        },
+        change: function() {
+          this.value = this.value.replace(/\s/g, "");
+        }
+    });
+    $("input.text-name").on({
+        keydown: function(e) {
+          if (this.value.length === 0 && e.which === 32)
+            e.preventDefault();
+        }
+    });
+};
 
     //login form function
  function validateRegisterForm() {

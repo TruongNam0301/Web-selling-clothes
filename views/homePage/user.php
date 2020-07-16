@@ -39,6 +39,7 @@
         $.post('../views/homePage/logout.php',{action:'logout'},function(){
             $(".user").css("display", "none");
             $(".login-regis").css("display", "block");
+            location.reload();
         });
     })
     $(".login-regis").css("display", "none");

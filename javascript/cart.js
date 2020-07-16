@@ -5,7 +5,7 @@ $(document).ready(function(){
           let index = $(this).data('index');
           let value= $(this).val();
           $.ajax({
-            url:'../views/cartPage/action.php',
+            url:'../views/action.php',
             type:'POST',
             data:{index:index,quantity:value,action:'update'},
             success: function(res){
@@ -18,7 +18,7 @@ $(document).ready(function(){
           let index = $(this).data('index');
           let value= $(this).val();
           $.ajax({
-            url:'../views/cartPage/action.php',
+            url:'../views/action.php',
             type:'POST',
             data:{index:index,size:value,action:'update'},
             success: function(res){
@@ -31,7 +31,7 @@ $(document).ready(function(){
         let index = $(this).data('index');
         let deleteButton =$(this).parents('.cart-row');
         $.ajax({
-            url:'../views/cartPage/action.php',
+            url:'../views/action.php',
             type:'POST',
             data:{index:index,action:'delete'},
             success: function(res){
@@ -50,11 +50,12 @@ function updateCartTotal(){
     var total=0;
     for (var i=0; i<cartRow.length; ++i){
         var item=cartRow[i];
-        var cartPrice = item.getElementsByClassName("cart-price")[0].textContent;
+        var cartPrice = item.getElementsByClassName("cart-price")[0].textContent.replace('.','');
         var cartQuantityValue = item.getElementsByClassName("cart-quantity-input")[0].value;
         total+=(cartPrice*cartQuantityValue);
     }
     var cartTotal=document.getElementsByClassName('cart-total');
     var cartTotalPrice=document.getElementsByClassName('cart-total-price')[0];
-    cartTotalPrice.innerText=total;
+    var n= total.toString().split('.');
+    cartTotalPrice.innerText=n[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")+(n.length>1?"."+n[1]:"");
 }
