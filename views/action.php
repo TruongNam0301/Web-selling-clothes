@@ -5,7 +5,7 @@
     $ClothesCtr = new ClothesCtr();
     #showlistclothes
     if($_POST['action']=='show'){
-        if(isset($_POST['type'])&&$_POST['type']!=0){
+        if($_POST['type']!=0){
             $ClothesCtr->getClothesByType($_POST['type'],$_POST['page'],$_POST['num'],$_POST['limit']); 
             $ClothesCtr->getNumRowsById($_POST['type'],$_POST['limit'],$_POST['idType']);  
               
@@ -26,6 +26,9 @@
             $CartCtr = new CartCtr();
             $CartCtr->deleteFromCart($_POST['index']);
         }
+    }
+    else if($_POST['action']=='bestsell'){
+        $ClothesCtr->getBestSell();
     }
     else { #updatecart
         if(isset($_POST['index'])){

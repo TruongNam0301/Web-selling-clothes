@@ -34,7 +34,7 @@
                         $('.count').load('../views/cartPage/countItem.php');
                     });
                 });
-            })
+        })
         </script>
     </body>
     <script src="../javascript/home.js"></script>

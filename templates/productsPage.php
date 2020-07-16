@@ -80,7 +80,6 @@
                 echo 0;
             }
             ?>;
-            console.log(type);
              $( "[name=type]" ).val( [val.toString()]);
             loadData(val,page,type);
             $(".check").on("click",function (){  

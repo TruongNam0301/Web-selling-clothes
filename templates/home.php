@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="../css/menubar.css">
         <link rel="stylesheet" type="text/css" href="../css/menu-mobile.css">
         <link rel="stylesheet" type="text/css" href="../css/main-home.css">
+        <link rel="stylesheet" type="text/css" href="../css/product-page.css">
         <title>Exercise</title>
     </head>
     <body >
@@ -85,35 +86,8 @@
                 <!--some best sale product-->
                         <div class="best-sale">
                             <h1> best sale of shop</h1>
-                            <div class='row'>
-                                <div class='col-lg-3 col-6 image-product'>
-                                    <div class="pic"> <img src="../image/s1.jpg"></div>
-                                    <div class="frames">
-                                        <p>ssssssssssss</p>
-                                        <p>2222222</p>
-                                    </div>
-                                </div>
-                                <div class='col-lg-3 col-6 image-product'>
-                                    <div class="pic"> <img src="../image/s1.jpg"></div>
-                                    <div class="frames">
-                                        <p>ssssssssssss</p>
-                                        <p>2222222</p>
-                                    </div>
-                                </div>
-                                <div class='col-lg-3 col-6 image-product'>
-                                    <div class="pic"> <img src="../image/s1.jpg"></div>
-                                    <div class="frames">
-                                        <p>ssssssssssss</p>
-                                        <p>2222222</p>
-                                    </div>
-                                </div>
-                                <div class='col-lg-3 col-6 image-product'>
-                                    <div class="pic"> <img src="../image/s1.jpg"></div>
-                                    <div class="frames">
-                                        <p>ssssssssssss</p>
-                                        <p>2222222</p>
-                                    </div>
-                                </div>
+                            <div class='bestsell row'>
+                             
                             </div>
                         </div>
                     </div>
@@ -133,3 +107,19 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
+
+<script>
+     function loadBestSell (){
+        $.ajax({
+            url:'../views/action.php',
+            data: {action:'bestsell'},
+            type: 'POST',
+            success: function (value){
+                $('.bestsell').html(value);
+                }
+            })
+    }  
+    $(document).ready(function(){
+        loadBestSell();
+    })
+</script>
