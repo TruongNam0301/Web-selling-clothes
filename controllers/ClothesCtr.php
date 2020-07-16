@@ -3,12 +3,12 @@ include_once('../models/ClothesMdl.php');
 class ClothesCtr{
     public function getClothes ($page,$num,$limit,$type){
         $ClothesMdl = new ClothesMdl();
-        $Clothes = $ClothesMdl -> getClothes($page,$limit,$type);
+        $Clothes = $ClothesMdl -> getClothes($page,$num,$limit,$type);
         include_once('../views/productPage/listclothes.php');
     } 
     public function getClothesByType ($val,$page,$num,$limit){
         $ClothesMdl = new ClothesMdl();
-        $Clothes = $ClothesMdl -> getClothesByType($val,$page,$limit);
+        $Clothes = $ClothesMdl -> getClothesByType($val,$page,$num,$limit);
         include_once('../views/productPage/listclothes.php');
     }
     public function getNumRows($limit,$type){

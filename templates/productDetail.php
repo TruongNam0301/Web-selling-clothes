@@ -28,13 +28,13 @@
                     let id = <?php echo $_GET['id'] ?>;
                     let quantity = $('.soluong').val();
                     let size = $('#size').val();
-                    $.post('../views/cartPage/action.php', { id:id,quantity:quantity,size:size,action:'add'},function(res){
+                    $.post('../views/action.php', { id:id,quantity:quantity,size:size,action:'add'},function(res){
                         if(res==-1) alert('alredy in cart bro');
                         console.log(res);
                         $('.count').load('../views/cartPage/countItem.php');
                     });
                 });
-            })
+        })
         </script>
     </body>
     <script src="../javascript/home.js"></script>
