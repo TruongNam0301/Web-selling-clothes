@@ -67,7 +67,9 @@ if(isset($_POST["update-clothes"])) {
         $fileSize = $file['size'];
         $fileError = $file['error'];
         $fileType = $file['type'];
-        
+        $type = $_POST['types_clothes'];
+        $name = $_POST['name'];
+        $price = $_POST['price'];
             #ADD CLOTHES
             $fileExt = explode('.',$fileName);
             $fileActualExt = strtolower(end($fileExt));
@@ -79,10 +81,6 @@ if(isset($_POST["update-clothes"])) {
                         $fileDestination = '../admin-test/image/image_product/'.$fileNameNew;
                         move_uploaded_file($fileTmpName,$fileDestination);
                         $db=new DataProvider();
-                        $id = $_POST['id'];
-                        $type = $_POST['types_clothes'];
-                        $name = $_POST['name'];
-                        $price = $_POST['price'];
                         $image = $fileNameNew;
                         $sql = "INSERT INTO `clothes`(id_type, name, price, picture) VALUES ('$type','$name','$price','$image')";
                             if ($db->ExecuteQuery($sql)) {
@@ -100,7 +98,7 @@ if(isset($_POST["update-clothes"])) {
                 }
             }
             else{
-                echo "can't up this file";
+                echo "";
             }
     }
     if(isset($_POST['action'])){
@@ -126,6 +124,7 @@ if(isset($_POST["update-clothes"])) {
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     </head>
     <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -233,7 +232,7 @@ if(isset($_POST["update-clothes"])) {
                         </ol>
                         
 
-<!-- Modal -->
+<!-- Modal edit-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -243,7 +242,6 @@ if(isset($_POST["update-clothes"])) {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-  
       <div class="modal-body">
         <form  method = 'post' action='' enctype="multipart/form-data" id='form'>
             <label>typeclothes</label>
@@ -258,30 +256,67 @@ if(isset($_POST["update-clothes"])) {
             <input type='text' name='name'  id='name'/><br/>
             <label>price</label>
             <input type='text' name='price' id='price'/><br/>
-            <label>image</label>
-            <input type='file' name='file' id='file' onchange="readURL(this);" />
-            <img id="blah" src="#" alt="" style=" display: inline-block; float:left;"/><br/>
-            <img id="current-image" src=""  style="width:100px; height:100px;  display: inline-block;" /></br>
-            <div align="center" class='button-action' style="margin-top:20px">  
+            <div class='image-swap'  style=" display: inline-block;">
+                <label>image</label>
+            </div>
+            <div class='blah-swap' style=" display: inline-block;">
+            </div>
+            <img src='' id='image' alt='cloth-image' style=' display:block;width:100px; height:50px'>
+            <div class="modal-footer" align="center" style="margin-top:20px">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>  
-            
+                <input type='submit'  name='add-clothes' class='btn-save btn btn-primary' value='save' />
+            </div>
         </form>
       </div>
-      <div class="modal-footer">
-        
-      </div>
-    
+      
     </div>
   </div>
-</div>          
+</div> 
+<!--Modal add-->   
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  method = 'post' action='' enctype="multipart/form-data" id='form-add'>
+            <label>typeclothes</label>
+                <select name="types_clothes" id="types_clothes-add">
+                    <option value="4">hoodies</option>
+                    <option value="1">jacket</option>
+                    <option value="3">t-shirt</option>
+                    <option value="2">shirt</option>
+                </select><br/>
+            <label>name</label>
+            <input type='text' name='name'  id='name-add'/><br/>
+            <label>price</label>
+            <input type='text' name='price' id='price-add'/><br/>
+            <label>image</label>
+            <div class='image-swap'>
+            </div>
+            <div class='blah-swap' style=" display: inline-block;">
+              </div>
+            <div class="modal-footer" align="center" style="margin-top:20px">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type='submit'  name='add-clothes' class='btn-save btn btn-primary' value='add' />
+            </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>       
                     <!-- table-->
                         <div class="card mb-4">
                             <div class="card-header" >
                                 <i class="fas fa-table mr-1"></i>
                                 Product List
                                 <div style="float:right">
-                                   <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#exampleModal'>Add New Clothes</button>
+                                   <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'>Add New Clothes</button>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -328,9 +363,8 @@ if(isset($_POST["update-clothes"])) {
                 <footer class="py-4 bg-light mt-auto">
                     <script>
                         $(document).ready(function(){
+                            validateForm();
                             $('.btn-edit').on('click',function(){
-                                        $( ".image-cloth" ).append("<img src='' id='image' alt='cloth-image' style='width:100px; height:50px'>");
-                                        $( ".button-action" ).append( "<input type='submit'  name='update-clothes' class='btn-save btn btn-primary' value='save' />" );
                                         let div = $(this).parent().parent();
                                         id=div.find('.id').text();
                                         name=div.find('.name').text();
@@ -339,10 +373,9 @@ if(isset($_POST["update-clothes"])) {
                                         type = div.find('.type').text();
                                         $('#name').val(name);
                                         $('#price').val(price);
-                                        $('#current-image').attr('src',image);
+                                        $('#image').attr('src',image);
                                         $('#id').val(id);
                                         $('#types_clothes option[value='+type+']').attr('selected','selected');
-                                       
                                     })
                             $('.btn-delete').on('click',function(){
                                     let div = $(this).parent().parent();
@@ -356,66 +389,55 @@ if(isset($_POST["update-clothes"])) {
                                         });
                                     }
                             })
-                            $('.btn-add').on('click',function(){
-                                $( "#image" ).remove();
-                                $( ".button-action" ).append( "<input type='submit'  name='add-clothes' class='btn-save btn btn-primary' value='add' />" );
+                            $('.btn-edit,.btn-add').on('click',function(){
+                                $('.blah-swap').append(" <img class='blah' src='#' alt=''/>")
+                                $('.image-swap').append(" <input type='file' name='file' id='file-add' onchange='readURL(this);' />")
                             })
-                            $("#exampleModal").on("hidden.bs.modal", function () {
-                                   let div = $(".button-action input").remove();
-                                    $('#name').val('');
-                                    $('#price').val('');
-                                    $('#id').val('');
-                                    $('#types_clothes option[value=0]').attr('selected','selected');
+                            $("#exampleModal,#AddModal").on("hidden.bs.modal", function () {
+                                $('.blah-swap img').remove();
+                                $('.image-swap input').remove();
                             });
-                            function validateRegisterForm() {
-    $("#form").validate({
-        onfocusout: false,
-        onkeyup: false,
-        onclick: false,
-        rules: {
-            "name":{
-                required: true,
-            },
-            "price": {
-                required: true,
-            },
-            "file": {
-                required: true,
-            },
-
-        },
-        messages: {
-            "name":{
-                required: "* Bắt buộc nhập name",
-            },
-            "username": {
-                required: "* Bắt buộc nhập username",
-                maxlength: "* Hãy nhập tối đa 15 ký tự"
-            },
-            "password": {
-                required: "* Bắt buộc nhập password",
-                minlength: "* Hãy nhập ít nhất 4 ký tự"
-            },
-            "re-password": {
-                equalTo: "* Hai password phải giống nhau",
-                minlength: "* Hãy nhập ít nhất 4 ký tự"
-            }
-        }
-    });
-}
+                            function validateForm() {
+                                $("#form-add").validate({
+                                    onfocusout: false,
+                                    onkeyup: false,
+                                    onclick: false,
+                                    rules: {
+                                        "name":{
+                                            required: true,
+                                        },
+                                        "price":{
+                                            required: true,
+                                        },
+                                        "file": {
+                                            required: true,
+                                        }
+                                    },
+                                    messages: {
+                                        "name":{
+                                            required: "* Bắt buộc nhập name"
+                                        },
+                                        "price":{
+                                            required: "* Bắt buộc nhập price"
+                                        },
+                                        "file": {
+                                            required: "* Bắt buộc nhập file"
+                                        
+                                        },
+                                    }
+                                });
+                            }
                         })
                         function readURL(input) {
                             if (input.files && input.files[0]) {
-                                var reader = new FileReader();
-
+                                var reader = new FileReader()
                                 reader.onload = function (e) {
-                                    $('#blah')
+                                    $('.blah')
                                         .attr('src', e.target.result)
                                         .width(100)
                                         .height(100);
                                     
                                 };
-
                                 reader.readAsDataURL(input.files[0]);
                             }
                         }
