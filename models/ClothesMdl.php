@@ -48,7 +48,7 @@ class ClothesMdl {
 		}
 	}
 	public function getBestSellClothes(){
-		$sql="SELECT * FROM bestsell INNER JOIN clothes on bestsell.id_to_clothes=clothes.id";
+		$sql="SELECT * FROM clothes WHERE best_sell=1 LIMIT 4";
 		return $this->db->FetchAll($sql);
 	}
 }

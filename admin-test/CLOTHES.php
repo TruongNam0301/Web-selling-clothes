@@ -2,7 +2,6 @@
 include_once("../admin-test/models/DataProvider.php");
 if(isset($_POST["update-clothes"])) {
     $file = $_FILES['file'];
-    print_r($file);
     $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];
         $fileSize = $file['size'];
@@ -15,8 +14,8 @@ if(isset($_POST["update-clothes"])) {
             $type = $_POST['types_clothes'];
             $name = $_POST['name'];
             $price = $_POST['price'];
-        
-            $sql = "UPDATE `clothes` SET id_type='$type',name='$name', price='$price' WHERE id = '$id' ";
+            $sell = $_POST['sell'];
+            $sql = "UPDATE `clothes` SET id_type='$type',name='$name', price='$price',best_sell='$sell' WHERE id = '$id' ";
             if ($db->ExecuteQuery($sql)) {
                 echo "New record created successfully";
             } else {
@@ -39,7 +38,7 @@ if(isset($_POST["update-clothes"])) {
                         $name = $_POST['name'];
                         $price = $_POST['price'];
                         $image = $fileNameNew;
-                        $sql = "UPDATE `clothes` SET id_type='$type',name='$name' ,price='$price', picture='$image'  WHERE id = '$id' ";
+                        $sql = "UPDATE `clothes` SET id_type='$type',name='$name' ,price='$price', picture='$image' ,best_sell='$sell'  WHERE id = '$id' ";
                             if ($db->ExecuteQuery($sql)) {
                                 echo "New record created successfully";
                             } else {
@@ -256,6 +255,10 @@ if(isset($_POST["update-clothes"])) {
             <input type='text' name='name'  id='name'/><br/>
             <label>price</label>
             <input type='text' name='price' id='price'/><br/>
+            <input type="radio" class='check' name="sell" value="0">
+            <label >normal</label>
+            <input type="radio" class='check' name="sell" value="1">
+            <label >best sell</label><br>
             <div class='image-swap'  style=" display: inline-block;">
                 <label>image</label>
             </div>
@@ -264,7 +267,7 @@ if(isset($_POST["update-clothes"])) {
             <img src='' id='image' alt='cloth-image' style=' display:block;width:100px; height:50px'>
             <div class="modal-footer" align="center" style="margin-top:20px">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type='submit'  name='add-clothes' class='btn-save btn btn-primary' value='save' />
+                <input type='submit'  name='update-clothes' class='btn-save btn btn-primary' value='save' />
             </div>
         </form>
       </div>
@@ -329,6 +332,7 @@ if(isset($_POST["update-clothes"])) {
                                                 <th>Name</th>
                                                 <th>Price</th>
                                                 <th>Pic</th>
+                                                <th>Best Sale</th>
                                                 <th>button</th>
                                             </tr>
                                         </thead>
@@ -347,6 +351,7 @@ if(isset($_POST["update-clothes"])) {
                                                     echo "<td class='name'>$item[name]</td>";
                                                     echo "<td class='price'>$p</td>";
                                                     echo "<td ><img src='../admin-test/image/image_product/$item[picture]' class='image' style='width:100px; height:50px' ></td>";
+                                                    echo "<td class='bestSale'>$item[best_sell]</td>";
                                                     echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
                                                     echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
                                                 echo "</tr>";
@@ -371,10 +376,12 @@ if(isset($_POST["update-clothes"])) {
                                         price=div.find('.price').text().replace('.', '');
                                         image=div.find('.image').attr('src');
                                         type = div.find('.type').text();
+                                        bestsale = div.find('.bestSale').text();
                                         $('#name').val(name);
                                         $('#price').val(price);
                                         $('#image').attr('src',image);
                                         $('#id').val(id);
+                                        $("input[name=sell][value=" + bestsale + "]").attr('checked', 'checked');
                                         $('#types_clothes option[value='+type+']').attr('selected','selected');
                                     })
                             $('.btn-delete').on('click',function(){
