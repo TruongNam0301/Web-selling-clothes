@@ -38,15 +38,14 @@ class ClothesMdl {
 	}
 	public function Search($key){
 		$sql="SELECT * FROM `clothes` WHERE name like '%$key%'";
-		
 		if($this->db->NumRows($sql)){
-              
 			return $this->db->FetchAll($sql);
 		}
 		else{
 			return -1;
 		}
 	}
+	
 }
 
 ?>
