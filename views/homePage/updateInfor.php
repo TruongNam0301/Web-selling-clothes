@@ -34,6 +34,7 @@
             <label for="file">Upload Avatar</label>
             <input type="submit"  name="update-user-submit" class="update_button btn" value="UpDate">
         </form>
+           
             <button type="button" class="button-logout btn btn-primary">LOG OUT</button>
     </div>
     

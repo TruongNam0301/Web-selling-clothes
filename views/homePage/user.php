@@ -28,9 +28,15 @@
         </div>
         <div class='name'><?php echo $user['name'] ?></div>
         <div class = 'update-infor'>
+            <?php
+                 if($user['lv']==1){
+                    echo "<button type='button' class='button-admin btn btn-warning'><a href='/web-selling-clothes/admin-test'> ADMIN PAGE</a></button>";
+                }
+            ?>
             <button type="button" class="button-update btn btn-primary">UPDATE INFOR</button>
             <?php
                 include_once('updateInfor.php');
+               
             ?>
         </div>
     </div>
