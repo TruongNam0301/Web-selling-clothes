@@ -47,6 +47,10 @@ class ClothesMdl {
 			return -1;
 		}
 	}
+	public function getBestSellClothes(){
+		$sql="SELECT * FROM bestsell INNER JOIN clothes on bestsell.id_to_clothes=clothes.id";
+		return $this->db->FetchAll($sql);
+	}
 }
 
 ?>

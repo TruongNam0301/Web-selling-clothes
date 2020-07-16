@@ -27,6 +27,9 @@
             $CartCtr->deleteFromCart($_POST['index']);
         }
     }
+    else if($_POST['action']=='bestsell'){
+        $ClothesCtr->getBestSell();
+    }
     else { #updatecart
         if(isset($_POST['index'])){
             $CartCtr = new CartCtr();

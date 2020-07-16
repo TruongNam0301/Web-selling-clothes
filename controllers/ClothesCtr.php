@@ -26,15 +26,20 @@ class ClothesCtr{
         if($key=='')
             echo '<div align="center" class="error-search">NO RESULT</div>';
         else{    
-        $ClothesMdl = new ClothesMdl();
-        $Clothes = $ClothesMdl -> Search($key);
-        if($Clothes==-1){
-            echo '<div align="center" class="error-search">NO RESULT</div>';
+            $ClothesMdl = new ClothesMdl();
+            $Clothes = $ClothesMdl -> Search($key);
+            if($Clothes==-1){
+                echo '<div align="center" class="error-search">NO RESULT</div>';
+            }
+            else{
+                include_once('../views/productPage/listclothes.php');
+            }
         }
-        else{
-            include_once('../views/productPage/listclothes.php');
     }
-    }
+    public function getBestSell(){
+        $ClothesMdl = new ClothesMdl();
+        $Clothes = $ClothesMdl -> getBestSellClothes();
+        include_once('../views/productPage/listbestsellclothes.php');
     }
 }
 
