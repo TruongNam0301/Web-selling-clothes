@@ -95,33 +95,13 @@
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
+                                Bills Manager
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
-                                            <a class="nav-link" href="password.html">Forgot Password</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
-                                    </div>
+                                    <a class="nav-link"  href="bills.php?tt=0"> Bills haven't shipped</a>
+                                    <a class="nav-link" href="bills.php?tt=1"> Bills have shipped</a> 
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Addons</div>
@@ -167,18 +147,33 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
+                                    <div class="card-body">Bills chua giao: 
+                                    <?php include_once("../admin-test/models/DataProvider.php");
+                                            $db=new DataProvider();
+                                            $sql="SELECT MaHD FROM `hoadon` WHERE tinhtrang = 0" ;
+                                            $num=$db->NumRows($sql);
+                                            echo $num;
+                                    ?>
+
+                                    </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="bills.php?tt=0">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
+                                    <div class="card-body">Bills da giao:
+                                    <?php include_once("../admin-test/models/DataProvider.php");
+                                            $db=new DataProvider();
+                                            $sql="SELECT MaHD FROM `hoadon` WHERE tinhtrang = 1" ;
+                                            $num=$db->NumRows($sql);
+                                            echo $num;
+                                    ?>
+                                    </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="bills.php?tt=1">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -193,86 +188,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                    <i class="fa fa-barcode" aria-hidden="true"></i>
-
-                                        Bill Manager
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="Bill-Table" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>id_clothes</th>
-                                                    <th>Buyer</th>
-                                                    <th>Button</th>
-                                                </tr>
-                                            </thead>
-                                        
-                                            <tbody>
-                                            <?php 
-                                                include_once("../admin-test/models/DataProvider.php");
-                                                $db=new DataProvider();
-                                                $sql="SELECT * FROM `accounts`";
-                                                  
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
-                                Product List
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>STT</th>
-                                                <th>Id_Type</th>
-                                                <th>Name</th>
-                                                <th>Price</th>
-                                                <th>Pic</th>
-                                                <th>button</th>
-                                            </tr>
-                                        </thead>
-                                       
-                                        <tbody>
-                                        <?php 
-                                            include_once("../admin-test/models/DataProvider.php");
-                                            $db=new DataProvider();
-                                            $sql="SELECT * FROM `clothes`";
-                                            $array=$db->FetchAll($sql);
-                                            foreach($array as $item){
-                                                $p=number_format($item['price'],0,",",".");
-                                                echo "<tr>";
-                                                    echo "<td >$item[id]</td>";
-                                                    echo "<td>$item[id_type]</td>";
-                                                    echo "<td>$item[name]</td>";
-                                                    echo "<td>$p</td>";
-                                                    echo "<td><img src='../admin-test/image/image_product/$item[picture]' class='item' style='width:100px; height:50px' ></td>";
-                                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button><button class='btn-delete btn btn-danger' style='margin-left:10px'>DELETE</button></td>";
-                                                echo "</tr>";
-                                            }                               
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        
+        
+                      
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">

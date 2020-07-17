@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 16, 2020 lúc 06:58 AM
+-- Thời gian đã tạo: Th7 16, 2020 lúc 09:57 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -52,6 +52,41 @@ CREATE TABLE `bills` (
   `id_clothes` int(4) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chitiet_hoadon`
+--
+
+CREATE TABLE `chitiet_hoadon` (
+  `SoHD` int(11) NOT NULL,
+  `MaHD` int(11) NOT NULL,
+  `id_cloth` int(11) NOT NULL,
+  `soluong` int(11) NOT NULL,
+  `size` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `chitiet_hoadon`
+--
+
+INSERT INTO `chitiet_hoadon` (`SoHD`, `MaHD`, `id_cloth`, `soluong`, `size`) VALUES
+(1, 5, 1, 1, 'M'),
+(2, 5, 20, 4, 'L'),
+(3, 6, 1, 1, 'M'),
+(4, 6, 20, 4, 'L'),
+(5, 7, 1, 1, 'M'),
+(6, 7, 20, 4, 'L'),
+(7, 8, 2, 1, 'M'),
+(8, 8, 35, 1, 'M'),
+(9, 9, 2, 1, 'M'),
+(10, 9, 35, 1, 'M'),
+(11, 11, 3, 1, 'M'),
+(12, 11, 7, 1, 'M'),
+(13, 12, 2, 1, 'M'),
+(14, 12, 20, 1, 'M'),
+(15, 13, 2, 1, 'M');
 
 -- --------------------------------------------------------
 
@@ -115,6 +150,37 @@ INSERT INTO `clothes` (`id`, `id_type`, `name`, `price`, `picture`, `best_sell`)
 (40, 1, 'quan hhh', '252252525', '5f0fc65ef08630.54419737.jpg', 0),
 (41, 1, 'ao khoac2', '300000', '5f0fcc3619e700.63728803.jpg', 0),
 (42, 1, 'ao khoac2', '300000', '5f0fcc46bc1b74.57515978.jpg', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `hoadon`
+--
+
+CREATE TABLE `hoadon` (
+  `MaHD` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `sdt` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `tinhtrang` int(11) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `hoadon`
+--
+
+INSERT INTO `hoadon` (`MaHD`, `id_user`, `sdt`, `address`, `tinhtrang`, `date`, `total`) VALUES
+(5, 1, '0123456', '12345', 0, '07/16/2020 09:04:15 am', 0),
+(6, 1, '123456789', 'hocmon', 0, '07/16/2020 09:14:12 am', 700000),
+(7, 1, '111', '2222', 0, '07/16/2020 02:22:14 pm', 700000),
+(8, 1, '11', '22', 0, '07/16/2020 02:23:15 pm', 500000),
+(9, 1, 'test', 'test', 0, '07/16/2020 02:23:56 pm', 500000),
+(10, 1, 'ss', 'ss', 0, '07/16/2020 02:27:29 pm', 0),
+(11, 1, '22', '33', 0, '07/16/2020 02:27:47 pm', 450000),
+(12, 1, '2222', '1111', 0, '07/16/2020 02:31:41 pm', 500000),
+(13, 1, 's', 's', 0, '07/16/2020 02:39:28 pm', 400000);
 
 -- --------------------------------------------------------
 
@@ -198,11 +264,25 @@ ALTER TABLE `bills`
   ADD KEY `Bills_fk1` (`id_user`);
 
 --
+-- Chỉ mục cho bảng `chitiet_hoadon`
+--
+ALTER TABLE `chitiet_hoadon`
+  ADD PRIMARY KEY (`SoHD`),
+  ADD KEY `fk_mahd` (`MaHD`);
+
+--
 -- Chỉ mục cho bảng `clothes`
 --
 ALTER TABLE `clothes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `Clothes_fk0` (`id_type`);
+
+--
+-- Chỉ mục cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD PRIMARY KEY (`MaHD`),
+  ADD KEY `fk_id_user` (`id_user`);
 
 --
 -- Chỉ mục cho bảng `typeclothes`
@@ -240,10 +320,22 @@ ALTER TABLE `bills`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `chitiet_hoadon`
+--
+ALTER TABLE `chitiet_hoadon`
+  MODIFY `SoHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT cho bảng `clothes`
 --
 ALTER TABLE `clothes`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `typeclothes`
@@ -269,10 +361,22 @@ ALTER TABLE `bills`
   ADD CONSTRAINT `Bills_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
+-- Các ràng buộc cho bảng `chitiet_hoadon`
+--
+ALTER TABLE `chitiet_hoadon`
+  ADD CONSTRAINT `fk_mahd` FOREIGN KEY (`MaHD`) REFERENCES `hoadon` (`MaHD`);
+
+--
 -- Các ràng buộc cho bảng `clothes`
 --
 ALTER TABLE `clothes`
   ADD CONSTRAINT `Clothes_fk0` FOREIGN KEY (`id_type`) REFERENCES `typeclothes` (`id_type`);
+
+--
+-- Các ràng buộc cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD CONSTRAINT `fk_id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Các ràng buộc cho bảng `typeclothes`

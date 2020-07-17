@@ -103,7 +103,7 @@ $AccountCtr->updateUserInfor();
     <div class="regis-form" style="display:none">
         <div class="regis-swapper">
             <form class="regis-content" method="post" >
-                <input type="text"  name="name" class='text-input' placeholder="name">
+                <input type="text"  name="name" class='text-name' placeholder="name">
                 <input type="text"  name="username" class='text-input' placeholder="USERNAME">
                 <input type="password"  name="password" class='text-input ' id='password' placeholder="PASSWORD">
                 <input type="password"  name="re-password" class='text-input' id='re-password' class="cf-password" placeholder="PASSWORD">

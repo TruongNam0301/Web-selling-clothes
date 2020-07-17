@@ -124,6 +124,14 @@ if(isset($_POST["update-clothes"])) {
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
         <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        <script>
+             function isNumberKey(evt){
+                                var charCode = (evt.which) ? evt.which : event.keyCode
+                                if (charCode > 31 && (charCode < 48 || charCode > 57))
+                                    return false;
+                                return true;
+                            }
+        </script>
     </head>
     <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -245,16 +253,20 @@ if(isset($_POST["update-clothes"])) {
         <form  method = 'post' action='' enctype="multipart/form-data" id='form'>
             <label>typeclothes</label>
                 <select name="types_clothes" id="types_clothes">
-                    <option value="4">hoodies</option>
-                    <option value="1">jacket</option>
-                    <option value="3">t-shirt</option>
-                    <option value="2">shirt</option>
+                    <?php
+                        $db=new DataProvider();
+                        $sql="SELECT * FROM typeclothes";
+                        $result=$db->FetchAll($sql);
+                        foreach($result as $row){
+                            echo "<option value='$row[id_type]'>$row[name_type]</option>";
+                        }
+                    ?>
                 </select><br/>
             <input type="hidden" name="id" id="id" />
             <label>name</label>
             <input type='text' name='name'  id='name'/><br/>
             <label>price</label>
-            <input type='text' name='price' id='price'/><br/>
+            <input type='text' name='price' id='price' onkeypress="return isNumberKey(event)"/><br/>
             <input type="radio" class='check' name="sell" value="0">
             <label >normal</label>
             <input type="radio" class='check' name="sell" value="1">
@@ -289,15 +301,19 @@ if(isset($_POST["update-clothes"])) {
         <form  method = 'post' action='' enctype="multipart/form-data" id='form-add'>
             <label>typeclothes</label>
                 <select name="types_clothes" id="types_clothes-add">
-                    <option value="4">hoodies</option>
-                    <option value="1">jacket</option>
-                    <option value="3">t-shirt</option>
-                    <option value="2">shirt</option>
+                     <?php
+                        $db=new DataProvider();
+                        $sql="SELECT * FROM typeclothes";
+                        $result=$db->FetchAll($sql);
+                        foreach($result as $row){
+                            echo "<option value='$row[id_type]'>$row[name_type]</option>";
+                        }
+                    ?>
                 </select><br/>
             <label>name</label>
             <input type='text' name='name'  id='name-add'/><br/>
             <label>price</label>
-            <input type='text' name='price' id='price-add'/><br/>
+            <input type='text' name='price' id='price-add' onkeypress="return isNumberKey(event)"/><br/>
             <label>image</label>
             <div class='image-swap'>
             </div>
@@ -305,7 +321,7 @@ if(isset($_POST["update-clothes"])) {
               </div>
             <div class="modal-footer" align="center" style="margin-top:20px">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type='submit'  name='add-clothes' class='btn-add btn btn-primary' value='add' />
+                <input type='submit'  name='add-clothes' class='btn-save btn btn-primary' value='add' />
             </div>
         </form>
       </div>
@@ -328,7 +344,7 @@ if(isset($_POST["update-clothes"])) {
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th>Id_Type</th>
+                                                <th>Kind</th>
                                                 <th>Name</th>
                                                 <th>Price</th>
                                                 <th>Pic</th>
@@ -341,17 +357,21 @@ if(isset($_POST["update-clothes"])) {
                                         <?php 
                                             include_once("../admin-test/models/DataProvider.php");
                                             $db=new DataProvider();
-                                            $sql="SELECT * FROM `clothes`";
+                                            $sql="SELECT clothes.id,clothes.id_type,typeclothes.name_type,clothes.name,clothes.price,clothes.picture,clothes.best_sell FROM `clothes` INNER JOIN typeclothes ON clothes.id_type=typeclothes.id_type";
                                             $array=$db->FetchAll($sql);
                                             foreach($array as $item){
+                                                $status="normal";
+                                                if($item['best_sell']==1){
+                                                    $status="sale";
+                                                }
                                                 @$p=number_format($item['price'],0,",",".");
                                                 echo "<tr>";
                                                     echo "<td class='id'>$item[id]</td>";
-                                                    echo "<td class='type'>$item[id_type]</td>";
+                                                    echo "<td class='type' data-id_type=$item[id_type]>$item[name_type]</td>";
                                                     echo "<td class='name'>$item[name]</td>";
                                                     echo "<td class='price'>$p</td>";
                                                     echo "<td ><img src='../admin-test/image/image_product/$item[picture]' class='image' style='width:100px; height:50px' ></td>";
-                                                    echo "<td class='bestSale'>$item[best_sell]</td>";
+                                                    echo "<td class='bestSale' data-value='$item[best_sell]'>$status</td>";
                                                     echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
                                                     echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
                                                 echo "</tr>";
@@ -370,22 +390,23 @@ if(isset($_POST["update-clothes"])) {
                         $(document).ready(function(){
                             validateForm();
                             $('.btn-edit').on('click',function(){
-                                        let div = $(this).parent().parent();
-                                        id=div.find('.id').text();
-                                        name=div.find('.name').text();
-                                        price=div.find('.price').text().replace('.', '');
-                                        image=div.find('.image').attr('src');
-                                        type = div.find('.type').text();
-                                        bestsale = div.find('.bestSale').text();
-                                        $("input[name=sell]").removeAttr('checked');
-                                        $('#types_clothes option[value='+type+']').removeAttr('selected');
-                                        $('#name').val(name);
-                                        $('#price').val(price);
-                                        $('#image').attr('src',image);
-                                        $('#id').val(id);
-                                        $("input[name=sell][value=" + bestsale + "]").attr('checked', 'checked');
-                                        $('#types_clothes option[value='+type+']').attr('selected','selected');
-                                    })
+                                    $('#types_clothes option:selected').removeAttr('selected');
+                                    let div = $(this).parent().parent();
+                                    id=div.find('.id').text();
+                                    name=div.find('.name').text();
+                                    price=div.find('.price').text().replace('.', '');
+                                    image=div.find('.image').attr('src');
+                                    type = div.find('.type').data('id_type');
+                                    bestsale = div.find('.bestSale').data('value');
+                                  
+                                    $("input[name=sell]").removeAttr('checked')
+                                    $('#name').val(name);
+                                    $('#price').val(price);
+                                    $('#image').attr('src',image);
+                                    $('#id').val(id);
+                                    $("input[name=sell][value=" + bestsale + "]").attr('checked', 'checked');
+                                    $('#types_clothes option[value='+type+']').attr('selected','selected');
+                            })
                             $('.btn-delete').on('click',function(){
                                     let div = $(this).parent().parent();
                                     id=div.find('.id').text();
@@ -405,7 +426,9 @@ if(isset($_POST["update-clothes"])) {
                             $("#exampleModal,#AddModal").on("hidden.bs.modal", function () {
                                 $('.blah-swap img').remove();
                                 $('.image-swap input').remove();
+                         
                             });
+                           
                             function validateForm() {
                                 $("#form-add").validate({
                                     onfocusout: false,

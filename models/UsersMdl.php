@@ -7,7 +7,7 @@
         }
         public function getUserById($id){
             
-            $sql = "SELECT * FROM `users` WHERE id=$id";
+            $sql = "SELECT users.id,users.name,accounts.lv,users.image FROM users INNER JOIN accounts on users.id=accounts.id WHERE users.id=$id";
             
             if( $this->db->NumRows($sql)>0){
                return $this->db->Fetch($sql);
