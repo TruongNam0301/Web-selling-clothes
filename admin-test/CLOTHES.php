@@ -335,11 +335,12 @@ if(isset($_POST["update-clothes"])) {
                                 <i class="fas fa-table mr-1"></i>
                                 Product List
                                 <div style="float:right">
-                                   <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'>Add New Clothes</button>
+                                   <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'><i class="fa fa-plus" aria-hidden="true"></i>
+Add New Clothes</button>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive"  id='clothes_table'>
+                                <div class="table-responsive" >
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
@@ -479,7 +480,8 @@ if(isset($_POST["update-clothes"])) {
         </div>
                         <script>if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
-    } </script>
+    } 
+    </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

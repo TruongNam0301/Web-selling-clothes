@@ -1,3 +1,25 @@
+<?php
+include_once("../admin-test/models/DataProvider.php");
+$db=new DataProvider();
+if(isset($_POST["update-type"])) {
+    $id=$_POST['id'];
+    $name=$_POST['name'];
+    $db->ExecuteQuery("UPDATE types SET nametype ='$name' WHERE id =$id");
+}
+else if(isset($_POST["add-type"])){
+    $name=$_POST['name'];
+    $db->ExecuteQuery("INSERT INTO types VALUES(NULL,'$name')");
+}
+if(isset($_POST['action'])){
+    if($_POST['action']==='delete'){
+    $db=new DataProvider();
+    $delete_id = $_POST["id"];
+    $sql = "UPDATE typeclothes SET type=-1 WHERE type=$delete_id;DELETE FROM types WHERE id=$delete_id ; SET @num := 0; UPDATE types SET id = @num := (@num+1); ALTER TABLE types AUTO_INCREMENT = 1";
+    $db->ExecuteMultiQuery($sql);
+}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,11 +28,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Sidenav Light - SB Admin</title>
+        <title>Static Navigation - SB Admin</title>
         <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     </head>
-    <body class="sb-nav-fixed">
+    <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.php">Start Bootstrap</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
@@ -109,71 +134,168 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Sidenav Light</h1>
+                        <h1 class="mt-4">Static Navigation</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">types clothes</li>
+                            <li class="breadcrumb-item active">Static Navigation</li>
                         </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                This page is an example of using the light side navigation option. By appending the
-                                <code>.t</code>
-                                class to the
-                                <code>.sb-sidenav</code>
-                                class, the side navigation will take on a light color scheme. The
-                                <code>.sb-sidenav-dark</code>
-                                is also available for a darker option.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-table mr-1"></i>
-                            types of clothes table
-                        </div>
-                      
-                        <div class="card-body">
-                        <button class='btn-add-typeclothes btn btn-primary'>add</button>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>Name_Type</th>
-                                            <th>type</th>
-                                            <th>button</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody>
-                                    <?php 
-                                        include_once("../admin-test/models/DataProvider.php");
-                                        $db=new DataProvider();
-                                        $sql="SELECT * FROM `typeclothes`";
-                                        $array=$db->FetchAll($sql);
-                                        foreach($array as $item){
-                                            echo "<tr>";
-                                                echo "<td>$item[id_type]</td>";
-                                                echo "<td>$item[name_type]</td>";
-                                                echo "<td>$item[type]</td>";
-                                                echo "<td><button class='btn-add-edit btn btn-primary'>EDIT</button><button class='btn-add-delete btn btn-danger'>DELETE</button></td>";
-                                            echo "</tr>";
-                                        }                               
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
+                        
+
+<!-- Modal edit-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  method = 'post' action='' enctype="multipart/form-data" id='form'>
+
+            <input type="hidden" name="id" id="id" />
+            <label>name</label>
+            <input type='text' name='name'  id='name'/><br/>
+            <div class="modal-footer" align="center" style="margin-top:20px">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type='submit'  name='update-type' class='btn-save btn btn-primary' value='save' />
+            </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div> 
+<!--Modal add-->   
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  method = 'post' action='' enctype="multipart/form-data" id='form-add'>
+            <label>name</label>
+            <input type='text' name='name'  id='name-add'/><br/>
+            <div class="modal-footer" align="center" style="margin-top:20px">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type='submit'  name='add-type' class='btn-save btn btn-primary' value='add' />
+            </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>       
+<!-- table-->
+<div class="card mb-4">
+    <div class="card-header" >
+        <i class="fas fa-table mr-1"></i>
+        Product List
+        <div style="float:right">
+            <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'><i class="fa fa-plus" aria-hidden="true"></i>Add New Type </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive" >
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Name</th>
+                            <th>Button</th>
+                        </tr>
+                    </thead>
                     
-                </footer>
+                    <tbody>
+                        <?php 
+                            include_once("../admin-test/models/DataProvider.php");
+                            $db=new DataProvider();
+                            $sql="SELECT * FROM types";
+                            $array=$db->FetchAll($sql);
+                            foreach($array as $type){
+                                if($type['id']>0){
+                                echo "<tr>";
+                                    echo "<td class='id'>$type[id]</td>";
+                                    echo "<td class='name' >$type[nametype]</td>";
+                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
+                                    echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
+                                echo "</tr>";
+                                }
+                            }                               
+                            ?>
+                    </tbody>
+                </table>
+                </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    </div>
+</div>
+</main>
+        <footer class="py-4 bg-light mt-auto">
+            <script>
+                $(document).ready(function(){
+                    validateForm();
+                    $('.btn-edit').on('click',function(){   
+                        let div = $(this).parent().parent();
+                        id=div.find('.id').text();
+                        name=div.find('.name').text();
+                        $('#name').val(name);
+                        $('#id').val(id);
+                    })
+                    $('.btn-delete').on('click',function(){
+                            let div = $(this).parent().parent();
+                            id=div.find('.id').text();
+                            name=div.find('.name').text();
+                            var check = confirm("Are you sure to delete "+ name +" ?");
+                            if(check==true){
+                                $.post('',{id:id,action:'delete'},function(){
+                                    location.reload();
+                                    alert('delete success')
+                                });
+                            }
+                    })
+                    function validateForm() {
+                        $("#form-add").validate({
+                            onfocusout: false,
+                            onkeyup: false,
+                            onclick: false,
+                            rules: {
+                                "name":{
+                                    required: true,
+                                },
+                                
+                            },
+                            messages: {
+                                "name":{
+                                    required: "* Bắt buộc nhập name"
+                                },
+                            
+                            }
+                        });
+                    }
+                })
+                
+            </script>
+        </footer>
+    </div>
+</div>
+    <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    } 
+    </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
     </body>
 </html>

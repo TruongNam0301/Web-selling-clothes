@@ -1,16 +1,27 @@
 <?php
 include_once("../admin-test/models/DataProvider.php");
-if(isset($_POST['action'])){
-    $db=new DataProvider();
+$db=new DataProvider();
+if(isset($_POST["update-type"])) {
     $id=$_POST['id'];
-    if($_POST['action']=='promote'){
-        $db->ExecuteQuery("UPDATE accounts SET lv=1 WHERE id=$id;");
-    }
-    if($_POST['action']=='demote'){
-        $db->ExecuteQuery("UPDATE accounts SET lv=0 WHERE id=$id;");
-    }
+    $name=$_POST['name'];
+    $type = $_POST['types_clothes'];
+    $db->ExecuteQuery("UPDATE typeclothes SET name_type ='$name', type=$type WHERE id_type =$id");
+}
+else if(isset($_POST["add-type"])){
+    $name=$_POST['name'];
+    $type = $_POST['types_clothes'];
+    $db->ExecuteQuery("INSERT INTO typeclothes VALUES(NULL,'$name',$type)");
+}
+if(isset($_POST['action'])){
+    if($_POST['action']==='delete'){
+    $db=new DataProvider();
+    $delete_id = $_POST["id"];
+    $sql = "UPDATE clothes SET id_type=-1 WHERE id_type=$delete_id;DELETE FROM typeclothes WHERE id_type=$delete_id ; SET @num := 0; UPDATE typeclothes SET id = @num := (@num+1); ALTER TABLE typeclothes AUTO_INCREMENT = 1";
+    $db->ExecuteMultiQuery($sql);
+}
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -132,96 +143,181 @@ if(isset($_POST['action'])){
                         </ol>
                         
 
-<!-- table-->
-    <div class="card mb-4">
-        <div class="card-header" >
-            <i class="fas fa-table mr-1"></i>
-            Product List
-            <div style="float:right">
-                <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'>Add New Clothes</button>
+<!-- Modal edit-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  method = 'post' action='' enctype="multipart/form-data" id='form'>
+            
+            <input type="hidden" name="id" id="id" />
+            <label>Name Type Clothes: </label>
+            <input type='text' name='name'  id='name'/><br/>
+            <label style="margin-left:105px">Type: </label>
+                <select name="types_clothes" id="types_clothes" >
+                    <?php
+                        $db=new DataProvider();
+                        $sql="SELECT * FROM types";
+                        $result=$db->FetchAll($sql);
+                        foreach($result as $row){
+                            echo "<option value='$row[id]'>$row[nametype]</option>";
+                        }
+                    ?>
+                </select><br/>
+            <div class="modal-footer" align="center" style="margin-top:20px">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type='submit'  name='update-type' class='btn-save btn btn-primary' value='save' />
             </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div> 
+<!--Modal add-->   
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  method = 'post' action='' enctype="multipart/form-data" id='form-add'>
+            <label>Name Type Clothes: </label>
+                <input type='text' name='name'  id='name'/><br/>
+            <label style="margin-left:105px">Type: </label>
+                <select name="types_clothes" id="types_clothes" >
+                    <?php
+                        $db=new DataProvider();
+                        $sql="SELECT * FROM types";
+                        $result=$db->FetchAll($sql);
+                        foreach($result as $row){
+                            echo "<option value='$row[id]'>$row[nametype]</option>";
+                        }
+                    ?>
+                </select><br/>
+            <div class="modal-footer" align="center" style="margin-top:20px">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type='submit'  name='add-type' class='btn-save btn btn-primary' value='add' />
+            </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>       
+<!-- table-->
+<div class="card mb-4">
+    <div class="card-header" >
+        <i class="fas fa-table mr-1"></i>
+        Product List
+        <div style="float:right">
+            <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'><i class="fa fa-plus" aria-hidden="true"></i>Add New Type Clothes</button>
         </div>
-        <div class="card-body">
-            <div class="table-responsive" >
+    </div>
+    <div class="card-body">
+        <div class="table-responsive" >
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Accounts</th>
+                            <th>Name Type Product</th>
+                            <th>Type </th>
                             <th>Button</th>
                         </tr>
                     </thead>
                     
                     <tbody>
-                    <?php 
-                        include_once("../admin-test/models/DataProvider.php");
-                        $db=new DataProvider();
-                        $sql="SELECT * FROM `accounts`";
-                        $array=$db->FetchAll($sql);
-                        foreach($array as $user){
-                            if($user['id']>0){
-                            echo "<tr>";
-                                echo "<td class='acc-id' >$user[id]</td>";
-                                echo "<td class='acc-username' >$user[username]</td>";
-                                if($user['lv']==1){
-                                    echo "<td><button class='btn-promote btn btn-primary' disabled>PROMOTE</button>";
-                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' >DEMOTE</button></td>";
+                        <?php 
+                            include_once("../admin-test/models/DataProvider.php");
+                            $db=new DataProvider();
+                            $sql="SELECT typeclothes.id_type,typeclothes.name_type, typeclothes.type, types.nametype FROM `typeclothes` INNER JOIN types on typeclothes.type=types.id";
+                            $array=$db->FetchAll($sql);
+                            foreach($array as $typeclothes){
+                                if($typeclothes['id_type']>0){
+                                echo "<tr>";
+                                    echo "<td class='id'>$typeclothes[id_type]</td>";
+                                    echo "<td class='name' >$typeclothes[name_type]</td>";
+                                    echo "<td class='type' data-id_type=$typeclothes[type]>$typeclothes[nametype]</td>";
+                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
+                                    echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
+                                echo "</tr>";
                                 }
-                                else{
-                                    echo "<td><button class='btn-promote btn btn-primary' >PROMOTE</button>";
-                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' disabled>DEMOTE</button></td>";
-                                }
-                            echo "</tr>";
-                            }
-                        }                               
-                        ?>
+                            }                               
+                            ?>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
-                    </div>
-                    </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                            
+</div>
+</main>
+        <footer class="py-4 bg-light mt-auto">
             <script>
-                $('.btn-promote').on('click',function(){
-                    let div = $(this).parent().parent();
-                    id=div.find('.acc-id').text();
-                    name=div.find('.acc-username').text();
-                    var check = confirm("Are you sure to promote '"+ name +"' ?");
-                    if(check==true){
-                        $.post('',{id:id,action:'promote'},function(){
-                        alert('promote success');
-                        location.reload();
+                $(document).ready(function(){
+                    validateForm();
+                    $('.btn-edit').on('click',function(){
+                        $('#types_clothes option:selected').removeAttr('selected');   
+                        let div = $(this).parent().parent();
+                        id=div.find('.id').text();
+                        name=div.find('.name').text();
+                        type = div.find('.type').data('id_type');
                         
-                    });
+                        $('#name').val(name);
+                        $('#id').val(id);
+                        $('#types_clothes option[value='+type+']').attr('selected','selected');
+                    })
+                    $('.btn-delete').on('click',function(){
+                            let div = $(this).parent().parent();
+                            id=div.find('.id').text();
+                            name=div.find('.name').text();
+                            var check = confirm("Are you sure to delete "+ name +" ?");
+                            if(check==true){
+                                $.post('',{id:id,action:'delete'},function(){
+                                    location.reload();
+                                    alert('delete success');
+                                });
+                            }
+                    })
+                    function validateForm() {
+                        $("#form-add").validate({
+                            onfocusout: false,
+                            onkeyup: false,
+                            onclick: false,
+                            rules: {
+                                "name":{
+                                    required: true,
+                                },
+                                
+                            },
+                            messages: {
+                                "name":{
+                                    required: "* Bắt buộc nhập name"
+                                },
+                            
+                            }
+                        });
                     }
                 })
-                $('.btn-demote').on('click',function(){
-                    let div = $(this).parent().parent();
-                    id=div.find('.acc-id').text();
-                    name=div.find('.acc-username').text();
-                    var check = confirm("Are you sure to demote ' "+ name +" ' ?");
-                    if(check==true){
-                        $.post('',{id:id,action:'demote'},function(){
-                        alert('demote success');
-                        location.reload();
-                    });
-                    }
-                })
+                
             </script>
-
-
-            <script>
-                if ( window.history.replaceState ) {
-                    window.history.replaceState( null, null, window.location.href );
-                } 
-            </script>
-                </footer>
-            </div>
-        </div>
+        </footer>
+    </div>
+</div>
+    <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    } 
     </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
@@ -233,7 +329,3 @@ if(isset($_POST['action'])){
         <script src="assets/demo/datatables-demo.js"></script>
     </body>
 </html>
-
-
-
-

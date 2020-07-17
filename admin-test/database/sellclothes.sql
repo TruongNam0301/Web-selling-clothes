@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 16, 2020 lúc 09:57 AM
+-- Thời gian đã tạo: Th7 17, 2020 lúc 10:35 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -39,7 +39,7 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `lv`) VALUES
-(1, 'test', '$2y$12$sHWsdiUVv6AtoOhpRu//wukYs4pCtHv8oRzCwA0FO3inPejMGADMy', 1);
+(-1, 'admin', '$2y$12$rHZZFIjJ7VEnGBQYm.4Dn.4zeVLmpV0QXT7.rzE1gXuXcYpMfhNiy', 1);
 
 -- --------------------------------------------------------
 
@@ -67,27 +67,6 @@ CREATE TABLE `chitiet_hoadon` (
   `size` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Đang đổ dữ liệu cho bảng `chitiet_hoadon`
---
-
-INSERT INTO `chitiet_hoadon` (`SoHD`, `MaHD`, `id_cloth`, `soluong`, `size`) VALUES
-(1, 5, 1, 1, 'M'),
-(2, 5, 20, 4, 'L'),
-(3, 6, 1, 1, 'M'),
-(4, 6, 20, 4, 'L'),
-(5, 7, 1, 1, 'M'),
-(6, 7, 20, 4, 'L'),
-(7, 8, 2, 1, 'M'),
-(8, 8, 35, 1, 'M'),
-(9, 9, 2, 1, 'M'),
-(10, 9, 35, 1, 'M'),
-(11, 11, 3, 1, 'M'),
-(12, 11, 7, 1, 'M'),
-(13, 12, 2, 1, 'M'),
-(14, 12, 20, 1, 'M'),
-(15, 13, 2, 1, 'M');
-
 -- --------------------------------------------------------
 
 --
@@ -110,9 +89,9 @@ CREATE TABLE `clothes` (
 INSERT INTO `clothes` (`id`, `id_type`, `name`, `price`, `picture`, `best_sell`) VALUES
 (1, 1, 'ao kh', '300000', 'product18.jpg', 1),
 (2, 1, 'ao khoc', '400000', 'product19.jpg', 1),
-(3, 1, 'ao khoac4', '350000', 'product20.jpg', 1),
+(3, 1, 'ao khoac4', '350000', 'product20.jpg', 0),
 (4, 3, 'ao thun1', '100000', 'product11.jpg', 1),
-(5, 3, 'ao thun2', '100000', 'product12.jpg', 0),
+(5, 3, 'ao thun2', '100000', 'product12.jpg', 1),
 (6, 3, 'ao thun3', '100000', 'product13.jpg', 0),
 (7, 3, 'ao thun5', '100000', 'product15.jpg', 0),
 (8, 3, 'ao thun6', '100000', 'product16.jpg', 0),
@@ -127,8 +106,8 @@ INSERT INTO `clothes` (`id`, `id_type`, `name`, `price`, `picture`, `best_sell`)
 (17, 1, 'ao khoac12', '350000', 'product32.jpg', 0),
 (18, 1, 'ao khoac13', '450000', 'product33.jpg', 0),
 (19, 1, 'ao khoac14', '200000', 'product34.jpg', 0),
-(20, 4, 'quan jean3', '100000', 'product35.jpg', 0),
-(21, 4, 'quan jean4', '150000', 'product36.jpg', 0),
+(20, 6, 'quan jean3', '100000', 'product35.jpg', 0),
+(21, 6, 'quan jean4', '150000', 'product36.jpg', 1),
 (22, 3, 'ao thun8', '100000', 'product37.jpg', 0),
 (23, 3, 'ao thun9', '100000', 'product38.jpg', 0),
 (24, 3, 'ao thun10', '100000', 'product39.jpg', 0),
@@ -167,21 +146,6 @@ CREATE TABLE `hoadon` (
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Đang đổ dữ liệu cho bảng `hoadon`
---
-
-INSERT INTO `hoadon` (`MaHD`, `id_user`, `sdt`, `address`, `tinhtrang`, `date`, `total`) VALUES
-(5, 1, '0123456', '12345', 0, '07/16/2020 09:04:15 am', 0),
-(6, 1, '123456789', 'hocmon', 0, '07/16/2020 09:14:12 am', 700000),
-(7, 1, '111', '2222', 0, '07/16/2020 02:22:14 pm', 700000),
-(8, 1, '11', '22', 0, '07/16/2020 02:23:15 pm', 500000),
-(9, 1, 'test', 'test', 0, '07/16/2020 02:23:56 pm', 500000),
-(10, 1, 'ss', 'ss', 0, '07/16/2020 02:27:29 pm', 0),
-(11, 1, '22', '33', 0, '07/16/2020 02:27:47 pm', 450000),
-(12, 1, '2222', '1111', 0, '07/16/2020 02:31:41 pm', 500000),
-(13, 1, 's', 's', 0, '07/16/2020 02:39:28 pm', 400000);
-
 -- --------------------------------------------------------
 
 --
@@ -199,10 +163,11 @@ CREATE TABLE `typeclothes` (
 --
 
 INSERT INTO `typeclothes` (`id_type`, `name_type`, `type`) VALUES
+(-1, 'NO PRODUCT TYPE', -1),
 (1, 'jacket', 1),
 (2, 't-shirt', 1),
 (3, 'shirt', 1),
-(4, 'jean', 2);
+(6, 'jean', 2);
 
 -- --------------------------------------------------------
 
@@ -220,7 +185,8 @@ CREATE TABLE `types` (
 --
 
 INSERT INTO `types` (`id`, `nametype`) VALUES
-(1, 'ÁO'),
+(-1, 'NO TYPE'),
+(1, 'ÁO '),
 (2, 'QUẦN'),
 (3, 'GIÀY');
 
@@ -243,7 +209,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `image`, `address`, `phoneNumber`) VALUES
-(1, 'test', 'user-image.png', NULL, NULL);
+(-1, 'admin', '5f1160ad603035.64866943.jpg', NULL, NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -311,7 +277,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `bills`
@@ -341,13 +307,19 @@ ALTER TABLE `hoadon`
 -- AUTO_INCREMENT cho bảng `typeclothes`
 --
 ALTER TABLE `typeclothes`
-  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT cho bảng `types`
+--
+ALTER TABLE `types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

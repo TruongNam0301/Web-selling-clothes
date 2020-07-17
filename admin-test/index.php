@@ -65,7 +65,7 @@
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="../templates">Return to main Page</a>
                     </div>
                 </li>
             </ul>
@@ -90,7 +90,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="ACCOUNT.php">ACCOUNTS</a>
                                     <a class="nav-link" href="TYPES.php">TYPES</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">TYPESCLOTHES</a>
+                                    <a class="nav-link" href="TYPESCLOTHES.php">TYPESCLOTHES</a>
                                     <a class="nav-link" href="CLOTHES.php">CLOTHES</a>
                                 </nav>
                             </div>
@@ -152,7 +152,11 @@
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Clothes : </div>
+                                    <div class="card-body">Clothes: <?php
+                                                                        $db=new DataProvider();
+                                                                        $countClothes=$db->NumRows("SELECT * FROM clothes");
+                                                                        echo $countClothes;
+                                                                        ?> </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>

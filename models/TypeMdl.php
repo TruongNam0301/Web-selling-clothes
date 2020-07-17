@@ -9,7 +9,7 @@
         public function getType(){
                         
           
-            $sql = "SELECT * FROM types";
+            $sql = "SELECT * FROM types WHERE id>0";
             
             $type = array();
             if($this->db->NumRows($sql)>0){
