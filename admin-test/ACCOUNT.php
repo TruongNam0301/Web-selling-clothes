@@ -1,19 +1,15 @@
 <?php
-    include_once("../admin-test/models/DataProvider.php");
-    if(isset($_POST['action'])){
-        if($_POST['action']==='promote'){
-        $db=new DataProvider();
-        $id = $_POST["id"];
-        $sql = "UPDATE accounts SET lv=1 WHERE id=$id";
-        $db->ExecuteQuery($sql);
-        }
-        if($_POST['action']==='demote'){
-        $db=new DataProvider();
-        $id = $_POST["id"];
-        $sql = "UPDATE accounts SET lv=0 WHERE id=$id";
-        $db->ExecuteQuery($sql);
-        }
+include_once("../models/DataProvider.php");
+if(isset($_POST['action'])){
+    $db=new DataProvider();
+    $id=$_POST['id'];
+    if($_POST['action']=='promote'){
+        $db->ExecuteQuery("UPDATE accounts SET lv=1 WHERE id=$id;");
     }
+    if($_POST['action']=='demote'){
+        $db->ExecuteQuery("UPDATE accounts SET lv=0 WHERE id=$id;");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,13 +19,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Sidenav Light - SB Admin</title>
+        <title>Static Navigation - SB Admin</title>
         <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     </head>
-    <body class="sb-nav-fixed">
+    <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.php">Account Manager</a>
+            <a class="navbar-brand" href="index.php">Start Bootstrap</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -54,178 +53,121 @@
             </ul>
         </nav>
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Layouts
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
-                                            <a class="nav-link" href="password.html">Forgot Password</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
-                                    </div>
-                                </nav>
-                            </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
-                    </div>
-                </nav>
-            </div>
+        <?php
+                include_once('menu-slide.php');
+            ?>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Sidenav Light</h1>
+                        <h1 class="mt-4">Static Navigation</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">types clothes</li>
+                            <li class="breadcrumb-item active">Static Navigation</li>
                         </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                This page is an example of using the light side navigation option. By appending the
-                                <code>.t</code>
-                                class to the
-                                <code>.sb-sidenav</code>
-                                class, the side navigation will take on a light color scheme. The
-                                <code>.sb-sidenav-dark</code>
-                                is also available for a darker option.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                                    <div class="card-header">
-                                       <i class="fa fa-users" aria-hidden="true"></i>
+                        
 
-                                        User manager
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="User-Table" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>User Name</th>
-                                                    <th>Button</th>
-                                                </tr>
-                                            </thead>
-                                        
-                                            <tbody>
-                                            <?php 
-                                                include_once("../admin-test/models/DataProvider.php");
-                                                $db=new DataProvider();
-                                                $sql="SELECT * FROM `accounts`";
-                                                $array=$db->FetchAll($sql);
-                                                foreach($array as $user){ 
-                                                        echo "<tr>";
-                                                        echo "<td class='acc-id'>$user[id]</td>";
-                                                        echo "<td class='acc-username'>$user[username]</td>";
-                                                        if($user['lv']==0){
-                                                            echo "<td><button class='btn-promote btn btn-primary' data-toggle='modal' data-target='#PromoteModal'>PROMOTE</button>";
-                                                            echo "<button class='btn-demote btn btn-danger' data-toggle='modal' data-target='#DemoteModal' style='margin-left:10px' disabled>DEMOTE</button></td>";
-                                                        }
-                                                        else{
-                                                            echo "<td><button class='btn-promote btn btn-primary' data-toggle='modal' data-target='#PromoteModal' disabled>PROMOTE</button>";
-                                                            echo "<button class='btn-demote btn btn-danger' data-toggle='modal' data-target='#DemoteModal' style='margin-left:10px' >DEMOTE</button></td>";
-                                                        }
-                                                        echo "</tr>";
-                                                }                               
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+<!-- table-->
+    <div class="card mb-4">
+        <div class="card-header" >
+            <i class="fas fa-table mr-1"></i>
+            Product List
+            <div style="float:right">
+                <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'>Add New Clothes</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive" >
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Accounts</th>
+                            <th>Button</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <?php 
+                       include_once("../models/DataProvider.php");
+                        $db=new DataProvider();
+                        $sql="SELECT * FROM `accounts`";
+                        $array=$db->FetchAll($sql);
+                        foreach($array as $user){
+                            if($user['id']>0){
+                            echo "<tr>";
+                                echo "<td class='acc-id' >$user[id]</td>";
+                                echo "<td class='acc-username' >$user[username]</td>";
+                                if($user['lv']==1){
+                                    echo "<td><button class='btn-promote btn btn-primary' disabled>PROMOTE</button>";
+                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' >DEMOTE</button></td>";
+                                }
+                                else{
+                                    echo "<td><button class='btn-promote btn btn-primary' >PROMOTE</button>";
+                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' disabled>DEMOTE</button></td>";
+                                }
+                            echo "</tr>";
+                            }
+                        }                               
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
                     </div>
-                </div>
+                    </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
-                    
+                            
+            <script>
+                $('.btn-promote').on('click',function(){
+                    let div = $(this).parent().parent();
+                    id=div.find('.acc-id').text();
+                    name=div.find('.acc-username').text();
+                    var check = confirm("Are you sure to promote '"+ name +"' ?");
+                    if(check==true){
+                        $.post('',{id:id,action:'promote'},function(){
+                        alert('promote success');
+                        location.reload();
+                        
+                    });
+                    }
+                })
+                $('.btn-demote').on('click',function(){
+                    let div = $(this).parent().parent();
+                    id=div.find('.acc-id').text();
+                    name=div.find('.acc-username').text();
+                    var check = confirm("Are you sure to demote ' "+ name +" ' ?");
+                    if(check==true){
+                        $.post('',{id:id,action:'demote'},function(){
+                        alert('demote success');
+                        location.reload();
+                    });
+                    }
+                })
+            </script>
+
+
+            <script>
+                if ( window.history.replaceState ) {
+                    window.history.replaceState( null, null, window.location.href );
+                } 
+            </script>
                 </footer>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
     </body>
 </html>
-<script>
-    $('.btn-promote').on('click',function(){
-        let div = $(this).parent().parent();
-        id=div.find('.acc-id').text();
-        name=div.find('.acc-username').text();
-        var check = confirm("Are you sure to promote '"+ name +"' ?");
-        if(check==true){
-            $.post('',{id:id,action:'promote'},function(){
-            location.reload();
-            alert('promote success');
-        });
-        }
-    })
-    $('.btn-demote').on('click',function(){
-        let div = $(this).parent().parent();
-        id=div.find('.acc-id').text();
-        name=div.find('.acc-username').text();
-        var check = confirm("Are you sure to demote ' "+ name +" ' ?");
-        if(check==true){
-            $.post('',{id:id,action:'demote'},function(){
-            location.reload();
-            alert('demote success');
-        });
-        }
-    })
-</script>
 
 
-<script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    } 
-</script>
+
+

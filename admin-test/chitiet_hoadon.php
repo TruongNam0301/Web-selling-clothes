@@ -77,7 +77,7 @@
                                         </thead>
                                         <tbody>
                                         <?php
-                                        include_once("../admin-test/models/DataProvider.php");
+                                        include_once("../models/DataProvider.php");
                                         $db=new DataProvider();
                                         $sql="SELECT clothes.id,clothes.name,clothes.price,clothes.picture,chitiet_hoadon.soluong, chitiet_hoadon.size FROM `clothes` INNER JOIN `chitiet_hoadon` ON clothes.id=chitiet_hoadon.id_cloth INNER JOIN `hoadon` ON hoadon.MaHD=chitiet_hoadon.MaHD WHERE chitiet_hoadon.MaHD=$_GET[MaHD]";
                                         $array=$db->FetchAll($sql);

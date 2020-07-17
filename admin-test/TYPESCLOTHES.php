@@ -4,17 +4,19 @@ $db=new DataProvider();
 if(isset($_POST["update-type"])) {
     $id=$_POST['id'];
     $name=$_POST['name'];
-    $db->ExecuteQuery("UPDATE types SET nametype ='$name' WHERE id =$id");
+    $type = $_POST['types_clothes'];
+    $db->ExecuteQuery("UPDATE typeclothes SET name_type ='$name', type=$type WHERE id_type =$id");
 }
 else if(isset($_POST["add-type"])){
     $name=$_POST['name'];
-    $db->ExecuteQuery("INSERT INTO types VALUES(NULL,'$name')");
+    $type = $_POST['types_clothes'];
+    $db->ExecuteQuery("INSERT INTO typeclothes VALUES(NULL,'$name',$type)");
 }
 if(isset($_POST['action'])){
     if($_POST['action']==='delete'){
     $db=new DataProvider();
     $delete_id = $_POST["id"];
-    $sql = "UPDATE typeclothes SET type=-1 WHERE type=$delete_id;DELETE FROM types WHERE id=$delete_id ; SET @num := 0; UPDATE types SET id = @num := (@num+1); ALTER TABLE types AUTO_INCREMENT = 1";
+    $sql = "UPDATE clothes SET id_type=-1 WHERE id_type=$delete_id;DELETE FROM typeclothes WHERE id_type=$delete_id ; SET @num := 0; UPDATE typeclothes SET id = @num := (@num+1); ALTER TABLE typeclothes AUTO_INCREMENT = 1";
     $db->ExecuteMultiQuery($sql);
 }
 }
@@ -62,7 +64,7 @@ if(isset($_POST['action'])){
             </ul>
         </nav>
         <div id="layoutSidenav">
-            <?php
+        <?php
                 include_once('menu-slide.php');
             ?>
             <div id="layoutSidenav_content">
@@ -87,10 +89,21 @@ if(isset($_POST['action'])){
       </div>
       <div class="modal-body">
         <form  method = 'post' action='' enctype="multipart/form-data" id='form'>
-
+            
             <input type="hidden" name="id" id="id" />
-            <label>name</label>
+            <label>Name Type Clothes: </label>
             <input type='text' name='name'  id='name'/><br/>
+            <label style="margin-left:105px">Type: </label>
+                <select name="types_clothes" id="types_clothes" >
+                    <?php
+                        $db=new DataProvider();
+                        $sql="SELECT * FROM types";
+                        $result=$db->FetchAll($sql);
+                        foreach($result as $row){
+                            echo "<option value='$row[id]'>$row[nametype]</option>";
+                        }
+                    ?>
+                </select><br/>
             <div class="modal-footer" align="center" style="margin-top:20px">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <input type='submit'  name='update-type' class='btn-save btn btn-primary' value='save' />
@@ -113,8 +126,19 @@ if(isset($_POST['action'])){
       </div>
       <div class="modal-body">
         <form  method = 'post' action='' enctype="multipart/form-data" id='form-add'>
-            <label>name</label>
-            <input type='text' name='name'  id='name-add'/><br/>
+            <label>Name Type Clothes: </label>
+                <input type='text' name='name'  id='name'/><br/>
+            <label style="margin-left:105px">Type: </label>
+                <select name="types_clothes" id="types_clothes" >
+                    <?php
+                        $db=new DataProvider();
+                        $sql="SELECT * FROM types";
+                        $result=$db->FetchAll($sql);
+                        foreach($result as $row){
+                            echo "<option value='$row[id]'>$row[nametype]</option>";
+                        }
+                    ?>
+                </select><br/>
             <div class="modal-footer" align="center" style="margin-top:20px">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <input type='submit'  name='add-type' class='btn-save btn btn-primary' value='add' />
@@ -131,7 +155,7 @@ if(isset($_POST['action'])){
         <i class="fas fa-table mr-1"></i>
         Product List
         <div style="float:right">
-            <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'><i class="fa fa-plus" aria-hidden="true"></i>Add New Type </button>
+            <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'><i class="fa fa-plus" aria-hidden="true"></i>Add New Type Clothes</button>
         </div>
     </div>
     <div class="card-body">
@@ -140,22 +164,23 @@ if(isset($_POST['action'])){
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Name</th>
+                            <th>Name Type Product</th>
+                            <th>Type </th>
                             <th>Button</th>
                         </tr>
                     </thead>
                     
                     <tbody>
                         <?php 
-                           include_once("../models/DataProvider.php");
                             $db=new DataProvider();
-                            $sql="SELECT * FROM types";
+                            $sql="SELECT typeclothes.id_type,typeclothes.name_type, typeclothes.type, types.nametype FROM `typeclothes` INNER JOIN types on typeclothes.type=types.id";
                             $array=$db->FetchAll($sql);
-                            foreach($array as $type){
-                                if($type['id']>0){
+                            foreach($array as $typeclothes){
+                                if($typeclothes['id_type']>0){
                                 echo "<tr>";
-                                    echo "<td class='id'>$type[id]</td>";
-                                    echo "<td class='name' >$type[nametype]</td>";
+                                    echo "<td class='id'>$typeclothes[id_type]</td>";
+                                    echo "<td class='name' >$typeclothes[name_type]</td>";
+                                    echo "<td class='type' data-id_type=$typeclothes[type]>$typeclothes[nametype]</td>";
                                     echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
                                     echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
                                 echo "</tr>";
@@ -174,12 +199,16 @@ if(isset($_POST['action'])){
             <script>
                 $(document).ready(function(){
                     validateForm();
-                    $('.btn-edit').on('click',function(){   
+                    $('.btn-edit').on('click',function(){
+                        $('#types_clothes option:selected').removeAttr('selected');   
                         let div = $(this).parent().parent();
                         id=div.find('.id').text();
                         name=div.find('.name').text();
+                        type = div.find('.type').data('id_type');
+                        
                         $('#name').val(name);
                         $('#id').val(id);
+                        $('#types_clothes option[value='+type+']').attr('selected','selected');
                     })
                     $('.btn-delete').on('click',function(){
                             let div = $(this).parent().parent();
@@ -189,7 +218,7 @@ if(isset($_POST['action'])){
                             if(check==true){
                                 $.post('',{id:id,action:'delete'},function(){
                                     location.reload();
-                                    alert('delete success')
+                                    alert('delete success');
                                 });
                             }
                     })

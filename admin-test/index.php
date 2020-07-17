@@ -2,7 +2,7 @@
     if (!isset($_SESSION)) {
         session_start();
     }
-    include_once("../admin-test/models/DataProvider.php");
+    include_once("../models/DataProvider.php");
     if(isset($_POST['promote-user'])){
         $id=$_POST['pro-id'];
         $user=$_POST['pro-name'];
@@ -64,63 +64,15 @@
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="../templates">Return to main Page</a>
                     </div>
                 </li>
             </ul>
         </nav>
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                DATABASES
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="ACCOUNT.php">ACCOUNTS</a>
-                                    <a class="nav-link" href="TYPES.php">TYPES</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">TYPESCLOTHES</a>
-                                    <a class="nav-link" href="CLOTHES.php">CLOTHES</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Bills Manager
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link"  href="bills.php?tt=0"> Bills haven't shipped</a>
-                                    <a class="nav-link" href="bills.php?tt=1"> Bills have shipped</a> 
-                                </nav>
-                            </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
-                    </div>
-                </nav>
-            </div>
+            <?php
+            include_once('menu-slide.php');
+            ?>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
@@ -131,14 +83,11 @@
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Clothes : 
-                                    <?php include_once("../admin-test/models/DataProvider.php");
-                                            $db=new DataProvider();
-                                            $sql="SELECT id FROM `clothes`";
-                                            $num=$db->NumRows($sql);
-                                            echo $num;
-                                    ?>
-                                    </div>
+                                    <div class="card-body">Clothes: <?php
+                                                                        $db=new DataProvider();
+                                                                        $countClothes=$db->NumRows("SELECT * FROM clothes");
+                                                                        echo $countClothes;
+                                                                        ?> </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="CLOTHES.php">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -148,7 +97,7 @@
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">Bills chua giao: 
-                                    <?php include_once("../admin-test/models/DataProvider.php");
+                                    <?php 
                                             $db=new DataProvider();
                                             $sql="SELECT MaHD FROM `hoadon` WHERE tinhtrang = 0" ;
                                             $num=$db->NumRows($sql);
@@ -165,7 +114,7 @@
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
                                     <div class="card-body">Bills da giao:
-                                    <?php include_once("../admin-test/models/DataProvider.php");
+                                    <?php 
                                             $db=new DataProvider();
                                             $sql="SELECT MaHD FROM `hoadon` WHERE tinhtrang = 1" ;
                                             $num=$db->NumRows($sql);

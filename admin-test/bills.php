@@ -1,5 +1,5 @@
 <?php
-include_once("../admin-test/models/DataProvider.php");
+include_once("../models/DataProvider.php");
 if(isset($_GET['action'])){
     if($_GET['action']==='edit'){
         if(isset($_POST['MaHD'])){
@@ -39,16 +39,45 @@ if(isset($_GET['action'])){
     </head>
    
     <body>
-       
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.php">Start Bootstrap</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Activity Log</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="login.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <?php
+                include_once('menu-slide.php');
+            ?>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Static Navigation</h1>
+                        <h1 class="mt-4"> Bills haven't ship</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
+                            <li class="breadcrumb-item active"> Bills haven't ship</li>
                         </ol>
                         
+
 
                 <!-- Modal edit-->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -61,7 +90,7 @@ if(isset($_GET['action'])){
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form  method = 'post' action='?action=edit' enctype="multipart/form-data" id='form'>
+                        <form  method = 'post' action='?tt=<?php echo $_GET['tt']?>&&action=edit' enctype="multipart/form-data" id='form'>
                             <input type='hidden' name='MaHD'  id='MaHD' /><br/>
                             <input type="radio" class='check' name="tinhtrang" value="1">
                             <label >xac nhan</label>
@@ -83,10 +112,8 @@ if(isset($_GET['action'])){
                         <div class="card mb-4">
                             <div class="card-header" >
                                 <i class="fas fa-table mr-1"></i>
-                                Product List
-                                <div style="float:right">
-                                   <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'>Add New Clothes</button>
-                                </div>
+                                Bills haven't ship List
+                               
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive"  id='clothes_table'>
@@ -106,7 +133,6 @@ if(isset($_GET['action'])){
                                        
                                         <tbody>
                                         <?php 
-                                            include_once("../admin-test/models/DataProvider.php");
                                             $db=new DataProvider();
                                             $sql="SELECT users.name, users.image, hoadon.MaHD, hoadon.sdt, hoadon.address, hoadon.date, hoadon.tinhtrang, hoadon.total FROM `hoadon` INNER JOIN users ON hoadon.id_user=users.id WHERE tinhtrang=$_GET[tt]";
                                             $array=$db->FetchAll($sql);
@@ -124,7 +150,7 @@ if(isset($_GET['action'])){
                                                     echo "<td class='tinhtrang' data-value='$item[tinhtrang]'>$check</td>";
                                                     echo "<td class='total'>$p</td>";
                                                     echo "<td><button class='btn-edit btn btn-primary' data-mahd=$item[MaHD] data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
-                                                    echo "<a href='chitiet_hoadon.php?MaHD=$item[MaHD]'>'<button class='btn-detail btn btn-success' style='margin-left:10px' >detail bills</button></a> ";
+                                                    echo "<a href='chitiet_hoadon.php?MaHD=$item[MaHD]'><button class='btn-detail btn btn-success' style='margin-left:10px' >detail bills</button></a> ";
                                                     echo "<a href='?tt=$_GET[tt]&&action=delete&&MaHD=$item[MaHD]'><button class='btn-delete btn btn-danger' style='margin-left:10px' >delete</button></td> ";
                                                 echo "</tr>";
                                             }                               
