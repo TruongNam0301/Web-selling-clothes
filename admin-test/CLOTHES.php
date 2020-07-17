@@ -377,6 +377,8 @@ if(isset($_POST["update-clothes"])) {
                                         image=div.find('.image').attr('src');
                                         type = div.find('.type').text();
                                         bestsale = div.find('.bestSale').text();
+                                        $("input[name=sell]").removeAttr('checked');
+                                        $('#types_clothes option[value='+type+']').removeAttr('selected');
                                         $('#name').val(name);
                                         $('#price').val(price);
                                         $('#image').attr('src',image);
