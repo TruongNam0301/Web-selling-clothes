@@ -52,6 +52,7 @@
 .square {
     float:left;
     position: relative;
+    margin-bottom: 20px;
 }
 .type-text{
     font-size:20px;

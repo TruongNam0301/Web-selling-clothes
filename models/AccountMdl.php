@@ -39,7 +39,8 @@
             return 1;
         }
         public function updatePass($pass,$id){
-            $sql = "UPDATE `accounts` SET password='$pass' WHERE id='$id'";
+            $password = password_hash($pass, PASSWORD_BCRYPT, array('cost'=>12));
+            $sql = "UPDATE `accounts` SET password='$password' WHERE id='$id'";
             $this->db->ExecuteQuery($sql);
         }
     }
