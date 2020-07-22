@@ -116,18 +116,3 @@
     </body>
 </html>
 
-<script>
-     function loadBestSell (){
-        $.ajax({
-            url:'../views/action.php',
-            data: {action:'bestsell'},
-            type: 'POST',
-            success: function (value){
-                $('.bestsell').html(value);
-                }
-            })
-    }  
-    $(document).ready(function(){
-        loadBestSell();
-    })
-</script>

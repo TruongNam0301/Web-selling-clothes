@@ -3,8 +3,18 @@ if (document.readyState == 'loading') {
 } else {
     ready()
 }
-
+function loadBestSell (){
+        $.ajax({
+            url:'../views/action.php',
+            data: {action:'bestsell'},
+            type: 'POST',
+            success: function (value){
+                $('.bestsell').html(value);
+                }
+            })
+    }  
  function ready(){
+     loadBestSell();
      ChangeLoginRegister();
      OpenAndExitLogin();
      validateRegisterForm();

@@ -49,9 +49,6 @@
     <?php
                    include_once('footer.php');
                 ?>
-   <?php
-   echo $_GET['idType'];
-   ?>
     <script>
         function loadData (val=0,page=1){
             $.ajax({
