@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 17, 2020 lúc 10:35 AM
+-- Thời gian đã tạo: Th7 22, 2020 lúc 02:26 PM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -39,7 +39,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `lv`) VALUES
-(-1, 'admin', '$2y$12$rHZZFIjJ7VEnGBQYm.4Dn.4zeVLmpV0QXT7.rzE1gXuXcYpMfhNiy', 1);
+(-1, 'admin', '$2y$12$rHZZFIjJ7VEnGBQYm.4Dn.4zeVLmpV0QXT7.rzE1gXuXcYpMfhNiy', 1),
+(4, 'test', '$2y$12$y5i2J4KsRZEe/jHVOVfNp.FFN0nKTUuYgOh.pAjIWU.jWXz3LzqM6', 0);
 
 -- --------------------------------------------------------
 
@@ -66,6 +67,15 @@ CREATE TABLE `chitiet_hoadon` (
   `soluong` int(11) NOT NULL,
   `size` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `chitiet_hoadon`
+--
+
+INSERT INTO `chitiet_hoadon` (`SoHD`, `MaHD`, `id_cloth`, `soluong`, `size`) VALUES
+(23, 16, 1, 1, 'M'),
+(24, 16, 31, 1, 'M'),
+(25, 16, 21, 1, 'M');
 
 -- --------------------------------------------------------
 
@@ -133,6 +143,26 @@ INSERT INTO `clothes` (`id`, `id_type`, `name`, `price`, `picture`, `best_sell`)
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `contact`
+--
+
+CREATE TABLE `contact` (
+  `stt` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `string` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `contact`
+--
+
+INSERT INTO `contact` (`stt`, `id_user`, `string`) VALUES
+(1, -1, 'hello'),
+(2, 4, 'zollo eeeeeeeeeeeeeeeeeadadadadada');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `hoadon`
 --
 
@@ -145,6 +175,13 @@ CREATE TABLE `hoadon` (
   `date` varchar(255) NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `hoadon`
+--
+
+INSERT INTO `hoadon` (`MaHD`, `id_user`, `sdt`, `address`, `tinhtrang`, `date`, `total`) VALUES
+(16, -1, '09046', 'sssss', 0, '07/22/2020 03:54:54 pm', 550000);
 
 -- --------------------------------------------------------
 
@@ -209,7 +246,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `image`, `address`, `phoneNumber`) VALUES
-(-1, 'admin', '5f1160ad603035.64866943.jpg', NULL, NULL);
+(-1, 'admin', '5f1160ad603035.64866943.jpg', NULL, NULL),
+(4, 'test', 'user-image.png', NULL, NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -242,6 +280,13 @@ ALTER TABLE `chitiet_hoadon`
 ALTER TABLE `clothes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `Clothes_fk0` (`id_type`);
+
+--
+-- Chỉ mục cho bảng `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`stt`),
+  ADD KEY `fk_id_user_contact` (`id_user`);
 
 --
 -- Chỉ mục cho bảng `hoadon`
@@ -277,7 +322,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `bills`
@@ -289,7 +334,7 @@ ALTER TABLE `bills`
 -- AUTO_INCREMENT cho bảng `chitiet_hoadon`
 --
 ALTER TABLE `chitiet_hoadon`
-  MODIFY `SoHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `SoHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `clothes`
@@ -298,28 +343,34 @@ ALTER TABLE `clothes`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
+-- AUTO_INCREMENT cho bảng `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `stt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `typeclothes`
 --
 ALTER TABLE `typeclothes`
-  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `types`
 --
 ALTER TABLE `types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -343,6 +394,12 @@ ALTER TABLE `chitiet_hoadon`
 --
 ALTER TABLE `clothes`
   ADD CONSTRAINT `Clothes_fk0` FOREIGN KEY (`id_type`) REFERENCES `typeclothes` (`id_type`);
+
+--
+-- Các ràng buộc cho bảng `contact`
+--
+ALTER TABLE `contact`
+  ADD CONSTRAINT `fk_id_user_contact` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Các ràng buộc cho bảng `hoadon`
