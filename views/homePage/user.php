@@ -33,11 +33,13 @@
                     echo "<button type='button' class='button-admin btn btn-warning'><a href='/web-selling-clothes/admin-test'> ADMIN PAGE</a></button>";
                 }
             ?>
+            <button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#ViewModal'>VIEW BILL</button>
             <button type="button" class="button-update btn btn-primary">UPDATE INFOR</button>
             <?php
                 include_once('updateInfor.php');
                
             ?>
+           
         </div>
     </div>
 <script>
@@ -56,5 +58,4 @@
         $(".update-swapper").toggleClass('active-update-form');
     })
 </script>
-
 
