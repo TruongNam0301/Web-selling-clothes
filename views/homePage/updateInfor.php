@@ -22,9 +22,6 @@
     background-color: rgb(137, 6, 32);
     color: white;
 }
-.update{
-
-}
 </style>
 <div class="update-form" style="overflow :hidden">
     <div class="update-swapper">

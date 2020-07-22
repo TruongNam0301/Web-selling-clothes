@@ -11,6 +11,11 @@
                 include_once("../views/homePage/clothing.php");
             }
         }
+        public function getOneType($id){
+            $TypeMdl = new TypeMdl();
+            $type = $TypeMdl->getOneType($id);
+            echo $type[0]['nametype'];
+        }
     }
 
 

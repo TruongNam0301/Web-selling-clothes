@@ -50,7 +50,7 @@
 
                 <!--carousel-->
                         <div class="mt-3">
-                            <h2>Carousel</h2>
+                        <div class='title-section'><h2>Carousel</h2></div>
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
                     <!-- Indicators -->
@@ -63,13 +63,13 @@
                     <!-- The slideshow -->
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                    <img src="../image/slide1.jpg" alt="pic1" width="1100" height="300">
+                                    <img src="../image/slide1.jpg" alt="pic1" width="1100" height="400">
                                     </div>
                                     <div class="carousel-item">
-                                    <img src="../image/slide2.jpg" alt="pic2" width="1100" height="300">
+                                    <img src="../image/slide2.jpg" alt="pic2" width="1100" height="400">
                                     </div>
                                     <div class="carousel-item">
-                                    <img src="../image/slide3.jpg" alt="pic3" width="1100" height="300">
+                                    <img src="../image/slide3.jpg" alt="pic3" width="1100" height="400">
                                     </div>
                                 </div>
                 
@@ -84,10 +84,18 @@
                         </div>
 
                 <!--some best sale product-->
+                        <div class='title-section' ><h2>Collections</h2></div>
+                        <div class='square-swap row' >
+                            <?php
+                                  include_once('../controllers/TypeClothesCtr.php');
+                                  $TypeClothesCtr = new TypeClothesCtr();
+                                  $TypeClothesCtr->getAllTypeClothes();
+                            ?>
+                         </div>
+                         <div class='title-section' ><h2> best sale of shop</h2></div>
                         <div class="best-sale">
-                            <h1> best sale of shop</h1>
                             <div class='bestsell row'>
-                             
+                                
                             </div>
                         </div>
                     </div>

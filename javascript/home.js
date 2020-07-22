@@ -24,6 +24,32 @@ if (document.readyState == 'loading') {
             e.preventDefault();
         }
     });
+    $('.forgot-pass').on('click',function(){
+      $('.login-form').css('display','none');
+      $('.forgot-form').css('display','block');
+    });
+    $('.forgot-button').on('click',function(){
+        let username = $('.check-user').val();
+        if(username ==''){
+            $('.error-user').text('* the user name not empty');
+        }
+        else{
+            $.ajax({
+                url:'../views/action.php',
+                method:'POST',
+                data:{username:username,action:'check-user'},
+                success: function(data){
+                    if(data==0){
+                         $('.error-user').text('* the username not exist ');
+                    }
+                     else{  
+                         $('.forgot-swapper').html(data)
+                        validateForgotForm();     
+                    };
+                }
+            })
+        }
+    });
 };
 
     //login form function
@@ -69,6 +95,34 @@ if (document.readyState == 'loading') {
         }
     });
 }  
+function validateForgotForm() {
+    $(".forgot-content").validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            "new-password": {
+                required: true,
+                minlength: 4
+            },
+            "re-new-password": {
+                equalTo: "#new-password",
+                minlength: 4
+                
+            }
+        },
+        messages: {
+            "new-password": {
+                required: "* Bắt buộc nhập password",
+                minlength: "* Hãy nhập ít nhất 4 ký tự"
+            },
+            "re-new-password": {
+                equalTo: "* Hai password phải giống nhau",
+                minlength: "* Hãy nhập ít nhất 4 ký tự"
+            }
+        }
+    });
+}  
 
 
 //click search-icon 
@@ -92,16 +146,19 @@ function menuExit(){
 function ChangeLoginRegister(){
     var loginForm=document.querySelector(".login-form");
     var regisForm=document.querySelector(".regis-form");
+    var forgotForm=document.querySelector(".forgot-form");
     var btnLogin=document.querySelector(".login");
     var btnRegister=document.querySelector(".register");
    
     btnLogin.addEventListener("click",function(){
         loginForm.style.display="block";
         regisForm.style.display="none";
+        forgotForm.style.display='none';
     });
     btnRegister.addEventListener("click",function(){
         regisForm.style.display="block";
         loginForm.style.display="none";
+        forgotForm.style.display='none';
     })
 }
 //open and exit login register form function

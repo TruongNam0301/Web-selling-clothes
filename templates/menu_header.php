@@ -4,6 +4,7 @@ include_once('../controllers/AccountCtr.php');
 $AccountCtr = new AccountCtr();
 $AccountCtr->register();   
 $AccountCtr->updateUserInfor();   
+$AccountCtr->updatePass();
 ?>
   <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <html>  
@@ -94,22 +95,33 @@ $AccountCtr->updateUserInfor();
                     <input type="text" name="username" class='text-input' placeholder="USERNAME">
                     <input type="password"  name="password" class='text-input' placeholder="PASSWORD">
                     <div class='error-login'></div>
-                    <div class="forgot-pass"><a href="#"> Forgot your password</a></div>
+                    <div class="forgot-pass"> Forgot your password</div>
                     <input type="submit" class='login-button' name="btn_submit" value="login">
                 </form>
             </div>
         </div>
-    </div>
-    <div class="regis-form" style="display:none">
-        <div class="regis-swapper">
-            <form class="regis-content" method="post" >
-                <input type="text"  name="name" class='text-name' placeholder="name">
-                <input type="text"  name="username" class='text-input' placeholder="USERNAME">
-                <input type="password"  name="password" class='text-input ' id='password' placeholder="PASSWORD">
-                <input type="password"  name="re-password" class='text-input' id='re-password' class="cf-password" placeholder="PASSWORD">
-                <input type="submit"  name="regis_submit" class="regis_button" value="register">
-                <div class="error_signup"></div>
-            </form>
+    
+        <div class="regis-form" style="display:none">
+            <div class="regis-swapper">
+                <form class="regis-content" method="post" >
+                    <input type="text"  name="name" class='text-name' placeholder="name">
+                    <input type="text"  name="username" class='text-input' placeholder="USERNAME">
+                    <input type="password"  name="password" class='text-input ' id='password' placeholder="PASSWORD">
+                    <input type="password"  name="re-password" class='text-input' id='re-password' class="cf-password" placeholder="PASSWORD">
+                    <input type="submit"  name="regis_submit" class="regis_button" value="register">
+                    <div class="error_signup"></div>
+                </form>
+            </div>
+        </div>
+
+        <div class="forgot-form" style="display:none">
+            <div class="forgot-swapper">
+                <div class="forgot-content">
+                    <input type="text" name="username" class='check-user' placeholder="USERNAME">
+                    <div class='error-user'></div>
+                    <input type="submit" class='forgot-button' name="btn_submit" value="Next">
+                </div>
+            </div>
         </div>
     </div>
     <div class='user'>

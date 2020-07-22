@@ -2,13 +2,7 @@ body{
     margin: 0;
     padding: 0;
 }
-.background{
-    height:400px;
-    background-color: white;
-    background-image: url(../image/product-bg.jpg);
-    background-size:contain;
-    background-position: center;
-}
+
 .check-product-board{
     margin-top: 50px;
     background-color: antiquewhite;

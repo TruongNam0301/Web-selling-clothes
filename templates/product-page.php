@@ -13,6 +13,31 @@
     </head>
     <body>
     <?php include_once('menu_header.php');?>
+    <section class="section1">
+                <div class="background">
+                    <div class="wall">
+                    <div class='name-link' style='font-size:50px'>
+                    <?php 
+                        include_once('../controllers/TypeClothesCtr.php');
+                        $TypeClothesCtr = new TypeClothesCtr();
+                        $TypeClothesCtr->getOneTypeClothes( $_GET['idType']);
+                    ?>
+                   </div>
+                        <div class='link'>
+                            <a href='#'> Home /</a>
+                            <a href='#'> Clothing /</a>
+                            <a href='#'> 
+                                 <?php 
+                        include_once('../controllers/TypeCtr.php');
+                        $TypeCtr = new TypeCtr();
+                        $TypeCtr->getOneType( $_GET['type']);
+                    ?>/</a>
+                            <a href='#'> <?php $TypeClothesCtr = new TypeClothesCtr();
+                        $TypeClothesCtr->getOneTypeClothes( $_GET['idType']);?></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         <div class="container">
             <div class="view-swap">
                 
@@ -21,6 +46,9 @@
             </div>
         </div>
     </body>
+    <?php
+                   include_once('footer.php');
+                ?>
    <?php
    echo $_GET['idType'];
    ?>

@@ -77,20 +77,9 @@
                                         </thead>
                                         <tbody>
                                         <?php
-                                        include_once("../models/DataProvider.php");
-                                        $db=new DataProvider();
-                                        $sql="SELECT clothes.id,clothes.name,clothes.price,clothes.picture,chitiet_hoadon.soluong, chitiet_hoadon.size FROM `clothes` INNER JOIN `chitiet_hoadon` ON clothes.id=chitiet_hoadon.id_cloth INNER JOIN `hoadon` ON hoadon.MaHD=chitiet_hoadon.MaHD WHERE chitiet_hoadon.MaHD=$_GET[MaHD]";
-                                        $array=$db->FetchAll($sql);
-                                        foreach($array as $item){
-                                            @$p=number_format($item['price'],0,",",".");
-                                            echo "<tr>";
-                                            echo "<td ><img src='../image/image_product/$item[picture]' class='image' style='width:100px; height:50px' ></td>";
-                                                echo "<td class='name'>$item[name]</td>";
-                                                echo "<td class='price'>$p</td>";
-                                                echo "<td class='quantity'>$item[soluong]</td>";
-                                                echo "<td class='size'>$item[size]</td>";
-                                            echo "</tr>";
-                                        }                          
+                                        include_once("../controllers/BillsDetailCtr.php");
+                                        $BillsDetailCtr=new BillsDetailCtr();
+                                        $BillsDetailCtr->getBillsDetail($_GET['MaHD']);                 
                                     ?>
                                     </tbody>
                                     </table>

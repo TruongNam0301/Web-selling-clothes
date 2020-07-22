@@ -101,6 +101,22 @@ include_once('../models/UsersMdl.php');
                 }
             }
         }
+        public function checkAccountExist($username){
+            $AccountMdl = new AccountMdl();
+            $Account = $AccountMdl -> checkAccountExist($username);
+            if($Account==0){
+                echo 0;
+            }
+            else {
+                $id=$Account['id'];
+                include_once('../views/homePage/forgot-pass.php');
+            }
+        }
+        public function updatePass(){
+            $AccountMdl = new AccountMdl();
+            if(isset($_POST['update-pass-submit'])) $AccountMdl -> updatePass($_POST['new-password'],$_POST['id']);
+           
+        }
         
     } 
 

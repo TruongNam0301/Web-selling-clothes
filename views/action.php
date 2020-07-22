@@ -1,6 +1,7 @@
 <?php
     include_once('../controllers/ClothesCtr.php');
     include_once('../controllers/CartCtr.php');
+    include_once('../controllers/AccountCtr.php');
     session_start();
     $ClothesCtr = new ClothesCtr();
     #showlistclothes
@@ -29,6 +30,11 @@
     }
     else if($_POST['action']=='bestsell'){
         $ClothesCtr->getBestSell();
+    }
+    else if($_POST['action']=='check-user'){
+        $AccountCtr = new AccountCtr();
+        $AccountCtr ->checkAccountExist($_POST['username']);
+       
     }
     else { #updatecart
         if(isset($_POST['index'])){

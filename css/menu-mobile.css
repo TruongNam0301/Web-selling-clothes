@@ -72,7 +72,7 @@ span{
 input{
     margin-left:20px;
 }
-.login-content,.regis-content{
+.login-content,.regis-content, .forgot-content{
     width: 350px;
     display: flex;
     flex-direction: column;

@@ -1,26 +1,21 @@
 <?php
-include_once("../models/DataProvider.php");
-if(isset($_GET['action'])){
-    if($_GET['action']==='edit'){
-        if(isset($_POST['MaHD'])){
-            $db=new DataProvider(); 
-            $MaHD = $_POST["MaHD"];
-            $tinhtrang = $_POST["tinhtrang"];
-            $sql = "UPDATE `hoadon`   SET tinhtrang = '$tinhtrang' WHERE MaHD='$MaHD' ";
-            $db->ExecuteQuery($sql);
+    include_once('../controllers/BillsCtr.php');
+    $BillsCtr = new BillsCtr();
+    include_once("../controllers/BillsDetailCtr.php");
+    $BillsDetailCtr = new BillsDetailCtr();
+    if(isset($_GET['action'])){
+        if($_GET['action']==='edit'){
+            if(isset($_POST['MaHD'])){
+            $BillsCtr -> editBills($_POST["tinhtrang"], $_POST["MaHD"]);
+            }
+        }
+        else if($_GET['action']==='delete'){
+            if(isset($_GET['MaHD'])){
+            $BillsDetailCtr->deleteBillsDetail($_GET['MaHD']);
+            $BillsCtr->deleteBills($_GET['MaHD']);
+            }
         }
     }
-    else if($_GET['action']==='delete'){
-        if(isset($_GET['MaHD'])){
-            $db=new DataProvider(); 
-            $MaHD = $_GET["MaHD"];
-            $sql = "DELETE FROM `chitiet_hoadon` WHERE MaHD='$MaHD' ";
-            $db->ExecuteQuery($sql);
-            $sql1 = "DELETE FROM `hoadon` WHERE MaHD='$MaHD' ";
-            $db->ExecuteQuery($sql1);
-        }
-}
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,28 +128,8 @@ if(isset($_GET['action'])){
                                        
                                         <tbody>
                                         <?php 
-                                            $db=new DataProvider();
-                                            $sql="SELECT users.name, users.image, hoadon.MaHD, hoadon.sdt, hoadon.address, hoadon.date, hoadon.tinhtrang, hoadon.total FROM `hoadon` INNER JOIN users ON hoadon.id_user=users.id WHERE tinhtrang=$_GET[tt]";
-                                            $array=$db->FetchAll($sql);
-                                            foreach($array as $item){
-                                                @$p=number_format($item['total'],0,",",".");
-                                                $check=$item['tinhtrang'];
-                                                if($check==0)$check = 'chua xac nhan';
-                                                else $check= 'da xac nhan';
-                                                echo "<tr>";
-                                                echo "<td ><img src='../image/image-user/$item[image]' class='image' style='width:100px; height:50px' ></td>";
-                                                    echo "<td class='name'>$item[name]</td>";
-                                                    echo "<td class='sdt'>$item[sdt]</td>";
-                                                    echo "<td class='address'>$item[address]</td>";
-                                                    echo "<td class='date'>$item[date]</td>";
-                                                    echo "<td class='tinhtrang' data-value='$item[tinhtrang]'>$check</td>";
-                                                    echo "<td class='total'>$p</td>";
-                                                    echo "<td><button class='btn-edit btn btn-primary' data-mahd=$item[MaHD] data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
-                                                    echo "<a href='chitiet_hoadon.php?MaHD=$item[MaHD]'><button class='btn-detail btn btn-success' style='margin-left:10px' >detail bills</button></a> ";
-                                                    echo "<a href='?tt=$_GET[tt]&&action=delete&&MaHD=$item[MaHD]'><button class='btn-delete btn btn-danger' style='margin-left:10px' >delete</button></td> ";
-                                                echo "</tr>";
-                                            }                               
-                                            ?>
+                                            $BillsCtr->getBills($_GET['tt']);                
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -166,6 +141,7 @@ if(isset($_GET['action'])){
                 <footer class="py-4 bg-light mt-auto">
                     <script>
                         $(document).ready(function(){
+                            
                             $('.btn-edit').on('click',function(){
                                     let div = $(this).parent().parent();
                                     let tinhtrang = div.find('.tinhtrang').data('value');

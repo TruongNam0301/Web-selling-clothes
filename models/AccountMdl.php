@@ -38,6 +38,10 @@
             }
             return 1;
         }
+        public function updatePass($pass,$id){
+            $sql = "UPDATE `accounts` SET password='$pass' WHERE id='$id'";
+            $this->db->ExecuteQuery($sql);
+        }
     }
 
 

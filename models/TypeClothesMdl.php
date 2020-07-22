@@ -19,10 +19,8 @@
             }
            
         }
-        public function getTypeClothesByType($typeId){
-           
-            $sql = "SELECT * FROM typeclothes WHERE type = $typeId";
-            
+        public function getAllTypeClothes(){
+            $sql = "SELECT * FROM typeclothes ";
             if($this->db->NumRows($sql)){
               
                 return $this->db->FetchAll($sql);
@@ -32,6 +30,17 @@
             }
            
         }
+        public function getOneTypeClothes($idType){
+            $sql = "SELECT * FROM typeclothes WHERE id_type=$idType";
+            if($this->db->NumRows($sql)){
+                return $this->db->FetchAll($sql);
+            }
+            else{
+                return null;
+            }
+           
+        }
+
 
     }
 

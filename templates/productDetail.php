@@ -13,6 +13,18 @@
     </head>
     <body>
     <?php include_once('menu_header.php');?>
+            <section class="section1">
+                <div class="background">
+                    <div class="wall">
+                    <div class='name-link' style='font-size:50px'>AOs</div>
+                        <div class='link'>
+                            <a href='#'> Home /</a>
+                            <a href='#'> Clothing /</a>
+                            <a href='#'> Ao</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         <div id='all'>
             <?php
                 include_once('../controllers/ProductCtr.php');
@@ -21,7 +33,9 @@
             ?>
         </div>
 
-        <a href = 'cart.php'> ssss</a>
+        <?php
+                   include_once('footer.php');
+                ?>
         <script>
          $(document).ready(function(){
                 $('.CartButton').on('click',function(){

@@ -13,6 +13,25 @@
     </head>
     <body>
     <?php include_once('menu_header.php');?>
+    <section class="section1">
+                <div class="background">
+                    <div class="wall">
+                        <div class='name-link' style='font-size:50px'>
+                        <?php
+                        include_once('../controllers/TypeCtr.php') ;
+                        $TypeCtr = new TypeCtr();
+                        $Type = $TypeCtr->getOneType( $_GET['type']);
+                        ?></div>
+                        <div class='link'>
+                            <a href='#'> Home /</a>
+                            <a href='#'> Clothing /</a>
+                            <a href='#'> <?php  ;
+                        $TypeCtr = new TypeCtr();
+                        $Type = $TypeCtr->getOneType( $_GET['type']);?></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -50,6 +69,9 @@
             </div>
         </div>
     </body>
+     <?php
+                   include_once('footer.php');
+                ?>
     <script>
     
         function loadData (val=0,page=1,type){

@@ -19,6 +19,16 @@
                 return null;
             }
         }
+        public function getOneType($id){
+            $sql = "SELECT * FROM types WHERE id=$id";
+            if($this->db->NumRows($sql)>0){
+               return $this->db->FetchAll($sql);
+            }
+            else{
+                return null;
+            }
+        }
+        
     }
 
 
