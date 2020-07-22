@@ -23,7 +23,7 @@
                         $Type = $TypeCtr->getOneType( $_GET['type']);
                         ?></div>
                         <div class='link'>
-                            <a href='#'> Home /</a>
+                            <a href='home.php'> Home /</a>
                             <a href='#'> Clothing /</a>
                             <a href='#'> <?php  ;
                         $TypeCtr = new TypeCtr();

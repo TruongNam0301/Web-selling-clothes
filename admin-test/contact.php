@@ -124,7 +124,7 @@ if(isset($_POST['action'])){
                             foreach($array as $contact){
                                 echo "<tr>";
                                     echo "<td class='stt'>$contact[stt]</td>";
-                                    echo "<td class='username' data-string=$contact[string]>$contact[username]</td>";
+                                    echo "<td class='username' data-string=$contact[string]> $contact[username] </td>";
                                     echo "<td class='name'>$contact[name]</td>";
                                     echo "<td><button class='btn-view btn btn-primary' data-toggle='modal' data-target='#exampleModal'>VIEW</button>";
                                     echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";

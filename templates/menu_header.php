@@ -44,8 +44,8 @@ $AccountCtr->updatePass();
                                 </ul>
                             </div>
                         </li>
-                        <li class="menu-item about"><a href="../html/about.php">ABOUT US</a></li>
-                        <li class="menu-item contact"><a href="../html/contact.php">CONTACT</a></li>
+                        <li class="menu-item about"><a href="../templates/about.php">ABOUT US</a></li>
+                        <li class="menu-item contact"><a href="../templates/contact.php">CONTACT</a></li>
                     </ul>
                 </div>
             </div>

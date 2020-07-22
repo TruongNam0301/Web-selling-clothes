@@ -13,7 +13,7 @@
     </head>
     <body>
     <?php include_once('menu_header.php');?>
-    <section class="section1">
+         <section class="section1">
                 <div class="background">
                     <div class="wall">
                     <div class='name-link' style='font-size:50px'>
@@ -24,9 +24,9 @@
                     ?>
                    </div>
                         <div class='link'>
-                            <a href='#'> Home /</a>
+                            <a href='home.php'> Home /</a>
                             <a href='#'> Clothing /</a>
-                            <a href='#'> 
+                            <a href="productsPage.php?type=<?php echo $_GET['type']?>"> 
                                  <?php 
                         include_once('../controllers/TypeCtr.php');
                         $TypeCtr = new TypeCtr();
@@ -50,10 +50,11 @@
                    include_once('footer.php');
                 ?>
     <script>
-        function loadData (val=0,page=1){
+        function loadData (val=0,page=1,type){
+           
             $.ajax({
                 url:'../views/action.php',
-                data: {type:val,page:page,action:'show',num:3,limit:16,idType:0},
+                data: {type:val,page:page,action:'show',num:3,limit:12,idType:type},
                 type: 'POST',
                 success: function (value){
                     $('.product-gridview').html(value);
@@ -75,7 +76,15 @@
                 echo 1;
             }
             ?>;
-            loadData(val,page);
+            let type = <?php if(isset($_GET['type'])){
+                echo $_GET['type'];
+            }
+            else {
+                echo 1;
+            }
+            ?>;
+           
+            loadData(val,page,type);
         })
     </script>
     

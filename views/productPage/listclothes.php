@@ -3,9 +3,9 @@
     foreach($Clothes as $cloth){
         $p=number_format($cloth['price'],0,",",".");
         $str = "   
-          <div class='col-lg-$num'>
+          <div class='col-6 col-lg-$num'>
               <div class='product sanpham'>
-              <a href='../templates/productDetail.php?id=$cloth[id]'>
+              <a href='../templates/productDetail.php?idType=$cloth[id_type]&&id=$cloth[id]'>
                   <div class='image-item'>
                       <img src='../image/image_product/$cloth[picture]' class='item' style='z-index:-1' >
                       <div class='view-detail' >

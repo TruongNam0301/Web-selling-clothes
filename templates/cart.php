@@ -17,6 +17,20 @@
     </head>
     <body>
     <?php include_once('menu_header.php');?>
+    <section class="section1">
+            <div class="background">
+                <div class="wall">
+                    <div class='name-link' style='font-size:50px'>CART</div>
+                    <div class='link'>
+                        <a href='home.php'> Home /</a>
+                        <a href='productsPage.php?type=1'> Clothing /</a>
+                        <a href='about.php'> About /</a>
+                        <a href='contact.php'> Contact /</a>
+                        <a href='#'> Cart /</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     <?php 
     if(isset($_POST['yes'])){
         $id = $_SESSION['user']['id'];
