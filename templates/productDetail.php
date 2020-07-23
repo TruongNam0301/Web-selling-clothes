@@ -16,26 +16,63 @@
             <section class="section1">
                 <div class="background">
                     <div class="wall">
-                    <div class='name-link' style='font-size:50px'>AOs</div>
+                    <div class='name-link' style='font-size:50px'>
+                    <?php 
+                        include_once('../controllers/productCtr.php');
+                        $productCtr = new productCtr();
+                        $productCtr->getName( $_GET['id']);
+                    ?>
+                    </div>
                         <div class='link'>
                             <a href='#'> Home /</a>
                             <a href='#'> Clothing /</a>
-                            <a href='#'> Ao</a>
+                            <a href='#'> 
+                            <?php 
+                                include_once('../controllers/TypeClothesCtr.php');
+                                $TypeClothesCtr = new TypeClothesCtr();
+                                $TypeClothesCtr->getOneTypeClothes( $_GET['idType']);
+                            ?>
+                             / </a>
+                            <a href='#'> 
+                            <?php 
+                                include_once('../controllers/TypeClothesCtr.php');
+                                $productCtr = new productCtr();
+                                $productCtr->getName( $_GET['id']);
+                            ?>
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
         <div id='all'>
-            <?php
-                include_once('../controllers/ProductCtr.php');
-                $ProductCtr = new ProductCtr();
-                $ProductCtr->getProduct($_GET['id']);
-            ?>
+            <div class='container'>
+                <div class="row">
+                    <?php
+                        include_once('../controllers/ProductCtr.php');
+                        $ProductCtr = new ProductCtr();
+                        $ProductCtr->getProduct($_GET['id']);
+                    ?>
+                </div>
+                <div class='relative'>
+                    <div class=relative-text>
+                       <hr/>
+                    </div>
+                    <div class="best-sale">
+                        <div class='bestsell row'>  
+                            <?php
+                                include_once('../controllers/ClothesCtr.php');
+                                $ClothesCtr = new ClothesCtr();
+                                $ClothesCtr->getRelativeClothes($_GET['id']);
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <?php
-                   include_once('footer.php');
-                ?>
+            include_once('footer.php');
+         ?>
         <script>
          $(document).ready(function(){
                 $('.CartButton').on('click',function(){

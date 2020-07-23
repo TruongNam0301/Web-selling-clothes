@@ -41,6 +41,11 @@ class ClothesCtr{
         $Clothes = $ClothesMdl -> getBestSellClothes();
         include_once('../views/productPage/listbestsellclothes.php');
     }
+    public function getRelativeClothes($id){
+        $ClothesMdl = new ClothesMdl();
+        $Clothes = $ClothesMdl -> getRelativeClothes($id);
+        include_once('../views/productPage/listbestsellclothes.php');
+    }
 }
 
 ?>

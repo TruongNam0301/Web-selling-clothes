@@ -53,7 +53,6 @@ include_once('../models/UsersMdl.php');
         public function updateUserInfor(){
             if(isset($_POST['update-user-submit'])){
                 $file = $_FILES['file'];
-                print_r($file);
                 $fileName = $file['name'];
                 $fileTmpName = $file['tmp_name'];
                 $fileSize = $file['size'];

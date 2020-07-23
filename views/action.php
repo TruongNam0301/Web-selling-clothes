@@ -28,9 +28,7 @@
             $CartCtr->deleteFromCart($_POST['index']);
         }
     }
-    else if($_POST['action']=='bestsell'){
-        $ClothesCtr->getBestSell();
-    }
+    
     else if($_POST['action']=='check-user'){
         $AccountCtr = new AccountCtr();
         $AccountCtr ->checkAccountExist($_POST['username']);

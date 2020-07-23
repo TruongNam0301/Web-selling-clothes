@@ -48,6 +48,12 @@ class ClothesMdl {
 		$sql="SELECT * FROM clothes WHERE best_sell=1 LIMIT 4";
 		return $this->db->FetchAll($sql);
 	}
+	public function getRelativeClothes($id){
+		$countClothes=$this->db->NumRows("SELECT id FROM clothes");
+		$start= rand(1,$countClothes-4);
+		$sql="SELECT * FROM clothes WHERE id <> $id LIMIT $start, 4";
+		return $this->db->FetchAll($sql);
+	}
 }
 
 ?>

@@ -95,7 +95,11 @@
                          <div class='title-section' ><h2> best sale of shop</h2></div>
                         <div class="best-sale">
                             <div class='bestsell row'>
-                                
+                                <?php
+                                     include_once('../controllers/ClothesCtr.php');
+                                     $ClothesCtr = new ClothesCtr();
+                                     $ClothesCtr->getBestSell();
+                                ?>
                             </div>
                         </div>
                     </div>

@@ -2,19 +2,8 @@ if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready)
 } else {
     ready()
-}
-function loadBestSell (){
-        $.ajax({
-            url:'../views/action.php',
-            data: {action:'bestsell'},
-            type: 'POST',
-            success: function (value){
-                $('.bestsell').html(value);
-                }
-            })
-    }  
+} 
  function ready(){
-     loadBestSell();
      ChangeLoginRegister();
      OpenAndExitLogin();
      validateRegisterForm();
@@ -71,10 +60,11 @@ function loadBestSell (){
         rules: {
             "name":{
                 required: true,
+
             },
             "username": {
                 required: true,
-                maxlength: 15
+                email: true,
             },
             "password": {
                 required: true,
@@ -90,10 +80,8 @@ function loadBestSell (){
             "name":{
                 required: "* Bắt buộc nhập name",
             },
-            "username": {
-                required: "* Bắt buộc nhập username",
-                maxlength: "* Hãy nhập tối đa 15 ký tự"
-            },
+
+            "username": "* Bắt buộc nhập email",
             "password": {
                 required: "* Bắt buộc nhập password",
                 minlength: "* Hãy nhập ít nhất 4 ký tự"
