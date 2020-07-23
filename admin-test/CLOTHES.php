@@ -1,4 +1,5 @@
 <?php
+if (!isset($_SESSION)) session_start();
 include_once("../models/DataProvider.php");
 if(isset($_POST["update-clothes"])) {
     $file = $_FILES['file'];
@@ -154,7 +155,7 @@ if(isset($_POST["update-clothes"])) {
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="../templates">Return to main Page</a>
                     </div>
                 </li>
             </ul>

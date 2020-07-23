@@ -1,4 +1,5 @@
 <?php
+if (!isset($_SESSION)) session_start();
 include_once("../models/DataProvider.php");
 if(isset($_POST['action'])){
     $db=new DataProvider();
@@ -7,6 +8,9 @@ if(isset($_POST['action'])){
         $db->ExecuteQuery("UPDATE accounts SET lv=1 WHERE id=$id;");
     }
     if($_POST['action']=='demote'){
+        $db->ExecuteQuery("UPDATE accounts SET lv=0 WHERE id=$id;");
+    }
+    if($_POST['action']=='delete'){
         $db->ExecuteQuery("UPDATE accounts SET lv=0 WHERE id=$id;");
     }
 }
@@ -48,7 +52,7 @@ if(isset($_POST['action'])){
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="../templates">Return to main Page</a>
                     </div>
                 </li>
             </ul>
@@ -100,12 +104,13 @@ if(isset($_POST['action'])){
                                 echo "<td class='acc-username' >$user[username]</td>";
                                 if($user['lv']==1){
                                     echo "<td><button class='btn-promote btn btn-primary' disabled>PROMOTE</button>";
-                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' >DEMOTE</button></td>";
+                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' >DEMOTE</button>";
                                 }
                                 else{
                                     echo "<td><button class='btn-promote btn btn-primary' >PROMOTE</button>";
-                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' disabled>DEMOTE</button></td>";
+                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' disabled>DEMOTE</button>";
                                 }
+                                echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' ><i class='fas fa-ban'></i></button></td>";
                             echo "</tr>";
                             }
                         }                               
@@ -138,10 +143,21 @@ if(isset($_POST['action'])){
                     let div = $(this).parent().parent();
                     id=div.find('.acc-id').text();
                     name=div.find('.acc-username').text();
-                    var check = confirm("Are you sure to demote ' "+ name +" ' ?");
+                    var check = confirm("Are you sure to demote '"+ name +"' ?");
                     if(check==true){
                         $.post('',{id:id,action:'demote'},function(){
                         alert('demote success');
+                        location.reload();
+                    });
+                    }
+                })
+                $('.btn-delete').on('click',function(){
+                    let div = $(this).parent().parent();
+                    id=div.find('.acc-id').text();
+                    name=div.find('.acc-username').text();
+                    var check = confirm("Are you sure to delete '"+ name +"' ?");
+                    if(check==true){
+                        $.post('',{id:id,action:'delete'},function(){
                         location.reload();
                     });
                     }

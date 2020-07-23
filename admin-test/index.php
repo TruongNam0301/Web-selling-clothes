@@ -1,7 +1,5 @@
 <?php
-    if (!isset($_SESSION)) {
-        session_start();
-    }
+    if (!isset($_SESSION)) session_start();
     include_once("../models/DataProvider.php");
 ?>
 <!DOCTYPE html>

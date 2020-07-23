@@ -1,4 +1,5 @@
 <?php
+    if (!isset($_SESSION)) session_start();
     include_once('../controllers/BillsCtr.php');
     $BillsCtr = new BillsCtr();
     include_once("../controllers/BillsDetailCtr.php");
@@ -54,7 +55,7 @@
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="../templates">Return to main Page</a>
                     </div>
                 </li>
             </ul>
@@ -79,7 +80,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">edit tinh trang hoa don</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">EDIT</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -88,9 +89,9 @@
                         <form  method = 'post' action='?tt=<?php echo $_GET['tt']?>&&action=edit' enctype="multipart/form-data" id='form'>
                             <input type='hidden' name='MaHD'  id='MaHD' /><br/>
                             <input type="radio" class='check' name="tinhtrang" value="1">
-                            <label >xac nhan</label>
+                            <label >PAID</label>
                             <input type="radio" class='check' name="tinhtrang" value="0">
-                            <label >chua xac nhan</label><br>
+                            <label >UNPAID</label><br>
                             <div class="modal-footer" align="center" style="margin-top:20px">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <input type='submit'  name='update-clothes' class='btn-save btn btn-primary' value='save' />
@@ -115,14 +116,14 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>image user</th>
-                                                <th>name user</th>
-                                                <th>phone number</th>
-                                                <th>address</th>
-                                                <th>date buy</th>
-                                                <th>tinh trang</th>
-                                                <th>tong cong</th>
-                                                <th>button</th>
+                                                <th>AVATAR</th>
+                                                <th>USER'S NAME</th>
+                                                <th>PHONE NUMBER</th>
+                                                <th>ADDRESS</th>
+                                                <th>DATE BUY</th>
+                                                <th>STATUS</th>
+                                                <th>TOTAL</th>
+                                                <th>BUTTON</th>
                                             </tr>
                                         </thead>
                                        
