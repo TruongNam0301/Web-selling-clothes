@@ -44,11 +44,13 @@
     </div>
 <script>
     $(".button-logout").on('click',function(){
+       
         $.post('../views/homePage/logout.php',{action:'logout'},function(){
             $(".user").css("display", "none");
-            $(".login-regis").css("display", "block");
-            location.reload();
+            $(".login-regis").css("display", "none");
+            $(".login-regis-swapper").css("display", "none");
         });
+        location.reload();
     })
     $(".login-regis").css("display", "none");
     $(".exit-form-login").on('click',function(){
@@ -58,4 +60,5 @@
         $(".update-swapper").toggleClass('active-update-form');
     })
 </script>
+
 

@@ -1,9 +1,6 @@
 <?php
 include_once("DataProvider.php");
 class BillsMdl{
-    function __destruct(){
-        return $this->db->__destruct();
-    }
     public function getBills($tt){
         $db=new DataProvider();
         $sql="SELECT users.name, users.image, hoadon.MaHD, hoadon.sdt, hoadon.address, hoadon.date, hoadon.tinhtrang, hoadon.total FROM `hoadon` INNER JOIN users ON hoadon.id_user=users.id WHERE tinhtrang='$tt'";

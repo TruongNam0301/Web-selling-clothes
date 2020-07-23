@@ -1,10 +1,11 @@
-
-        <div class="col-lg-6 col-6">
+<div class='container'>
+    <div class="row">
+        <div class="col-md-6">
             <div class= 'image-product'>
             <img src="../image/image_product/<?php echo $product['picture']?>" width="500" height="600"/>
             </div>
         </div>
-        <div class="col-lg-6 col-6" style="color:#555756">
+        <div class="col-md-6" style="color:#555756">
             <div class= 'infor-product'>
                 <h1><?php echo $product['name']?></h1>
                 <h2>
@@ -20,7 +21,7 @@
                     Quot semper vivendo ad vix, qui ad diam lucilius repudiare. Autem voluptua ius id. Invenire antiopam qualisque ne per, ei vim legimus accusam, tale nulla vim ut. Sea at omnium utroque delectus. Vivendo voluptaria vix ex, ei mei nobis clita detracto.
                     </div>
                 </div>
-                <hr/>
+                <hr>
                 <div class="pickOptions">
                     <div style="display:flex;flex-direction:row; margin-bottom:10px">
                         <p style="margin-top:5px">so luong: </p>
@@ -39,4 +40,5 @@
                 <div class="CartButton"><button id="addToCartButton">ADD TO CART</button></div>
             </div>
         </div>
- 
+    </div>
+</div>

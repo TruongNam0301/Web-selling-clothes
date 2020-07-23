@@ -14,6 +14,20 @@
     <body>
     
     <?php include_once('menu_header.php');?>
+    <section class="section1">
+            <div class="background">
+                <div class="wall">
+                    <div class='name-link' style='font-size:50px'>Search</div>
+                    <div class='link'>
+                        <a href='home.php'> Home /</a>
+                        <a href='productsPage.php?type=1'> Clothing /</a>
+                        <a href='about.php'> About /</a>
+                        <a href='contact.php'> Contact /</a>
+                        <a href='#'> Search /</a>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div class="container">
             <div class="view-swap">
                 
@@ -34,8 +48,5 @@
         ?>
     </body>
    
-   
-   
-    
     <script src="../javascript/home.js"></script>
 </html>

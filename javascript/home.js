@@ -2,7 +2,8 @@ if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready)
 } else {
     ready()
-} 
+}
+
  function ready(){
      ChangeLoginRegister();
      OpenAndExitLogin();
@@ -60,11 +61,10 @@ if (document.readyState == 'loading') {
         rules: {
             "name":{
                 required: true,
-
             },
             "username": {
                 required: true,
-                email: true,
+                maxlength: 15
             },
             "password": {
                 required: true,
@@ -80,8 +80,10 @@ if (document.readyState == 'loading') {
             "name":{
                 required: "* Bắt buộc nhập name",
             },
-
-            "username": "* Bắt buộc nhập email",
+            "username": {
+                required: "* Bắt buộc nhập username",
+                maxlength: "* Hãy nhập tối đa 15 ký tự"
+            },
             "password": {
                 required: "* Bắt buộc nhập password",
                 minlength: "* Hãy nhập ít nhất 4 ký tự"

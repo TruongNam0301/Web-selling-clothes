@@ -12,8 +12,7 @@
         <link rel="stylesheet" type="text/css" href="../css/main-home.css">
     </head>
     <body>
-    <div class='all'>
-        <?php include_once('menu_header.php');?>
+    <?php include_once('menu_header.php');?>
             <section class="section1">
                 <div class="background">
                     <div class="wall">
@@ -33,7 +32,7 @@
                                 $TypeClothesCtr = new TypeClothesCtr();
                                 $TypeClothesCtr->getOneTypeClothes( $_GET['idType']);
                             ?>
-                                / </a>
+                             / </a>
                             <a href='#'> 
                             <?php 
                                 $productCtr = new productCtr();
@@ -43,7 +42,8 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </>
+            <div id='all'>
             <div class='container'>
                 <div class="row">
                     <?php
@@ -67,11 +67,11 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
 
         <?php
-            include_once('footer.php');
-         ?>
+             include_once('footer.php');
+        ?>
         <script>
          $(document).ready(function(){
                 $('.CartButton').on('click',function(){

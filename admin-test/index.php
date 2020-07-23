@@ -3,6 +3,32 @@
         session_start();
     }
     include_once("../models/DataProvider.php");
+    if(isset($_POST['promote-user'])){
+        $id=$_POST['pro-id'];
+        $user=$_POST['pro-name'];
+        $db=new DataProvider();
+        $sql="UPDATE accounts SET lv=1 WHERE id=$id";
+        $db->ExecuteQuery($sql);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_SESSION['postdata'] = $_POST;
+            unset($_POST);
+            header("Location: ".$_SERVER['PHP_SELF']);
+            exit;
+        }
+    }
+    if(isset($_POST['demote-user'])){
+        $id=$_POST['de-id'];
+        $user=$_POST['de-name'];
+        $db=new DataProvider();
+        $sql="UPDATE accounts SET lv=0 WHERE id=$id";
+        $db->ExecuteQuery($sql);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_SESSION['postdata'] = $_POST;
+            unset($_POST);
+            header("Location: ".$_SERVER['PHP_SELF']);
+            exit;
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,13 +83,11 @@
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Clothes:     
-                                        <?php
-                                        $db=new DataProvider();
-                                        $countClothes=$db->NumRows("SELECT * FROM clothes");
-                                        echo $countClothes;
-                                        ?> 
-                                    </div>
+                                    <div class="card-body">Clothes: <?php
+                                                                        $db=new DataProvider();
+                                                                        $countClothes=$db->NumRows("SELECT * FROM clothes");
+                                                                        echo $countClothes;
+                                                                        ?> </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="CLOTHES.php">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -105,21 +129,13 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Người dùng liên hệ:
-                                    <?php 
-                                            $db=new DataProvider();
-                                            $sql="SELECT * FROM `contact`" ;
-                                            $num=$db->NumRows($sql);
-                                            echo $num;
-                                    ?>
-                                    </div>
+                                    <div class="card-body">Danger Card</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="contact.php">View Details</a>
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
-                          
                         </div>
                         
         
@@ -151,6 +167,63 @@
     </body>
 </html>
 
+<div id="PromoteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">PROMOTION</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+      </div>
+      <div class="modal-body">
+        <form  method = 'post' action='' enctype="multipart/form-data" >
+            <input type="hidden" name="pro-id" id="pro-id" />
+            <h4>Are you sure want to promote <b><span id="pro-user"></span></b> ?</h4>
+            <input type='hidden' name='pro-name'  id='pro-name'/><br/>
+            <div align="center">  
+                
+                <input type='submit'  name="promote-user" class="btn-pro btn btn-primary" value='YES' />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+            </div>  
+            
+        </form>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+
+<div id="DemoteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">PROMOTION</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+      </div>
+      <div class="modal-body">
+        <form  method = 'post' action='' enctype="multipart/form-data" >
+            <input type="hidden" name="de-id" id="de-id" />
+            <h4>Are you sure want to demote <b><span id="de-user"></span></b> ?</h4>
+            <input type='hidden' name='de-name'  id='de-name'/><br/>
+            <div align="center">  
+                
+                <input type='submit'  name="demote-user" class="btn-de btn btn-primary" value='YES' />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+            </div>  
+            
+        </form>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
 <script>
     $(document).ready(function(){
         $('.btn-promote').on('click',function(){

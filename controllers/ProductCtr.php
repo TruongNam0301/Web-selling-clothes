@@ -11,5 +11,6 @@ class ProductCtr{
         $product = $ProductMdl->getProduct($id);
         echo $product['name'];
     }
+    
 }
 ?>

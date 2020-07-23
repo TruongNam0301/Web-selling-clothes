@@ -8,10 +8,9 @@
                 <a href='../templates/productDetail.php?idType=$cloth[id_type]&&id=$cloth[id]'>
                     <div class='pic'>  
                         <img src='../image/image_product/$cloth[picture]' class='item'  >
-                        
-                    </div>
-                    <div class='view-detail-best-sell' style=' z-index: -1;'> 
+                        <div class='view-detail-best-sell' style=' z-index: -1;'> 
                             <b >View Detail</b> 
+                        </div>
                     </div>
                     <div class='frames' style=' '>
                         <p class='item-title' style='font-size: large;color:#575652;transform: translate(0px,10px);'>$cloth[name]</p>

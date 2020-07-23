@@ -2,12 +2,8 @@
     include_once("DataProvider.php");
     class AccountMdl{
         private $db;
-
         function __construct(){
             $this->db = new DataProvider(); 
-        }
-        function __destruct(){
-            return $this->db->__destruct();
         }
         public function checkAccount($username,$password){
             $sql = "SELECT * FROM `accounts` WHERE username='$username'";
@@ -41,13 +37,11 @@
             }
             return 1;
         }
-        public function updatePass($pass,$id){
-            $password = password_hash($pass, PASSWORD_BCRYPT, array('cost'=>12));
-            $sql = "UPDATE `accounts` SET password='$password' WHERE id='$id'";
+        public function updatePass($password,$id){
+            $pass = password_hash($password, PASSWORD_BCRYPT, array('cost'=>12));
+            $sql = "UPDATE `accounts` SET password='$pass' WHERE id='$id'";
             $this->db->ExecuteQuery($sql);
         }
     }
-
-
 
 ?>

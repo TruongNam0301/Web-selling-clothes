@@ -241,7 +241,6 @@ if(isset($_POST['action'])){
                             }
                         });
                     }
-                    
                 })
                 
             </script>

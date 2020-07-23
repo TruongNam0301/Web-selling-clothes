@@ -1,4 +1,4 @@
-<<?php
+<?php
 class DataProvider
 {
 	private $link;//bien ket noi csdl
@@ -30,13 +30,22 @@ class DataProvider
 			return 1;
 		}
 	}
-	
+	function ExecuteQueryInsert($sql)
+	{
+		$result=$this->link->execute($sql);
+		if($result > 0)
+		{
+			return $this->link->lastInsertId();// tra ve id vua moi insert
+		}
+		else
+			return 0;
+	}
 	
 	function Fetch($sql)
 	{
 		$db=$this->link->prepare($sql);
 		$db->execute();
-		$result=$db->fetchAll(PDO::FETCH_ASSOC);
+		$result=$db->fetch(PDO::FETCH_ASSOC);
 		 return $result;
 	}
 	function NumRows($sql)
@@ -49,7 +58,7 @@ class DataProvider
 	{
 		$db=$this->link->prepare($sql);
 		$db->execute();
-		$result=$db->fetchAll(PDO::FETCH_ASSOC);
+		$result=$db->fetchAll(\PDO::FETCH_ASSOC);
 		return $result;
 	}
 	function __destruct()

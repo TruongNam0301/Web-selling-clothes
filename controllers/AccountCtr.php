@@ -53,6 +53,7 @@ include_once('../models/UsersMdl.php');
         public function updateUserInfor(){
             if(isset($_POST['update-user-submit'])){
                 $file = $_FILES['file'];
+                print_r($file);
                 $fileName = $file['name'];
                 $fileTmpName = $file['tmp_name'];
                 $fileSize = $file['size'];
@@ -108,7 +109,15 @@ include_once('../models/UsersMdl.php');
             }
             else {
                 $id=$Account['id'];
-                include_once('../views/homePage/forgot-pass.php');
+                $str=<<<EOD
+                <form class='forgot-content' action='' method ='post'>
+                    <input type='hidden' name="id" value=$id>
+                    <input type="password"  name="new-password" class='text-input ' id='new-password' placeholder="PASSWORD">
+                    <input type="password"  name="re-new-password" class='text-input' id='re-new-password' class="cf-password" placeholder="PASSWORD">
+                    <input type="submit"  name="update-pass-submit" class="update-pass-button" value="update">
+                </form>
+EOD;
+ echo $str;
             }
         }
         public function updatePass(){

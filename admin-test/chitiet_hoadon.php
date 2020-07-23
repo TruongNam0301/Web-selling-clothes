@@ -60,16 +60,8 @@
                         <div class="card mb-4">
                             <div class="card-header" >
                                 <i class="fas fa-table mr-1"></i>
-                                Product Detail
-                                <div style="float:right">
-                                    <form action="print.php" method="post">
-                                        <input type="hidden" name="id_of_user" value="<?php echo $_GET['MaHD'] ?>">
-                                    <button style="submit" name="print" value="PRINT" class='btn-print btn btn-success'><i class="fas fa-print"></i>
-                                    PRINT </button>
-                                    </form>
-                                </div>
+                                Product List
                             </div>
-                           
                             <div class="card-body">
                                 <div class="table-responsive"  id='clothes_table'>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -116,10 +108,10 @@
                 </footer>
             </div>
         </div>
-        <script>if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    } 
-    </script>
+        <script>
+            if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );} 
+        </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
        

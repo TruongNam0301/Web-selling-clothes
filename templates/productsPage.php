@@ -14,24 +14,24 @@
     <body>
     <?php include_once('menu_header.php');?>
     <section class="section1">
-        <div class="background">
-            <div class="wall">
-                <div class='name-link' style='font-size:50px'>
-                <?php
-                include_once('../controllers/TypeCtr.php') ;
-                $TypeCtr = new TypeCtr();
-                $Type = $TypeCtr->getOneType( $_GET['type']);
-                ?></div>
-                <div class='link'>
-                    <a href='home.php'> Home /</a>
-                    <a href='#'> Clothing /</a>
-                    <a href='#'> <?php  ;
-                $TypeCtr = new TypeCtr();
-                $Type = $TypeCtr->getOneType( $_GET['type']);?></a>
+                <div class="background">
+                    <div class="wall">
+                        <div class='name-link' style='font-size:50px'>
+                        <?php
+                        include_once('../controllers/TypeCtr.php') ;
+                        $TypeCtr = new TypeCtr();
+                        $Type = $TypeCtr->getOneType( $_GET['type']);
+                        ?></div>
+                        <div class='link'>
+                            <a href='#'> Home /</a>
+                            <a href='#'> Clothing /</a>
+                            <a href='#'> <?php  ;
+                        $TypeCtr = new TypeCtr();
+                        $Type = $TypeCtr->getOneType( $_GET['type']);?></a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -42,6 +42,7 @@
                                 <label>all</label>
                             </div>
                             <?php
+                          
                             include_once('../controllers/TypeClothesCtr.php');
                             $ClothesCtr = new TypeClothesCtr();
                             $ClothesCtr->getTypeClothes();
@@ -51,7 +52,15 @@
                 </div>
 
                 <div class="col-lg-9">
-          
+                    <div class="view-swap">
+                        <div class="choice-display">
+                            <div class="icon grid-icon">
+                                <i class="fas fa-th fa-lg "></i>
+                            </div>
+                            <div class= "icon list-icon">
+                                <i class="fas fa-list fa-lg"></i>
+                            </div>
+                        </div>
                 <!--grid-view-->
                         <div class="product-gridview">
                         </div>
