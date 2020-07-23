@@ -5,8 +5,8 @@ $db=new DataProvider();
 if(isset($_POST['action'])){
     if($_POST['action']==='delete'){
     $db=new DataProvider();
-    $delete_id = $_POST["id"];
-    $sql = "UPDATE typeclothes SET type=-1 WHERE type=$delete_id;DELETE FROM types WHERE id=$delete_id ; SET @num := 0; UPDATE types SET id = @num := (@num+1); ALTER TABLE types AUTO_INCREMENT = 1";
+    $delete_id = $_POST["stt"];
+    $sql = "DELETE FROM contact WHERE id_user=$delete_id ; SET @num := 0; UPDATE contact SET stt = @num := (@num+1); ALTER TABLE contact AUTO_INCREMENT = 1";
     $db->ExecuteMultiQuery($sql);
 }
 }
@@ -119,13 +119,13 @@ if(isset($_POST['action'])){
                         <?php 
                            include_once("../models/DataProvider.php");
                             $db=new DataProvider();
-                            $sql="SELECT contact.stt, accounts.username, users.name, contact.string FROM contact INNER JOIN users on users.id=contact.id_user INNER JOIN accounts on users.id=accounts.id";
+                            $sql="SELECT contact.stt, accounts.username, users.name,contact.id_user, contact.string FROM contact INNER JOIN users on users.id=contact.id_user INNER JOIN accounts on users.id=accounts.id";
                             $array=$db->FetchAll($sql);
                             foreach($array as $contact){
                                 echo "<tr>";
                                     echo "<td class='stt'>$contact[stt]</td>";
                                     echo "<td class='username' data-string=$contact[string]> $contact[username] </td>";
-                                    echo "<td class='name'>$contact[name]</td>";
+                                    echo "<td class='name' data-id_user=$contact[id_user]>$contact[name]</td>";
                                     echo "<td><button class='btn-view btn btn-primary' data-toggle='modal' data-target='#exampleModal'>VIEW</button>";
                                     echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
                                 echo "</tr>";
@@ -155,11 +155,11 @@ if(isset($_POST['action'])){
                     })
                     $('.btn-delete').on('click',function(){
                             let div = $(this).parent().parent();
-                            stt=div.find('.stt').text();
+                            stt = div.find('.name').data('id_user');
                             name=div.find('.name').text();
                             var check = confirm("Are you sure to delete this contact ?");
                             if(check==true){
-                                $.post('',{id:id,action:'delete'},function(){
+                                $.post('',{stt:stt,action:'delete'},function(){
                                     location.reload();
                                     alert('delete success')
                                 });

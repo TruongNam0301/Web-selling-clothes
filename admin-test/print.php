@@ -4,7 +4,7 @@ $db=new DataProvider;
 if(isset($_POST['print'])){
     
     $sql="SELECT clothes.id, clothes.name, clothes.price, chitiet_hoadon.soluong, chitiet_hoadon.size,hoadon.tinhtrang,hoadon.date  FROM chitiet_hoadon INNER JOIN clothes ON chitiet_hoadon.id_cloth=clothes.id INNER JOIN hoadon ON chitiet_hoadon.MaHD=hoadon.MaHD
-    WHERE hoadon.id_user=$_POST[id_of_user]";
+    WHERE hoadon.MaHD=$_POST[id_of_user]";
     
     if($db->NumRows($sql)){
         $delimiter = ",";

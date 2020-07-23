@@ -32,23 +32,24 @@
     padding: 20px 18px;
     Outline: none;
 }
-.view-detail {
-
+.view-detail-best-sell {
+    z-index: -1;
     text-transform: uppercase;
     height: 30px;
     transition: .5s ease;
-    opacity: 1;
+    opacity: 0;
     text-align: center;
     transition-timing-function: ease;
     transform: translate(0px,30px);
 }
-.product:hover .view-detail {
+.product-bestsell:hover .view-detail-best-sell {
    
     transform: translate(0px,0px);
     color: azure;
     background-color: #333;
     opacity: 1;
 }
+
 .square {
     float:left;
     position: relative;
