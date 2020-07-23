@@ -7,7 +7,7 @@
               <div class='product sanpham'>
               <a href='../templates/productDetail.php?idType=$cloth[id_type]&&id=$cloth[id]'>
                   <div class='image-item'>
-                      <img src='../image/image_product/$cloth[picture]' class='item' style='z-index:-1' >
+                      <img src='../image/image_product/$cloth[picture]' class='item'  >
                       <div class='view-detail' >
                           <b>View Detail</b>
                     </div>

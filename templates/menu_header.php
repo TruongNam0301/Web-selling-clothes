@@ -237,9 +237,10 @@ $AccountCtr->updatePass();
               <th>BOUGHT AT</th>
             </tr>
             <?php
+                $user=$_SESSION['user']['id'];
                 $db=new DataProvider;
                 $sql="SELECT clothes.id, clothes.name, clothes.price, chitiet_hoadon.soluong, chitiet_hoadon.size,hoadon.tinhtrang,hoadon.date  FROM chitiet_hoadon INNER JOIN clothes ON chitiet_hoadon.id_cloth=clothes.id INNER JOIN hoadon ON chitiet_hoadon.MaHD=hoadon.MaHD
-                WHERE hoadon.id_user=$user[id]";
+                WHERE hoadon.id_user=$user";
                 $array=$db->FetchAll($sql);
                 $i=1;
                 foreach($array as $bill){
@@ -265,12 +266,6 @@ $AccountCtr->updatePass();
         <button type="button" class="btn btn-danger" data-dismiss="modal">
           CLOSE
         </button>
-        <form method="post" action="print.php">
-            <input type="hidden" name="id_of_user" value=<?php echo $user['id'] ?>>
-            <button type="submit" class="btnPrint btn-warning" name="print">
-            PRINT 
-            </button>
-        </form>    
       </div>
     </div>
   </div>
