@@ -6,8 +6,44 @@ $AccountCtr->register();
 $AccountCtr->updateUserInfor();   
 $AccountCtr->updatePass();
 ?>
-  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-<html>  
+<?php
+  if(isset($_POST['yes'])){
+      $id = $_SESSION['user']['id'];
+      $sdt = $_POST['sdt'];
+      $address = $_POST['address'];
+      date_default_timezone_set('Asia/Ho_Chi_Minh');
+      $date = date('m/d/Y h:i:s a', time());
+      $total = $_POST['total'];
+      $tinhtrang = 0;
+      include_once("../models/DataProvider.php");
+      $db= new DataProvider();
+      $sql="INSERT INTO `hoadon` (`MaHD`, `id_user`, `sdt`, `address`, `tinhtrang`, `date`,`total` ) VALUES(null,$id,'$sdt','$address',$tinhtrang,'$date',$total)";
+      $lastId=$db->ExecuteQueryInsert($sql);
+      foreach( $_SESSION['cart'] as $item){
+          $id=$item['id'];
+          $soluong = $item['quantity'];
+          $size= $item['size'];
+          $maHD = $lastId;
+          $sql2="INSERT INTO `chitiet_hoadon` (`SoHD`, `MaHD`, `id_cloth`, `soluong`, `size`) VALUES (null, $maHD, $id, $soluong, '$size')";
+          $db->ExecuteQuery($sql2);  
+      }
+      unset($_SESSION['cart']);
+     
+  }
+?>    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/65adf3fa6d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ 
+    <link rel="stylesheet" type="text/css" href="../css/product-page.css">
+    <link rel="stylesheet" type="text/css" href="../css/menubar.css">
+    <link rel="stylesheet" type="text/css" href="../css/menu-mobile.css">
+    <link rel="stylesheet" type="text/css" href="../css/main-home.css">
+    <script src="../javascript/home.js"></script>
+    <html>  
     <div class="header" >
     <div class="mg-left-right " >
         <div class="row">
@@ -80,6 +116,7 @@ $AccountCtr->updatePass();
         </div>
     </div>
 </div>
+  <!--modal-->  
 
 <!--login-->
 <div class="login-regis-swapper">
@@ -204,12 +241,11 @@ $AccountCtr->updatePass();
     }
     $(document).ready(function() {
     $('#dataTable').DataTable();
-    
     });
 
 </script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 </html>
-
 <div id="ViewModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="classInfo" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -220,8 +256,9 @@ $AccountCtr->updatePass();
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
           ×
         </button>
-       
+     
       </div>
+    
       <div class="modal-body">
         <table id="classTable" class="table table-bordered">
           <thead>
@@ -270,3 +307,4 @@ $AccountCtr->updatePass();
     </div>
   </div>
 </div>
+

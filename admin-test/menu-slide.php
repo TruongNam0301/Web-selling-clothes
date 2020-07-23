@@ -18,12 +18,12 @@
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <?php
-                        
-                           if( $_SESSION['user']['id']==-1){
-                               
-                                echo "<a class='nav-link' href='ACCOUNT.php'>ACCOUNT MANAGE</a>";
-                           }
-                            
+                            if(isset($_SESSION['user']['id']))   {             
+                                if( $_SESSION['user']['id']==-1){
+                                
+                                    echo "<a class='nav-link' href='ACCOUNT.php'>ACCOUNT MANAGE</a>";
+                                }
+                            }
                         ?>
                         <a class="nav-link" href="TYPES.php">TYPES</a>
                         <a class="nav-link" href="TYPESCLOTHES.php">TYPESCLOTHES</a>

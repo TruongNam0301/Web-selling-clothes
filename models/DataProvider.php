@@ -4,66 +4,55 @@ class DataProvider
 	private $link;//bien ket noi csdl
 	function __construct()
 	{
-		$this->link=mysqli_connect("localhost","root","","sellclothes");
+		$this->link = new PDO("mysql:host=localhost;dbname=sellclothes",'root','');
+		$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	
 	}
 	function ExecuteQuery($sql)
 	{
-		mysqli_query($this->link,"set names 'utf8'");
-		return mysqli_query($this->link, $sql);
+		$db=$this->link->prepare($sql);
+		return $db->execute();
 	}
 	function ExecuteMultiQuery($sql){
-		if ($this->link->multi_query($sql)) {
-			do {
-				/* store first result set */
-				if ($result = $this->link->store_result()) {
-					while ($row = $result->fetch_row()) {
-						printf("%s\n", $row[0]);
-					}
-					$result->free();
-				}
-				/* print divider */
-				if ($this->link->more_results()) {
-					printf("-----------------\n");
-				}
-			} while ($this->link->next_result());
-			return 1;
-		}
+		$stmt   = $db->query($sql);
+		$r=$stmt->nextRowset();
+		if($r)
+			return $r;
+		else
+			return -1;
+		
 	}
 	function ExecuteQueryInsert($sql)
 	{
-		$result=$this->ExecuteQuery($sql);
-		if($result > 0)
-		{
-			return mysqli_insert_id($this->link);// tra ve id vua moi insert
-		}
-		else
-			return 0;
+		$db=$this->link->prepare($sql);
+		$db->execute();
+		$result=$db->lastInsertId();
+		 return $result;
 	}
 	
 	function Fetch($sql)
 	{
-		$result=$this->ExecuteQuery($sql);
-		return mysqli_fetch_assoc($result);
+		$db=$this->link->prepare($sql);
+		$db->execute();
+		$result=$db->fetch(PDO::FETCH_ASSOC);
+		 return $result;
 	}
 	function NumRows($sql)
 	{
-		$result=$this->ExecuteQuery($sql);
-		return mysqli_num_rows($result);
+		$stmt=$this->link->query($sql);
+		$stmt->execute();
+		return $stmt->rowCount();
 	}
 	function FetchAll($sql)
 	{
-		$result=$this->ExecuteQuery($sql);
-		$arr=array();
-		while($row=mysqli_fetch_assoc($result))
-		{
-			$arr[]=$row;
-		}
-		mysqli_free_result($result);
-		return $arr;
+		$db=$this->link->prepare($sql);
+		$db->execute();
+		$result=$db->fetchAll(\PDO::FETCH_ASSOC);
+		return $result;
 	}
 	function __destruct()
 	{
-		mysqli_close($this->link);
+		$this->link=null;
 	}
 }
 ?>
