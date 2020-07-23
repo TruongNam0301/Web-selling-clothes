@@ -6,6 +6,9 @@
         function __construct(){
             $this->db = new DataProvider(); 
         }
+        function __destruct(){
+            return $this->db->__destruct();
+        }
         public function checkAccount($username,$password){
             $sql = "SELECT * FROM `accounts` WHERE username='$username'";
 		    if($this->db->NumRows($sql) >0){

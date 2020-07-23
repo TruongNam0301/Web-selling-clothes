@@ -6,7 +6,7 @@ $AccountCtr->register();
 $AccountCtr->updateUserInfor();   
 $AccountCtr->updatePass();
 ?>
-  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <html>  
     <div class="header" >
     <div class="mg-left-right " >
@@ -55,7 +55,7 @@ $AccountCtr->updatePass();
                     <div class="icon-search">
                     <i onclick="displayONOFF('search-swapper')" class="fas fa-search fa-lg"></i>
                     <div class="search-swapper" style="display: none;">
-                    <form  method='POST' class="search-content" action="search.php">
+                        <form  method='POST' class="search-content" action="search.php">
                             <div class="search">
                                 <input type="text" name="search-key"style="height:30px;" >
                                 <button type="submit" id="search-button" class="btn btn-danger" >SEARCH</button>
@@ -199,9 +199,7 @@ $AccountCtr->updatePass();
     </div>  
 </div>
 <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
+    
     $(document).ready(function() {
     $('#dataTable').DataTable();
     

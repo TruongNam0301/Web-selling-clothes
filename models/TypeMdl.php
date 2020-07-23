@@ -6,6 +6,9 @@
         function __construct(){
             $this->db = new DataProvider(); 
         }
+        function __destruct(){
+            return $this->db->__destruct();
+        }
         public function getType(){
                         
           

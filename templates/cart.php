@@ -106,7 +106,9 @@
     </div>
   </div>
 </div>
-
+    <?php
+     include 'footer.php';
+    ?>
     </body>
     <script src="../javascript/home.js"></script>
     <script src="../javascript/cart.js"></script>
@@ -183,9 +185,11 @@
             }
         })
         $('#form-buy').on('submit',function(){
-              
+            
             var check = confirm("Are you sure to buy ?");
-          return check;
+            if(check){
+                location.reload();
+            }
         })
     })
 </script>       

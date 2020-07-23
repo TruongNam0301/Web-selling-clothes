@@ -5,6 +5,9 @@
         function __construct(){
             $this->db = new DataProvider(); 
         }
+        function __destruct(){
+          return $this->db->__destruct();
+      }
         public function getUserById($id){
             
             $sql = "SELECT users.id,users.name,accounts.lv,users.image FROM users INNER JOIN accounts on users.id=accounts.id WHERE users.id=$id";

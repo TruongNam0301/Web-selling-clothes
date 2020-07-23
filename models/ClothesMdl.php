@@ -6,7 +6,9 @@ class ClothesMdl {
 	function __construct(){
 		$this->db = new DataProvider(); 
 	}
-
+	function __destruct(){
+		return $this->db->__destruct();
+	}
     public function getClothes($page,$num,$limit,$type){
     	$start = ($page-1)*$num;
 		$sql = "SELECT clothes.id ,clothes.id_type,clothes.name,clothes.price,clothes.picture FROM clothes INNER JOIN typeclothes on clothes.id_type=typeclothes.id_type INNER JOIN types ON typeclothes.type=types.id where types.id=$type LIMIT $start,$limit";

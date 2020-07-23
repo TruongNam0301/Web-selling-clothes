@@ -12,7 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../css/main-home.css">
     </head>
     <body>
-    <?php include_once('menu_header.php');?>
+    <div class='all'>
+        <?php include_once('menu_header.php');?>
             <section class="section1">
                 <div class="background">
                     <div class="wall">
@@ -32,10 +33,9 @@
                                 $TypeClothesCtr = new TypeClothesCtr();
                                 $TypeClothesCtr->getOneTypeClothes( $_GET['idType']);
                             ?>
-                             / </a>
+                                / </a>
                             <a href='#'> 
                             <?php 
-                                include_once('../controllers/TypeClothesCtr.php');
                                 $productCtr = new productCtr();
                                 $productCtr->getName( $_GET['id']);
                             ?>
@@ -44,7 +44,6 @@
                     </div>
                 </div>
             </section>
-        <div id='all'>
             <div class='container'>
                 <div class="row">
                     <?php
@@ -68,7 +67,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
 
         <?php
             include_once('footer.php');
