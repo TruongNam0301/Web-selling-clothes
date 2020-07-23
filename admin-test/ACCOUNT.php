@@ -11,7 +11,15 @@ if(isset($_POST['action'])){
         $db->ExecuteQuery("UPDATE accounts SET lv=0 WHERE id=$id;");
     }
     if($_POST['action']=='delete'){
-        $db->ExecuteQuery("UPDATE accounts SET lv=0 WHERE id=$id;");
+       
+        $db->ExecuteMultiQuery("DELETE chitiet_hoadon FROM chitiet_hoadon INNER JOIN hoadon on chitiet_hoadon.MaHD=hoadon.MaHD where hoadon.id_user=$id;
+                                DELETE FROM contact WHERE id_user=$id;
+                                SET @num := 0; 
+                                UPDATE contact SET stt = @num := (@num+1); 
+                                ALTER TABLE contact AUTO_INCREMENT = 1;
+                                DELETE FROM hoadon WHERE id_user=$id;
+                                DELETE FROM users WHERE id=$id;
+                                DELETE FROM accounts WHERE id=$id;");
     }
 }
 ?>
