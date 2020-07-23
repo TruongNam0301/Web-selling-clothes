@@ -19,5 +19,11 @@ class BillsMdl{
         $sql = "DELETE FROM `hoadon` WHERE MaHD='$MaHD'";
         $db->ExecuteQuery($sql);
     }
+    public function insertBills($id,$sdt,$address,$tinhtrang,$date,$total){
+        $db=new DataProvider();
+        $sql="INSERT INTO `hoadon` (`MaHD`, `id_user`, `sdt`, `address`, `tinhtrang`, `date`,`total` ) VALUES(null,$id,'$sdt','$address',$tinhtrang,'$date',$total)";
+        $lastId=$db->ExecuteQueryInsert($sql);
+        return $lastId;
+    }
 }
 ?>

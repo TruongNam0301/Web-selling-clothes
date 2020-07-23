@@ -12,5 +12,10 @@
             $BillsDetailMdl=new BillsDetailMdl();
             $BillsDetailMdl ->deleteBillsDetail($MaHD);
         }
+
+        public function insertBillsDetail($maHD, $id, $soluong, $size){
+            $BillsDetailMdl=new BillsDetailMdl();
+            $BillsDetailMdl ->insertBillsDetail($maHD, $id, $soluong, $size);
+        }
     }
 ?>

@@ -10,7 +10,7 @@ class DataProvider
 	}
 	function ExecuteQuery($sql)
 	{
-		return $this->link->query($sql);
+		return $this->link->exec($sql);
 	}
 	function ExecuteMultiQuery($sql){
 		if ($this->link->multi_query($sql)) {
@@ -31,14 +31,11 @@ class DataProvider
 		}
 	}
 	function ExecuteQueryInsert($sql)
-	{
-		$result=$this->link->execute($sql);
-		if($result > 0)
-		{
-			return $this->link->lastInsertId();// tra ve id vua moi insert
-		}
-		else
-			return 0;
+	{	
+			$this->link->exec($sql);
+			$id= $this->link->lastInsertId();// tra ve id vua moi insert
+			return $id;
+		
 	}
 	
 	function Fetch($sql)
