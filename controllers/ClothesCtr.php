@@ -8,17 +8,17 @@ class ClothesCtr{
     } 
     public function getClothesByType ($val,$page,$num,$limit,$sort){
         $ClothesMdl = new ClothesMdl();
-        $Clothes = $ClothesMdl -> getClothesByType($val,$page,$num,$limit);
+        $Clothes = $ClothesMdl -> getClothesByType($val,$page,$num,$limit,$sort);
         include_once('./views/productPage/listclothes.php');
     }
     public function getNumRows($limit,$type,$sort){
         $ClothesMdl = new ClothesMdl();
-        $NumRows = $ClothesMdl -> getNumRows($type);
+        $NumRows = $ClothesMdl -> getNumRows($type,$sort);
         include_once('./views/productPage/pagination.php');
     }
     public function getNumRowsById($val,$limit,$type,$sort){
         $ClothesMdl = new ClothesMdl();
-        $NumRows = $ClothesMdl -> getNumRowsById($val);
+        $NumRows = $ClothesMdl -> getNumRowsById($val,$sort);
         include_once('./views/productPage/pagination.php');
     }
     public function Search($key,$sort){

@@ -53,14 +53,19 @@
 			</div>
 			<div class="col-lg-9">
 				<div class="view-swap">
-					<div class="choice-display">
-						<div class="icon grid-icon">
-							<i class="fas fa-th fa-lg"></i>
-						</div>
-						<div class="icon list-icon">
-							<i class="fas fa-list fa-lg"></i>
-						</div>
-					</div><!--grid-view-->
+				<div class="choice-display">
+				<div class="dropdown show">
+					<a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Sort
+					</a>
+
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href='productsPage.php?type=<?php echo $_GET['type']?>&&sort=0'style="border-bottom:1px solid black"><i class="fas fa-caret-down "> Giá từ thấp đến cao</i></a>
+						<a class="dropdown-item" href='productsPage.php?type=<?php echo $_GET['type']?>&&sort=1'><i class="fas fa-caret-up "> Giá từ cao đến thấp</i></a>
+					</div>
+				</div>
+                            
+                        </div><!--grid-view-->
 					<div class="product-gridview"></div>
 				</div>
 			</div>
@@ -72,14 +77,20 @@
 	<script>
 	   
 	       function loadData (val=0,page=1,type){
-	           $.ajax({
-	                   url:'./action.php',
-	                   data: {type:val,page:page,action:'show',num:4,limit:15,idType:type},
-	                   type: 'POST',
-	                   success: function (value){
-	                       $('.product-gridview').html(value);
-	                   }
-	               })
+				sort=<?php if(isset($_GET['sort'])) 
+								echo $_GET['sort']; 
+							else 
+								echo -1;
+						?>;
+				$.ajax({
+						url:'./action.php',
+						data: {type:val,page:page,action:'show',num:4,limit:15,idType:type,sort:sort},
+						type: 'POST',
+						success: function (value){
+
+							$('.product-gridview').html(value);
+						}
+					})
 	       }  
 
 	       $(document).ready(function(){

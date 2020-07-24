@@ -8,7 +8,7 @@ class ClothesMdl {
 	}
 
     public function getClothes($page,$num,$limit,$type,$sort){
-    	$start = ($page-1)*$num;
+    	$start = ($page-1)*$limit;
 		$sql = "SELECT clothes.id ,clothes.id_type,clothes.name,clothes.price,clothes.picture FROM clothes INNER JOIN typeclothes on clothes.id_type=typeclothes.id_type INNER JOIN types ON typeclothes.type=types.id where types.id=$type ";
 		if($sort==0){
 			$sql .="ORDER BY price ASC";
@@ -22,7 +22,7 @@ class ClothesMdl {
 		}
 	} 
 	public function getClothesByType($val,$page,$num,$limit,$sort){
-		$start = ($page-1)*$num;
+		$start = ($page-1)*$limit;
 		$sql = "SELECT * FROM clothes WHERE id_type = $val ";
 		if($sort==0){
 			$sql .="ORDER BY price ASC";
