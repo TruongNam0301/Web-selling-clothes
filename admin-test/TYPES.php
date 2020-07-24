@@ -15,7 +15,7 @@ if(isset($_POST['action'])){
     if($_POST['action']==='delete'){
     $db=new DataProvider();
     $delete_id = $_POST["id"];
-    $sql = "UPDATE typeclothes SET type=-1 WHERE type=$delete_id;DELETE FROM types WHERE id=$delete_id ; SET @num := 0; UPDATE types SET id = @num := (@num+1); ALTER TABLE types AUTO_INCREMENT = 1";
+    $sql = "UPDATE typeclothes SET type=-1 WHERE type=$delete_id;DELETE FROM types WHERE id=$delete_id ;";
     $db->ExecuteMultiQuery($sql);
 }
 }
@@ -152,14 +152,16 @@ if(isset($_POST['action'])){
                             $db=new DataProvider();
                             $sql="SELECT * FROM types";
                             $array=$db->FetchAll($sql);
+                            $i=1;
                             foreach($array as $type){
                                 if($type['id']>0){
                                 echo "<tr>";
-                                    echo "<td class='id'>$type[id]</td>";
+                                    echo "<td class='id' data-id=$type[id]>$i</td>";
                                     echo "<td class='name' >$type[nametype]</td>";
                                     echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
                                     echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
                                 echo "</tr>";
+                                $i++;
                                 }
                             }                               
                             ?>
@@ -177,14 +179,14 @@ if(isset($_POST['action'])){
                     validateForm();
                     $('.btn-edit').on('click',function(){   
                         let div = $(this).parent().parent();
-                        id=div.find('.id').text();
+                        id=div.find('.id').data('id');
                         name=div.find('.name').text();
                         $('#name').val(name);
                         $('#id').val(id);
                     })
                     $('.btn-delete').on('click',function(){
                             let div = $(this).parent().parent();
-                            id=div.find('.id').text();
+                            id=div.find('.id').data('id');
                             name=div.find('.name').text();
                             var check = confirm("Are you sure to delete "+ name +" ?");
                             if(check==true){

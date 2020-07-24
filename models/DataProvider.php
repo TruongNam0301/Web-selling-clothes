@@ -4,66 +4,66 @@ class DataProvider
 	private $link;//bien ket noi csdl
 	function __construct()
 	{
-		$this->link=mysqli_connect("localhost","root","","sellclothes");
+		$this->link = new PDO("mysql:host=localhost;dbname=sellclothes",'root','');
+		$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	
 	}
 	function ExecuteQuery($sql)
 	{
-		mysqli_query($this->link,"set names 'utf8'");
-		return mysqli_query($this->link, $sql);
+		$db=$this->link->prepare($sql);
+		return $db->execute();
 	}
 	function ExecuteMultiQuery($sql){
-		if ($this->link->multi_query($sql)) {
-			do {
-				/* store first result set */
-				if ($result = $this->link->store_result()) {
-					while ($row = $result->fetch_row()) {
-						printf("%s\n", $row[0]);
-					}
-					$result->free();
-				}
-				/* print divider */
-				if ($this->link->more_results()) {
-					printf("-----------------\n");
-				}
-			} while ($this->link->next_result());
-			return 1;
+		$i=-1;
+		$tempSql = preg_replace('/[\n\r\s]+/', ' ', $sql);
+		$tempSqlParts = explode(';', $tempSql);
+		foreach ($tempSqlParts as $tempSqlPart) {
+			$tempSqlPart = trim($tempSqlPart);
+			if (!empty($tempSqlPart)) {
+				$tempBindVars = (0 < preg_match_all('/\:[a-z0-9_]+/i', $tempSqlPart, $matches))
+					? array_intersect_key($bindVariables, array_flip($matches[0]))
+					: array();
+				$tempStatement = $this->link->prepare($tempSqlPart);
+				$tempStatement->execute($tempBindVars);
+				$tempStatement->closeCursor();
+				$i++;
+			}
 		}
+		return $i;
+		
 	}
 	function ExecuteQueryInsert($sql)
-	{
-		$result=$this->ExecuteQuery($sql);
-		if($result > 0)
-		{
-			return mysqli_insert_id($this->link);// tra ve id vua moi insert
-		}
-		else
-			return 0;
+	{	
+			$db=$this->link->prepare($sql);
+			$db->execute();
+			$id= $this->link->lastInsertId();// tra ve id vua moi insert
+			return $id;
+		
 	}
 	
 	function Fetch($sql)
 	{
-		$result=$this->ExecuteQuery($sql);
-		return mysqli_fetch_assoc($result);
+		$db=$this->link->prepare($sql);
+		$db->execute();
+		$result=$db->fetch(PDO::FETCH_ASSOC);
+		 return $result;
 	}
 	function NumRows($sql)
 	{
-		$result=$this->ExecuteQuery($sql);
-		return mysqli_num_rows($result);
+		$stmt=$this->link->query($sql);
+		$stmt->execute();
+		return $stmt->rowCount();
 	}
 	function FetchAll($sql)
 	{
-		$result=$this->ExecuteQuery($sql);
-		$arr=array();
-		while($row=mysqli_fetch_assoc($result))
-		{
-			$arr[]=$row;
-		}
-		mysqli_free_result($result);
-		return $arr;
+		$db=$this->link->prepare($sql);
+		$db->execute();
+		$result=$db->fetchAll(\PDO::FETCH_ASSOC);
+		return $result;
 	}
 	function __destruct()
 	{
-		mysqli_close($this->link);
+		$this->link=null;
 	}
 }
 ?>

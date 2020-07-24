@@ -60,3 +60,6 @@
     </body>
     <script src="../javascript/home.js"></script>
 </html>
+<?php 
+    include ("viewbillmodal.php");
+?>

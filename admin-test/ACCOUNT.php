@@ -105,10 +105,11 @@ if(isset($_POST['action'])){
                         $db=new DataProvider();
                         $sql="SELECT * FROM `accounts`";
                         $array=$db->FetchAll($sql);
+                        $i=1;
                         foreach($array as $user){
                             if($user['id']>0){
                             echo "<tr>";
-                                echo "<td class='acc-id' >$user[id]</td>";
+                                echo "<td class='acc-id' data-id=$user[id]>$i</td>";
                                 echo "<td class='acc-username' >$user[username]</td>";
                                 if($user['lv']==1){
                                     echo "<td><button class='btn-promote btn btn-primary' disabled>PROMOTE</button>";
@@ -120,6 +121,7 @@ if(isset($_POST['action'])){
                                 }
                                 echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' ><i class='fas fa-ban'></i></button></td>";
                             echo "</tr>";
+                            $i++;
                             }
                         }                               
                         ?>
@@ -136,7 +138,7 @@ if(isset($_POST['action'])){
             <script>
                 $('.btn-promote').on('click',function(){
                     let div = $(this).parent().parent();
-                    id=div.find('.acc-id').text();
+                    id=div.find('.id').data('id');
                     name=div.find('.acc-username').text();
                     var check = confirm("Are you sure to promote '"+ name +"' ?");
                     if(check==true){
@@ -149,7 +151,7 @@ if(isset($_POST['action'])){
                 })
                 $('.btn-demote').on('click',function(){
                     let div = $(this).parent().parent();
-                    id=div.find('.acc-id').text();
+                    id=div.find('.id').data('id');
                     name=div.find('.acc-username').text();
                     var check = confirm("Are you sure to demote '"+ name +"' ?");
                     if(check==true){
@@ -161,7 +163,7 @@ if(isset($_POST['action'])){
                 })
                 $('.btn-delete').on('click',function(){
                     let div = $(this).parent().parent();
-                    id=div.find('.acc-id').text();
+                    id=div.find('.id').data('id');
                     name=div.find('.acc-username').text();
                     var check = confirm("Are you sure to delete '"+ name +"' ?");
                     if(check==true){

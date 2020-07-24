@@ -38,7 +38,7 @@
         $address = $_POST['address'];
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $date = date('m/d/Y h:i:s a', time());
-        $total = $_POST['total'];
+        $total = intval(str_replace(',','',$_POST['total']));
         $tinhtrang = 0;
         include_once("../models/DataProvider.php");
         $db= new DataProvider();
@@ -188,4 +188,7 @@
           return check;
         })
     })
-</script>       
+</script>
+<?php 
+    include ("viewbillmodal.php");
+?>       

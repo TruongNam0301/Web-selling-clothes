@@ -58,8 +58,9 @@
                                     <div class="card-body">Clothes:     
                                         <?php
                                         $db=new DataProvider();
-                                        $countClothes=$db->NumRows("SELECT * FROM clothes");
-                                        echo $countClothes;
+                                        $sql="SELECT * FROM `clothes`";
+                                        $num=$db->NumRows($sql);
+                                        echo $num;
                                         ?> 
                                     </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">

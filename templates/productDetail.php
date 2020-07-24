@@ -91,3 +91,6 @@
     <script src="../javascript/home.js"></script>
     <script src="../javascript/product.js"></script>
 </html>
+<?php 
+    include ("viewbillmodal.php");
+?>
