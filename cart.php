@@ -34,9 +34,28 @@
 		</div>
 	</section>
     <?php 
-	   include_once('./controllers/BillsCtr.php');
-	   $BillsCtr = new BillsCtr();
-	   $BillsCtr -> insertBills();
+	   if(isset($_POST['yes'])){
+        $id = $_SESSION['user']['id'];
+        $sdt = $_POST['sdt'];
+        $address = $_POST['address'];
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $date = date('m/d/Y h:i:s a', time());
+        $total = intval(str_replace(',','',$_POST['total']));
+        $tinhtrang = 0;
+        include_once("./models/DataProvider.php");
+        $db= new DataProvider();
+        $sql="INSERT INTO `hoadon` (`MaHD`, `id_user`, `sdt`, `address`, `tinhtrang`, `date`,`total` ) VALUES(null,$id,'$sdt','$address',$tinhtrang,'$date',$total)";
+        $lastId=$db->ExecuteQueryInsert($sql);
+        foreach( $_SESSION['cart'] as $item){
+            $id=$item['id'];
+            $soluong = $item['quantity'];
+            $size= $item['size'];
+            $maHD = $lastId;
+            $sql2="INSERT INTO `chitiet_hoadon` (`SoHD`, `MaHD`, `id_cloth`, `soluong`, `size`) VALUES (null, $maHD, $id, $soluong, '$size')";
+            $db->ExecuteQuery($sql2);  
+        }
+        unset($_SESSION['cart']);
+    }
 	?>
 	<section class="container content-section">
 		<h2 class="section-header">CART</h2>

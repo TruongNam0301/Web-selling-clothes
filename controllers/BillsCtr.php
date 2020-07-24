@@ -1,12 +1,12 @@
 <?php
-include_once("./models/BillsMdl.php");
+include_once("../models/BillsMdl.php");
 include_once("BillsDetailCtr.php");
 
 class BillsCtr{
     public function getBills($tt){
         $BillsMdl=new BillsMdl();
         $array = $BillsMdl->getBills($tt);
-        include_once('./views/admin/Bills.php');           
+        include_once('../views/admin/Bills.php');           
     }
 
     public function editBills($tt,$MaHD){

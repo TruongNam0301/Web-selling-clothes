@@ -18,9 +18,9 @@ if(isset($_POST["update-clothes"])) {
             $sell = $_POST['sell'];
             $sql = "UPDATE `clothes` SET id_type='$type',name='$name', price='$price',best_sell='$sell' WHERE id = '$id' ";
             if ($db->ExecuteQuery($sql)) {
-                echo "New record created successfully";
+                echo "<script>alert('New record created successfully')</script>";
             } else {
-                echo "Error: " . $sql . "<br>" ;
+                echo "<script>alert('Error')</script>" ;
             }
         }else{
             #update name & image
@@ -41,27 +41,27 @@ if(isset($_POST["update-clothes"])) {
                         $image = $fileNameNew;
                         $sql = "UPDATE `clothes` SET id_type='$type',name='$name' ,price='$price', picture='$image' ,best_sell='$sell'  WHERE id = '$id' ";
                             if ($db->ExecuteQuery($sql)) {
-                                echo "New record created successfully";
+                                echo "<script>alert('New record created successfully')</script>";
                             } else {
-                                echo "Error: " . $sql . "<br>" ;
+                                echo "<script>alert('Error')</script>" ;
                             }
                     }
                     else{
-                        echo "file too big";
+                        echo "</script>alert('file too big')</script>";
                     }
                 } 
                 else{
-                    echo "error upload file";
+                    echo "</script>alert('error upload file')</script>";
                 }
             }
             else{
-                echo "can't up this file";
+                echo "<script>alert('error up this file')</script>')";
             }
         }
     }
     else if(isset($_POST["add-clothes"])){
         $file = $_FILES['file'];
-        print_r($file);
+        
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];
         $fileSize = $file['size'];
@@ -84,21 +84,21 @@ if(isset($_POST["update-clothes"])) {
                         $image = $fileNameNew;
                         $sql = "INSERT INTO clothes VALUES (null,'$type','$name','$price','$image',0)";
                             if ($db->ExecuteQuery($sql)) {
-                                echo "New record created successfully";
+                                echo "<script>alert('New record created successfully')</script>";
                             } else {
-                                echo "Error: " . $sql . "<br>" ;
+                                echo "<script>alert('Error:')</script> " ;
                             }
                     }
                     else{
-                        echo "file too big";
+                        echo "<script>alert('file too big')</script>";
                     }
                 } 
                 else{
-                    echo "error upload file";
+                    echo "<script>alert('error upload file')</script>";
                 }
             }
             else{
-                echo "";
+                echo "<script>alert('error')</script>";
             }
     }
     if(isset($_POST['action'])){
