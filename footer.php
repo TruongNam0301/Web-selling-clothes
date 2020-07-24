@@ -33,10 +33,10 @@
                             Accept Payment
                         </div>
                         <div class="credit-card">
-                            <img src='../image/paypal-card.png'>
-                            <img src='../image/master-card.png'>
-                            <img src='../image/maetro-card.png'>
-                            <img src='../image/visa-card.png'>
+                            <img src='./image/paypal-card.png'>
+                            <img src='./image/master-card.png'>
+                            <img src='./image/maetro-card.png'>
+                            <img src='./image/visa-card.png'>
                         </div>
                     </div>
                 </div>

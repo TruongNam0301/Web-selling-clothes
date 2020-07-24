@@ -36,10 +36,10 @@ class CartCtr{
         if(isset($_SESSION['cart'])){
             foreach($_SESSION['cart'] as $i=>$val){
                 $item = $_SESSION['cart'][$i];
-                include_once('../models/ProductMdl.php');
+                include_once('./models/ProductMdl.php');
                 $ProductMdl = new ProductMdl();
                 $product = $ProductMdl->getProduct($item['id']);
-                include('../views/cartPage/listcart.php');
+                include('./views/cartPage/listcart.php');
             }
         }else{
             $_SESSION['cart']=Array();

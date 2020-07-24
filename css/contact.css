@@ -1,4 +1,3 @@
-
 .background-contact{
     background-image: url(./);
 }
@@ -45,8 +44,6 @@ textarea{
     height: 150px;
     resize: none;
 }
-
-
 
 @media screen and (max-width:1000px){
     .pro-tip{

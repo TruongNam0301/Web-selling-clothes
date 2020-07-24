@@ -1,7 +1,7 @@
 
         <div class="col-lg-6 col-6">
             <div class= 'image-product'>
-            <img src="../image/image_product/<?php echo $product['picture']?>" width="500" height="600"/>
+            <img src="./image/image_product/<?php echo $product['picture']?>" width="500" height="600"/>
             </div>
         </div>
         <div class="col-lg-6 col-6" style="color:#555756">

@@ -59,7 +59,7 @@ if(isset($_POST['action'])){
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../templates">Return to main Page</a>
+                        <a class="dropdown-item" href="../">Return to main Page</a>
                     </div>
                 </li>
             </ul>

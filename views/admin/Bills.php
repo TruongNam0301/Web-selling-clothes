@@ -5,7 +5,7 @@
         if($check==0)$check = 'UNPAID';
         else $check= 'PAID';
         echo "<tr>";
-        echo "<td ><img src='../image/image-user/$item[image]' class='image' style='width:100px; height:50px' ></td>";
+        echo "<td ><img src='./image/image-user/$item[image]' class='image' style='width:100px; height:50px' ></td>";
             echo "<td class='name'>$item[name]</td>";
             echo "<td class='sdt'>$item[sdt]</td>";
             echo "<td class='address'>$item[address]</td>";

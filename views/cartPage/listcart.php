@@ -3,7 +3,7 @@
     $check_size=array("M","SM","L","XL");
     echo "<div class= 'cart-row'>";
     echo "<div class='cart-item cart-column'>";
-    echo "<img class='cart-item-image' src='../image/image_product/$product[picture]' width='100' height='100'>";
+    echo "<img class='cart-item-image' src='./image/image_product/$product[picture]' width='100' height='100'>";
     echo "<span class='cart-item-title'>$product[name]</span>";
     echo "</div>";
     echo "<span class='cart-price cart-column'><b>$money</b></span>";
