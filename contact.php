@@ -1,11 +1,11 @@
 <?php 
 		if(isset($_SESSION['user']) && isset($_POST['contact_submit'])){
 			if($_POST['contact_submit']=='CONTACT'){
-				$user=$_SESSION['user']['id'];
+				$userId=$_SESSION['user']['id'];
 				$string=$_POST['your-text'];
 				include_once("/controllers/ContactCtr.php");
 				$ContactCtr=new ContactCtr;
-				$ContactCtr->UpContactToAdmin($user,$string)
+				$ContactCtr->UpContactToAdmin($userId,$string)
 			}
 		}
 ?>
@@ -93,6 +93,9 @@
 				if(checkInput.trim()==''){
 					alert("You must write something to Contact us");
 					e.preventDefault();
+				}
+				else{
+					alert("Thank you for contact us!!!");
 				}
 			}
 		})
