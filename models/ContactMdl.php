@@ -7,7 +7,7 @@
             $this->db = new DataProvider(); 
         }
         public function UpContactToAdmin($user,$string){
-           $sql="INSERT INTO contact VALUES (NULL,)"
+            $sql="INSERT INTO contact VALUES (NULL,$userId,'$string')";
         }
     }
 ?>

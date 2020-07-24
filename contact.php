@@ -5,7 +5,7 @@
 				$string=$_POST['your-text'];
 				include_once("/controllers/ContactCtr.php");
 				$ContactCtr=new ContactCtr;
-				$ContactCtr->UpContactToAdmin($user,$string)
+				$ContactCtr->UpContactToAdmin($user,$string);
 			}
 		}
 ?>
