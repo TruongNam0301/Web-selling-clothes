@@ -7,7 +7,7 @@ if(isset($_POST['action'])){
     if($_POST['action']==='delete'){
     $db=new DataProvider();
     $delete_id = $_POST["stt"];
-    $sql = "DELETE FROM contact WHERE id_user=$delete_id ; SET @num := 0; UPDATE contact SET stt = @num := (@num+1); ALTER TABLE contact AUTO_INCREMENT = 1";
+    $sql = "DELETE FROM contact WHERE stt=$delete_id ; SET @num := 0; UPDATE contact SET stt = @num := (@num+1); ALTER TABLE contact AUTO_INCREMENT = 1";
     $db->ExecuteMultiQuery($sql);
 }
 }
@@ -125,8 +125,9 @@ if(isset($_POST['action'])){
                             foreach($array as $contact){
                                 echo "<tr>";
                                     echo "<td class='stt'>$contact[stt]</td>";
-                                    echo "<td class='username' data-string=$contact[string]> $contact[username] </td>";
-                                    echo "<td class='name' data-id_user=$contact[id_user]>$contact[name]</td>";
+                                    echo "<td class='username'> $contact[username] </td>";
+                                    echo "<input class='text' type='hidden' value ='$contact[string]'/>";
+                                    echo "<td class='name' data-id_user=$contact[stt]>$contact[name]</td>";
                                     echo "<td><button class='btn-view btn btn-primary' data-toggle='modal' data-target='#exampleModal'>VIEW</button>";
                                     echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
                                 echo "</tr>";
@@ -148,7 +149,7 @@ if(isset($_POST['action'])){
                         let div = $(this).parent().parent();
                         stt=div.find('.stt').text();
                         username=div.find('.username').text();
-                        string = div.find('.username').data('string');
+                        string = div.find('.text').val();
                         name=div.find('.name').text();
                         
                         $('#string').val(string);

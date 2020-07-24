@@ -1,14 +1,4 @@
-<?php 
-		if(isset($_SESSION['user']) && isset($_POST['contact_submit'])){
-			if($_POST['contact_submit']=='CONTACT'){
-				$user=$_SESSION['user']['id'];
-				$string=$_POST['your-text'];
-				include_once("/controllers/ContactCtr.php");
-				$ContactCtr=new ContactCtr;
-				$ContactCtr->UpContactToAdmin($user,$string);
-			}
-		}
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,8 +19,18 @@
 		<!--menu-bar-->
 		<?php
 		    include 'menu_header.php';
-		?>
+			if(isset($_POST['contact_submit'])){
+					$userId=$_SESSION['user']['id'];
+					$string=$_POST['your-text'];
+					echo $string;
+					include_once("./controllers/ContactCtr.php");
+					$ContactCtr=new ContactCtr();
+					$ContactCtr->UpContactToAdmin($userId,$string);
+
+			}
+			?>
         <!--background-->
+
 		<section class="section1">
 			<div class="background">
 				<div class="wall">
@@ -56,6 +56,7 @@
 				</div>
 				<form class="contact-form" method="post" action="">
 					<textarea id="inputString" class="input-c-box text-description" cols="50" name="your-text" placeholder="Text" rows="4"></textarea> 
+					<div class='error'></div>
 					<input class="contact_button" name="contact_submit" type="submit" value="CONTACT">
 				</form>
 			</div>
@@ -65,7 +66,7 @@
 	     include 'footer.php';
 	    ?>
 	</div>
-<script src="../javascript/home.js">
+<script src="./javascript/home.js">
 </script>
 <script>
 	function checkUserLogin(){
@@ -82,17 +83,22 @@
 		return input;
 	}
 	$(document).ready(function(){
-		check=checkUserLogin();
-		checkInput=checkEmptyText();
-		$(".contact_button").on("click",function(e){
+		$(".contact-form").submit(function(e){
+			checkInput=checkEmptyText();
+			check=checkUserLogin();
+			console.log(checkInput);
 			if(check==0){
 				alert("You must login to Contact us");
 				e.preventDefault();
 			}
 			else{
 				if(checkInput.trim()==''){
-					alert("You must write something to Contact us");
+					$('.error').html(" * You must write something to Contact us");
 					e.preventDefault();
+				}
+				else{
+					alert("Thank you for contact us!!!");
+					return ;
 				}
 			}
 		})
