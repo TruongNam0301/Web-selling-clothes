@@ -31,7 +31,7 @@ if(isset($_POST['action'])){
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Static Navigation - SB Admin</title>
+        <title>HNH SHOP  Admin</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -40,7 +40,7 @@ if(isset($_POST['action'])){
     </head>
     <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.php">Start Bootstrap</a>
+            <a class="navbar-brand" href="index.php">HNH Shop Admin Page</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -71,10 +71,10 @@ if(isset($_POST['action'])){
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Static Navigation</h1>
+                        <h1 class="mt-4">TYPES CLOTHES MANAGER</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
+                            <li class="breadcrumb-item"><a href="index.php">DASHBOARD</a></li>
+                            <li class="breadcrumb-item active">TYPES CLOTHES</li>
                         </ol>
                         
 
@@ -154,7 +154,7 @@ if(isset($_POST['action'])){
 <div class="card mb-4">
     <div class="card-header" >
         <i class="fas fa-table mr-1"></i>
-        Product List
+        TYPES CLOTHES LIST
         <div style="float:right">
             <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'><i class="fa fa-plus" aria-hidden="true"></i>Add New Type Clothes</button>
         </div>

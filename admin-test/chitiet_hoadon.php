@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Static Navigation - SB Admin</title>
+        <title>HNH SHOP  Admin</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -20,10 +20,32 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Static Navigation</h1>
+                    <?php
+                                if($_GET['tt']==0){
+                                    echo "<h1 class='mt-4'> UNPAID BILL</h1>";
+                                }
+                                else{
+                                    echo "<h1 class='mt-4'> PAID BILL</h1>";
+                                }
+                            ?>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
+                            <li class="breadcrumb-item"><a href="index.php">DASHBOARD</a></li>
+                            <?php
+                                 if($_GET['tt']==0){
+                                    echo "<li class='breadcrumb-item'><a href='bills.php?tt=0'> UNPAID BILL</a></li>";
+                                }
+                                else{
+                                    echo "<li class='breadcrumb-item'><a href='bills.php?tt=1'>PAID BILL</a></li>";
+                                }
+                            ?>
+                             <?php
+                                if($_GET['tt']==0){
+                                    echo "<li class='breadcrumb-item active'> UNPAID BILL DETAIL</li>";
+                                }
+                                else{
+                                    echo "<li class='breadcrumb-item active'> PAID BILL DETAIL</li>";
+                                }
+                            ?>
                         </ol>
                         
 
@@ -60,7 +82,7 @@
                         <div class="card mb-4">
                             <div class="card-header" >
                                 <i class="fas fa-table mr-1"></i>
-                                Product Detail
+                                BILL DETAILS
                                 <div style="float:right">
                                     <form action="print.php" method="post">
                                         <input type="hidden" name="id_of_user" value="<?php echo $_GET['MaHD'] ?>">
@@ -75,11 +97,11 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>image clothes</th>
-                                                <th>name clothes</th>
-                                                <th>pricer</th>
-                                                <th>quantity</th>
-                                                <th>size</th>
+                                                <th>IMAGE CLOTHES</th>
+                                                <th>NAME CLOTHES</th>
+                                                <th>PRICES</th>
+                                                <th>QUANTITY</th>
+                                                <th>SIZE</th>
                                              
                                             </tr>
                                         </thead>
