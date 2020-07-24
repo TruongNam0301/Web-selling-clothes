@@ -45,8 +45,6 @@ textarea{
     resize: none;
 }
 
-
-
 @media screen and (max-width:1000px){
     .pro-tip{
         font-size: 20px;
