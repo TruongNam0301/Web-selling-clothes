@@ -41,6 +41,7 @@ body{
 }
 
 .product-gridview .product:hover{
+    background-color: inherit;
     box-shadow:0px 12px 16px rgba(0, 0, 0, 0.15);
 }
  
