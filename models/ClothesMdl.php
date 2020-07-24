@@ -7,34 +7,69 @@ class ClothesMdl {
 		$this->db = new DataProvider(); 
 	}
 
-    public function getClothes($page,$num,$limit,$type){
+    public function getClothes($page,$num,$limit,$type,$sort){
     	$start = ($page-1)*$num;
-		$sql = "SELECT clothes.id ,clothes.id_type,clothes.name,clothes.price,clothes.picture FROM clothes INNER JOIN typeclothes on clothes.id_type=typeclothes.id_type INNER JOIN types ON typeclothes.type=types.id where types.id=$type LIMIT $start,$limit";
+		$sql = "SELECT clothes.id ,clothes.id_type,clothes.name,clothes.price,clothes.picture FROM clothes INNER JOIN typeclothes on clothes.id_type=typeclothes.id_type INNER JOIN types ON typeclothes.type=types.id where types.id=$type ";
+		if($sort==0){
+			$sql .="ORDER BY price ASC";
+		}
+		if($sort==1){
+			$sql .="ORDER BY price DESC";
+		}
+			$sql .=" LIMIT $start,$limit";
 		if($this->db->NumRows($sql)){
 			return $this->db->FetchAll($sql);
 		}
 	} 
-	public function getClothesByType($val,$page,$num,$limit){
+	public function getClothesByType($val,$page,$num,$limit,$sort){
 		$start = ($page-1)*$num;
-		$sql = "SELECT * FROM clothes WHERE id_type = $val LIMIT $start,$limit";
+		$sql = "SELECT * FROM clothes WHERE id_type = $val ";
+		if($sort==0){
+			$sql .="ORDER BY price ASC";
+		}
+		if($sort==1){
+			$sql .="ORDER BY price DESC";
+		}
+			$sql .=" LIMIT $start,$limit";
 		if($this->db->NumRows($sql)){
 			return $this->db->FetchAll($sql);
 		}
 	}
-	public function getNumRows($type){
-		$sql = "SELECT clothes.id FROM clothes INNER JOIN typeclothes on clothes.id_type=typeclothes.id_type INNER JOIN types ON typeclothes.type=types.id where types.id=$type";
+	public function getNumRows($type,$sort){
+		$sql = "SELECT clothes.id FROM clothes INNER JOIN typeclothes on clothes.id_type=typeclothes.id_type INNER JOIN types ON typeclothes.type=types.id where types.id=$type ";
+		if($sort==0){
+			$sql .="ORDER BY price ASC";
+		}
+		if($sort==1){
+			$sql .="ORDER BY price DESC";
+		}
+			
 		return $this->db->NumRows($sql);
 	} 
-	public function getNumRowsById($val){
-		$sql = "SELECT id FROM clothes WHERE id_type = $val";
+	public function getNumRowsById($val,$sort){
+		$sql = "SELECT id FROM clothes WHERE id_type = $val ";
+		if($sort==0){
+			$sql .="ORDER BY price ASC";
+		}
+		if($sort==1){
+			$sql .="ORDER BY price DESC";
+		}
+			
 		return $this->db->NumRows($sql);
 	} 
 	public function getProductById($id){
 		$sql="SELECT * FROM clothes WHERE id= $id";
 		return $this->db->FetchAll($sql);
 	}
-	public function Search($key){
+	public function Search($key,$sort){
 		$sql="SELECT * FROM `clothes` WHERE name like '%$key%'";
+		
+		if($sort==0){
+			$sql .="ORDER BY price ASC";
+		}
+		if($sort==1){
+			$sql .="ORDER BY price DESC";
+		}
 		
 		if($this->db->NumRows($sql)){
               

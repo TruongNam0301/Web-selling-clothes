@@ -7,13 +7,13 @@
     #showlistclothes
     if($_POST['action']=='show'){
         if($_POST['type']!=0){
-            $ClothesCtr->getClothesByType($_POST['type'],$_POST['page'],$_POST['num'],$_POST['limit']); 
-            $ClothesCtr->getNumRowsById($_POST['type'],$_POST['limit'],$_POST['idType']);  
+            $ClothesCtr->getClothesByType($_POST['type'],$_POST['page'],$_POST['num'],$_POST['limit'],$_POST['sort']); 
+            $ClothesCtr->getNumRowsById($_POST['type'],$_POST['limit'],$_POST['idType'],$_POST['sort']);  
               
         }
         else{
-            $ClothesCtr->getClothes($_POST['page'],$_POST['num'],$_POST['limit'],$_POST['idType']);
-            $ClothesCtr->getNumRows($_POST['limit'],$_POST['idType']);
+            $ClothesCtr->getClothes($_POST['page'],$_POST['num'],$_POST['limit'],$_POST['idType'],$_POST['sort']);
+            $ClothesCtr->getNumRows($_POST['limit'],$_POST['idType'],$_POST['sort']);
         }
     }#addcart
     else if($_POST['action']=='add'){
