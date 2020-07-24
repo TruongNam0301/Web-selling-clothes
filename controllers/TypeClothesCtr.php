@@ -26,6 +26,15 @@ class TypeClothesCtr{
         $TypeClothes = $TypeClothesMdl->getOneTypeClothes($_GET['idType']);
         echo $TypeClothes[0]['name_type'];
     }
+    public function getTypeClothesByTypeIpad($type){
+        $TypeClothesMdl = new TypeClothesMdl();
+        $TypeClothes = $TypeClothesMdl->getTypeClothes($type['id']);
+        if($TypeClothes == null) echo "<li type-id=$type[id]><a href='#'>$type[nametype]</a>";
+        else{
+           
+            include('../views/homePage/clothingIpad.php');
+        }
+    } 
 
 }
 ?>

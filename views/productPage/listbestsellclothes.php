@@ -12,6 +12,7 @@
                             <b >View Detail</b> 
                         </div>
                     </div>
+                   
                     <div class='frames' style=' '>
                         <p class='item-title' style='font-size: large;color:#575652;transform: translate(0px,10px);'>$cloth[name]</p>
                         <p class='item-price' style='color:#575652;'><b>$p <sup><u>đ</u></sup></b></p>

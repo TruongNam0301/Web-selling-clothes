@@ -1,3 +1,5 @@
+
+
 <div id="layoutSidenav_nav">
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
@@ -15,7 +17,14 @@
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="ACCOUNT.php">ACCOUNTS</a>
+                        <?php
+                            if(isset($_SESSION['user']['id']))   {             
+                                if( $_SESSION['user']['id']==-1){
+                                
+                                    echo "<a class='nav-link' href='ACCOUNT.php'>ACCOUNT MANAGE</a>";
+                                }
+                            }
+                        ?>
                         <a class="nav-link" href="TYPES.php">TYPES</a>
                         <a class="nav-link" href="TYPESCLOTHES.php">TYPESCLOTHES</a>
                         <a class="nav-link" href="CLOTHES.php">CLOTHES</a>

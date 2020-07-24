@@ -2,20 +2,12 @@
 if (!isset($_SESSION)) session_start();
 include_once("../models/DataProvider.php");
 $db=new DataProvider();
-if(isset($_POST["update-type"])) {
-    $id=$_POST['id'];
-    $name=$_POST['name'];
-    $db->ExecuteQuery("UPDATE types SET nametype ='$name' WHERE id =$id");
-}
-else if(isset($_POST["add-type"])){
-    $name=$_POST['name'];
-    $db->ExecuteQuery("INSERT INTO types VALUES(NULL,'$name')");
-}
+
 if(isset($_POST['action'])){
     if($_POST['action']==='delete'){
     $db=new DataProvider();
-    $delete_id = $_POST["id"];
-    $sql = "UPDATE typeclothes SET type=-1 WHERE type=$delete_id;DELETE FROM types WHERE id=$delete_id ;";
+    $delete_id = $_POST["stt"];
+    $sql = "DELETE FROM contact WHERE id_user=$delete_id ; SET @num := 0; UPDATE contact SET stt = @num := (@num+1); ALTER TABLE contact AUTO_INCREMENT = 1";
     $db->ExecuteMultiQuery($sql);
 }
 }
@@ -76,7 +68,7 @@ if(isset($_POST['action'])){
                         </ol>
                         
 
-<!-- Modal edit-->
+<!-- Modal view-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -90,8 +82,11 @@ if(isset($_POST['action'])){
         <form  method = 'post' action='' enctype="multipart/form-data" id='form'>
 
             <input type="hidden" name="id" id="id" />
-            <label>name</label>
-            <input type='text' name='name'  id='name'/><br/>
+            <div class="form-group">
+            <label for="exampleFormControlTextarea1">User's Contact</label>
+            <textarea class="form-control" id="string" name="string" rows="3"></textarea>
+            </div>
+            <br/>
             <div class="modal-footer" align="center" style="margin-top:20px">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <input type='submit'  name='update-type' class='btn-save btn btn-primary' value='save' />
@@ -102,38 +97,12 @@ if(isset($_POST['action'])){
     </div>
   </div>
 </div> 
-<!--Modal add-->   
-<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add type</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form  method = 'post' action='' enctype="multipart/form-data" id='form-add'>
-            <label>name</label>
-            <input type='text' name='name'  id='name-add'/><br/>
-            <div class="modal-footer" align="center" style="margin-top:20px">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type='submit'  name='add-type' class='btn-save btn btn-primary' value='add' />
-            </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-</div>       
+  
 <!-- table-->
 <div class="card mb-4">
     <div class="card-header" >
         <i class="fas fa-table mr-1"></i>
-        Product List
-        <div style="float:right">
-            <button class='btn-add btn btn-success'  data-toggle='modal' data-target='#AddModal'><i class="fa fa-plus" aria-hidden="true"></i>Add New Type </button>
-        </div>
+        Contact List
     </div>
     <div class="card-body">
         <div class="table-responsive" >
@@ -141,7 +110,8 @@ if(isset($_POST['action'])){
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Name</th>
+                            <th>Account</th>
+                            <th>User's Name</th>
                             <th>Button</th>
                         </tr>
                     </thead>
@@ -150,19 +120,16 @@ if(isset($_POST['action'])){
                         <?php 
                            include_once("../models/DataProvider.php");
                             $db=new DataProvider();
-                            $sql="SELECT * FROM types";
+                            $sql="SELECT contact.stt, accounts.username, users.name,contact.id_user, contact.string FROM contact INNER JOIN users on users.id=contact.id_user INNER JOIN accounts on users.id=accounts.id";
                             $array=$db->FetchAll($sql);
-                            $i=1;
-                            foreach($array as $type){
-                                if($type['id']>0){
+                            foreach($array as $contact){
                                 echo "<tr>";
-                                    echo "<td class='id' data-id=$type[id]>$i</td>";
-                                    echo "<td class='name' >$type[nametype]</td>";
-                                    echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
+                                    echo "<td class='stt'>$contact[stt]</td>";
+                                    echo "<td class='username' data-string=$contact[string]> $contact[username] </td>";
+                                    echo "<td class='name' data-id_user=$contact[id_user]>$contact[name]</td>";
+                                    echo "<td><button class='btn-view btn btn-primary' data-toggle='modal' data-target='#exampleModal'>VIEW</button>";
                                     echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
                                 echo "</tr>";
-                                $i++;
-                                }
                             }                               
                             ?>
                     </tbody>
@@ -177,20 +144,23 @@ if(isset($_POST['action'])){
             <script>
                 $(document).ready(function(){
                     validateForm();
-                    $('.btn-edit').on('click',function(){   
+                    $('.btn-view').on('click',function(){   
                         let div = $(this).parent().parent();
-                        id=div.find('.id').data('id');
+                        stt=div.find('.stt').text();
+                        username=div.find('.username').text();
+                        string = div.find('.username').data('string');
                         name=div.find('.name').text();
-                        $('#name').val(name);
+                        
+                        $('#string').val(string);
                         $('#id').val(id);
                     })
                     $('.btn-delete').on('click',function(){
                             let div = $(this).parent().parent();
-                            id=div.find('.id').data('id');
+                            stt = div.find('.name').data('id_user');
                             name=div.find('.name').text();
-                            var check = confirm("Are you sure to delete "+ name +" ?");
+                            var check = confirm("Are you sure to delete this contact ?");
                             if(check==true){
-                                $.post('',{id:id,action:'delete'},function(){
+                                $.post('',{stt:stt,action:'delete'},function(){
                                     location.reload();
                                     alert('delete success')
                                 });

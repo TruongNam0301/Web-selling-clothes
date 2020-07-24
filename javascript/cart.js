@@ -1,5 +1,6 @@
 $(document).ready(function(){
      updateCartTotal();
+    
      $('.cart-quantity-input').on('change',function(){
          updateCartTotal();
           let index = $(this).data('index');
@@ -43,7 +44,66 @@ $(document).ready(function(){
         })
         
     })
+
+    $('.btn-purchase').on("click",function(){
+         validateForm();
+        let total= $('.cart-total-price').text().replace(',','');
+        $('#total').val(total);
+        checkUser=checkUserLogin();
+        checkCart=checkCart();
+        if(checkUser==0){
+            alert('You must login to purchase!!');
+            $(this).removeAttr('data-target');
+        }
+        else if(checkCart==0){
+            alert('Cart is empty!!');
+            $(this).removeAttr('data-target'); 
+        }
+        else{
+            $(this).attr('data-target','#BoxModal');
+        }
+    })
+    $('#form-buy').on('submit',function(){
+            
+        var check = confirm("Are you sure to buy ?");
+        return check;
+    })
 })
+function validateForm() {
+    $("#form-buy").validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            "sdt":{
+                required: true,
+            },
+            "address":{
+                required: true,
+            },
+        },
+        messages: {
+            "name":{
+                required: "* Bắt buộc nhập name"
+            },
+            "price":{
+                required: "* Bắt buộc nhập price"
+            },
+            "file": {
+                required: "* Bắt buộc nhập file"
+            
+            },
+        }
+    });
+}
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+
+
 function updateCartTotal(){
     var cartItems=document.getElementsByClassName("cart-items")[0];
     var cartRow=cartItems.getElementsByClassName("cart-row");

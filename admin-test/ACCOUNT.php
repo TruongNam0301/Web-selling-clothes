@@ -1,4 +1,5 @@
 <?php
+if (!isset($_SESSION)) session_start();
 include_once("../models/DataProvider.php");
 if(isset($_POST['action'])){
     $db=new DataProvider();
@@ -9,11 +10,23 @@ if(isset($_POST['action'])){
     if($_POST['action']=='demote'){
         $db->ExecuteQuery("UPDATE accounts SET lv=0 WHERE id=$id;");
     }
+    if($_POST['action']=='delete'){
+       
+        $db->ExecuteMultiQuery("DELETE chitiet_hoadon FROM chitiet_hoadon INNER JOIN hoadon on chitiet_hoadon.MaHD=hoadon.MaHD where hoadon.id_user=$id;
+                                DELETE FROM contact WHERE id_user=$id;
+                                SET @num := 0; 
+                                UPDATE contact SET stt = @num := (@num+1); 
+                                ALTER TABLE contact AUTO_INCREMENT = 1;
+                                DELETE FROM hoadon WHERE id_user=$id;
+                                DELETE FROM users WHERE id=$id;
+                                DELETE FROM accounts WHERE id=$id;");
+    }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache" /> <META HTTP-EQUIV="Expires" CONTENT="-1" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -47,7 +60,7 @@ if(isset($_POST['action'])){
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="../templates">Return to main Page</a>
                     </div>
                 </li>
             </ul>
@@ -92,20 +105,23 @@ if(isset($_POST['action'])){
                         $db=new DataProvider();
                         $sql="SELECT * FROM `accounts`";
                         $array=$db->FetchAll($sql);
+                        $i=1;
                         foreach($array as $user){
                             if($user['id']>0){
                             echo "<tr>";
-                                echo "<td class='acc-id' >$user[id]</td>";
+                                echo "<td class='acc-id' data-id=$user[id]>$i</td>";
                                 echo "<td class='acc-username' >$user[username]</td>";
                                 if($user['lv']==1){
                                     echo "<td><button class='btn-promote btn btn-primary' disabled>PROMOTE</button>";
-                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' >DEMOTE</button></td>";
+                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' >DEMOTE</button>";
                                 }
                                 else{
                                     echo "<td><button class='btn-promote btn btn-primary' >PROMOTE</button>";
-                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' disabled>DEMOTE</button></td>";
+                                    echo "<button class='btn-demote btn btn-danger' style='margin-left:10px' disabled>DEMOTE</button>";
                                 }
+                                echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' ><i class='fas fa-ban'></i></button></td>";
                             echo "</tr>";
+                            $i++;
                             }
                         }                               
                         ?>
@@ -122,7 +138,7 @@ if(isset($_POST['action'])){
             <script>
                 $('.btn-promote').on('click',function(){
                     let div = $(this).parent().parent();
-                    id=div.find('.acc-id').text();
+                    id=div.find('.id').data('id');
                     name=div.find('.acc-username').text();
                     var check = confirm("Are you sure to promote '"+ name +"' ?");
                     if(check==true){
@@ -135,12 +151,23 @@ if(isset($_POST['action'])){
                 })
                 $('.btn-demote').on('click',function(){
                     let div = $(this).parent().parent();
-                    id=div.find('.acc-id').text();
+                    id=div.find('.id').data('id');
                     name=div.find('.acc-username').text();
-                    var check = confirm("Are you sure to demote ' "+ name +" ' ?");
+                    var check = confirm("Are you sure to demote '"+ name +"' ?");
                     if(check==true){
                         $.post('',{id:id,action:'demote'},function(){
                         alert('demote success');
+                        location.reload();
+                    });
+                    }
+                })
+                $('.btn-delete').on('click',function(){
+                    let div = $(this).parent().parent();
+                    id=div.find('.id').data('id');
+                    name=div.find('.acc-username').text();
+                    var check = confirm("Are you sure to delete '"+ name +"' ?");
+                    if(check==true){
+                        $.post('',{id:id,action:'delete'},function(){
                         location.reload();
                     });
                     }

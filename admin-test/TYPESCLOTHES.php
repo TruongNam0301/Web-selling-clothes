@@ -1,4 +1,5 @@
 <?php
+if (!isset($_SESSION)) session_start();
 include_once("../models/DataProvider.php");
 $db=new DataProvider();
 if(isset($_POST["update-type"])) {
@@ -16,7 +17,7 @@ if(isset($_POST['action'])){
     if($_POST['action']==='delete'){
     $db=new DataProvider();
     $delete_id = $_POST["id"];
-    $sql = "UPDATE clothes SET id_type=-1 WHERE id_type=$delete_id;DELETE FROM typeclothes WHERE id_type=$delete_id ; SET @num := 0; UPDATE typeclothes SET id = @num := (@num+1); ALTER TABLE typeclothes AUTO_INCREMENT = 1";
+    $sql = "UPDATE clothes SET id_type=-1 WHERE id_type=$delete_id;DELETE FROM typeclothes WHERE id_type=$delete_id;";
     $db->ExecuteMultiQuery($sql);
 }
 }
@@ -58,7 +59,7 @@ if(isset($_POST['action'])){
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="../templates">Return to main Page</a>
                     </div>
                 </li>
             </ul>
@@ -175,15 +176,18 @@ if(isset($_POST['action'])){
                             $db=new DataProvider();
                             $sql="SELECT typeclothes.id_type,typeclothes.name_type, typeclothes.type, types.nametype FROM `typeclothes` INNER JOIN types on typeclothes.type=types.id";
                             $array=$db->FetchAll($sql);
+                            $i=1;
                             foreach($array as $typeclothes){
                                 if($typeclothes['id_type']>0){
+                                
                                 echo "<tr>";
-                                    echo "<td class='id'>$typeclothes[id_type]</td>";
+                                    echo "<td class='id' data-id=$typeclothes[id_type]>$i</td>";
                                     echo "<td class='name' >$typeclothes[name_type]</td>";
                                     echo "<td class='type' data-id_type=$typeclothes[type]>$typeclothes[nametype]</td>";
                                     echo "<td><button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#exampleModal'>EDIT</button>";
                                     echo "<button class='btn-delete btn btn-danger' style='margin-left:10px' >DELETE</button></td>";
                                 echo "</tr>";
+                                $i++;
                                 }
                             }                               
                             ?>
@@ -202,7 +206,7 @@ if(isset($_POST['action'])){
                     $('.btn-edit').on('click',function(){
                         $('#types_clothes option:selected').removeAttr('selected');   
                         let div = $(this).parent().parent();
-                        id=div.find('.id').text();
+                        id=div.find('.id').data('id');
                         name=div.find('.name').text();
                         type = div.find('.type').data('id_type');
                         
@@ -212,7 +216,7 @@ if(isset($_POST['action'])){
                     })
                     $('.btn-delete').on('click',function(){
                             let div = $(this).parent().parent();
-                            id=div.find('.id').text();
+                            id=div.find('.id').data('id');
                             name=div.find('.name').text();
                             var check = confirm("Are you sure to delete "+ name +" ?");
                             if(check==true){
@@ -241,6 +245,7 @@ if(isset($_POST['action'])){
                             }
                         });
                     }
+                    
                 })
                 
             </script>

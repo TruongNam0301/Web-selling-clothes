@@ -10,35 +10,35 @@ class DataProvider
 	}
 	function ExecuteQuery($sql)
 	{
-		return $this->link->query($sql);
+		$db=$this->link->prepare($sql);
+		return $db->execute();
 	}
 	function ExecuteMultiQuery($sql){
-		if ($this->link->multi_query($sql)) {
-			do {
-				/* store first result set */
-				if ($result = $this->link->store_result()) {
-					while ($row = $result->fetch_row()) {
-						printf("%s\n", $row[0]);
-					}
-					$result->free();
-				}
-				/* print divider */
-				if ($this->link->more_results()) {
-					printf("-----------------\n");
-				}
-			} while ($this->link->next_result());
-			return 1;
+		$i=-1;
+		$tempSql = preg_replace('/[\n\r\s]+/', ' ', $sql);
+		$tempSqlParts = explode(';', $tempSql);
+		foreach ($tempSqlParts as $tempSqlPart) {
+			$tempSqlPart = trim($tempSqlPart);
+			if (!empty($tempSqlPart)) {
+				$tempBindVars = (0 < preg_match_all('/\:[a-z0-9_]+/i', $tempSqlPart, $matches))
+					? array_intersect_key($bindVariables, array_flip($matches[0]))
+					: array();
+				$tempStatement = $this->link->prepare($tempSqlPart);
+				$tempStatement->execute($tempBindVars);
+				$tempStatement->closeCursor();
+				$i++;
+			}
 		}
+		return $i;
+		
 	}
 	function ExecuteQueryInsert($sql)
-	{
-		$result=$this->link->execute($sql);
-		if($result > 0)
-		{
-			return $this->link->lastInsertId();// tra ve id vua moi insert
-		}
-		else
-			return 0;
+	{	
+			$db=$this->link->prepare($sql);
+			$db->execute();
+			$id= $this->link->lastInsertId();// tra ve id vua moi insert
+			return $id;
+		
 	}
 	
 	function Fetch($sql)

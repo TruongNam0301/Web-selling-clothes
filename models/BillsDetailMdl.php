@@ -14,5 +14,11 @@ class BillsDetailMdl{
         $sql = "DELETE FROM `chitiet_hoadon` WHERE MaHD='$MaHD' ";
         $db->ExecuteQuery($sql);
     }
+
+    public function insertBillsDetail($maHD, $id, $soluong, $size){
+        $db= new DataProvider();
+        $sql="INSERT INTO `chitiet_hoadon` (`SoHD`, `MaHD`, `id_cloth`, `soluong`, `size`) VALUES (null, $maHD, $id, $soluong, '$size')";
+        $db->ExecuteQuery($sql);  
+    }
 }
 ?>
