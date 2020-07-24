@@ -92,6 +92,7 @@ if (document.readyState == 'loading') {
             }
         }
     });
+   
 }  
 function validateForgotForm() {
     $(".forgot-content").validate({

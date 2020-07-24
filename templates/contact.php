@@ -1,3 +1,9 @@
+<?php
+    print_r($_POST);
+    if(isset($_POST['contact_submit'])){
+        
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,12 +46,9 @@
                     <div class="pro-tip">When contacting us about your order kindly provide us your order number.
                         <p>Send us a text</p>
                     </div >
-                    <form class="contact-form">
-                        <input type="email" class="input-c-box" name="your-name" placeholder="Name">
-                        <input type="text" class="input-c-box" name="your-mail" placeholder="Email">
-                        <input type="text" class="input-c-box" name="your-phone" pattern="[0-9]" placeholder="Phone number">
-                        <textarea type="text" class="input-c-box text-description" rows="4" cols="50"name="your-text" placeholder="Text"></textarea>
-                        <input type="submit"  name="contact_submit" class="contact_button" value="contact">
+                    <form class="contact-form" method="POST">
+                        <textarea type="text" class="input-c-box text-description" rows="4" cols="50" name="your-text" placeholder="Text"></textarea>
+                        <div><input type="submit"  name="contact_submit" class="contact_button" value="contact" style="margin-top:50px"></div>
                     </form>
                 </div>
             </div>      
@@ -59,6 +62,32 @@
     <!--script-->
     </body>
     <script src="../javascript/home.js"></script>
+    <script>
+         function checkUserLogin(){
+        check = <?php 
+            if(isset($_SESSION['user'])){
+                echo sizeof($_SESSION['user']);
+            }
+            else echo 0;
+        ?>;
+        return check;
+    }
+         $(".contact-form").validate({
+        onfocusout: false,
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            "your-text": {
+                required: true,
+               
+            },
+        
+        },
+        messages: {
+            "your-text": "* Bắt buộc nhập Text",
+        }
+    });
+    </script>
 </html>
 <?php 
     include ("viewbillmodal.php");

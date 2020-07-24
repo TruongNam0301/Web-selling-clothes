@@ -208,4 +208,5 @@ $AccountCtr->updatePass();
     });
 
 </script>
+<script src="../javascript/home.js"></script>
 </html>
