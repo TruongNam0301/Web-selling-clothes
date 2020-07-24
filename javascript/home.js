@@ -24,8 +24,8 @@ if (document.readyState == 'loading') {
         }
     });
     $('.forgot-pass').on('click',function(){
-      $('.login-form').css('display','none');
-      $('.forgot-form').css('display','block');
+        $('.login-form').css('display','none');
+        $('.forgot-form').css('display','block');
     });
     $('.forgot-button').on('click',function(){
         let username = $('.check-user').val();

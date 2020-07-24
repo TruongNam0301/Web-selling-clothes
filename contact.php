@@ -1,3 +1,14 @@
+<?php 
+		if(isset($_SESSION['user']) && isset($_POST['contact_submit'])){
+			if($_POST['contact_submit']=='CONTACT'){
+				$user=$_SESSION['user']['id'];
+				$string=$_POST['your-text'];
+				include_once("/controllers/ContactCtr.php");
+				$ContactCtr=new ContactCtr;
+				$ContactCtr->UpContactToAdmin($user,$string)
+			}
+		}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,9 +54,9 @@
 					When contacting us about your order kindly provide us your order number.
 					<p>Send us a text</p>
 				</div>
-				<form class="contact-form">
-					<input class="input-c-box" name="your-name" placeholder="Name" type="email"> <input class="input-c-box" name="your-mail" placeholder="Email" type="text"> <input class="input-c-box" name="your-phone" pattern="[0-9]" placeholder="Phone number" type="text"> 
-					<textarea class="input-c-box text-description" cols="50" name="your-text" placeholder="Text" rows="4"></textarea> <input class="contact_button" name="contact_submit" type="submit" value="contact">
+				<form class="contact-form" method="post" action="">
+					<textarea id="inputString" class="input-c-box text-description" cols="50" name="your-text" placeholder="Text" rows="4"></textarea> 
+					<input class="contact_button" name="contact_submit" type="submit" value="CONTACT">
 				</form>
 			</div>
 		</section>
@@ -54,8 +65,41 @@
 	     include 'footer.php';
 	    ?>
 	</div>
-	<script src="../javascript/home.js">
-	</script>
+<script src="../javascript/home.js">
+</script>
+<script>
+	function checkUserLogin(){
+		check = <?php 
+			if(isset($_SESSION['user'])){
+				echo sizeof($_SESSION['user']);
+			}
+			else echo 0;
+		?>;
+		return check;
+	}
+	function checkEmptyText(){
+		var input = document.getElementById("inputString").value;
+		return input;
+	}
+	$(document).ready(function(){
+		check=checkUserLogin();
+		checkInput=checkEmptyText();
+		$(".contact_button").on("click",function(e){
+			if(check==0){
+				alert("You must login to Contact us");
+				e.preventDefault();
+			}
+			else{
+				if(checkInput.trim()==''){
+					alert("You must write something to Contact us");
+					e.preventDefault();
+				}
+			}
+		})
+		
+		
+	})
+</script>
 </body>
 </html>
 <?php 
