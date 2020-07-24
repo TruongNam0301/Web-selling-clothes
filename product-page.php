@@ -44,6 +44,14 @@
 	</section>
 	<div class="container">
 		<div class="view-swap">
+				<div class="choice-display">
+                            <div class="icon grid-icon">
+                                <a href='product-page.php?type=<?php echo $_GET['type']?>&&idType=<?php echo $_GET['idType']?>&&sort=0'><button class='btn-promote btn btn-primary'><i class="fas fa-arrow-up"></i></button></a>
+                            </div>
+                            <div class= "icon list-icon">
+                                <a href='product-page.php?type=<?php echo $_GET['type']?>&&idType=<?php echo $_GET['idType']?>&&sort=1'><button class='btn-promote btn btn-primary'><i class="fas fa-arrow-down"></i></button></a>
+                            </div>
+                </div>
 			<!--grid-view-->
 			<div class="product-gridview"></div>
 		</div>
@@ -53,15 +61,19 @@
 	    ?>
 	<script>
 	       function loadData (val=0,page=1,type){
-           
-		   $.ajax({
-			   url:'./action.php',
-			   data: {type:val,page:page,action:'show',num:3,limit:12,idType:type},
-			   type: 'POST',
-			   success: function (value){
-				   $('.product-gridview').html(value);
-			   }
-			})
+			sort=<?php if(isset($_GET['sort'])) 
+                            echo $_GET['sort']; 
+                        else 
+                            echo -1;
+                    ?>;
+            $.ajax({
+                url:'../views/action.php',
+                data: {type:val,page:page,action:'show',num:3,limit:12,idType:type,sort:sort},
+                type: 'POST',
+                success: function (value){
+                    $('.product-gridview').html(value);
+                }
+             })
 	   }  
 	   $(document).ready(function(){
 		   let val = <?php if(isset($_GET['idType'])){

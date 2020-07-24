@@ -5,6 +5,7 @@ class DataProvider
 	function __construct()
 	{
 		$this->link = new PDO("mysql:host=localhost;dbname=sellclothes",'root','');
+		$this->link->exec("set names utf8mb4_unicode_ci");
 		$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
 	}

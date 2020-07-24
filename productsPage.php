@@ -53,14 +53,14 @@
 			</div>
 			<div class="col-lg-9">
 				<div class="view-swap">
-					<div class="choice-display">
-						<div class="icon grid-icon">
-							<i class="fas fa-th fa-lg"></i>
-						</div>
-						<div class="icon list-icon">
-							<i class="fas fa-list fa-lg"></i>
-						</div>
-					</div><!--grid-view-->
+				<div class="choice-display">
+                            <div class="icon grid-icon">
+                                <a href='productsPage.php?type=<?php echo $_GET['type']?>&&sort=0'><button class='btn-promote btn btn-primary'><i class="fas fa-arrow-up"></i></button></a>
+                            </div>
+                            <div class= "icon list-icon">
+                                <a href='productsPage.php?type=<?php echo $_GET['type']?>&&sort=1'><button class='btn-promote btn btn-primary'><i class="fas fa-arrow-down"></i></button></a>
+                            </div>
+                        </div><!--grid-view-->
 					<div class="product-gridview"></div>
 				</div>
 			</div>
@@ -72,14 +72,20 @@
 	<script>
 	   
 	       function loadData (val=0,page=1,type){
-	           $.ajax({
-	                   url:'./action.php',
-	                   data: {type:val,page:page,action:'show',num:4,limit:15,idType:type},
-	                   type: 'POST',
-	                   success: function (value){
-	                       $('.product-gridview').html(value);
-	                   }
-	               })
+				sort=<?php if(isset($_GET['sort'])) 
+								echo $_GET['sort']; 
+							else 
+								echo -1;
+						?>;
+				$.ajax({
+						url:'../views/action.php',
+						data: {type:val,page:page,action:'show',num:4,limit:15,idType:type,sort:sort},
+						type: 'POST',
+						success: function (value){
+
+							$('.product-gridview').html(value);
+						}
+					})
 	       }  
 
 	       $(document).ready(function(){

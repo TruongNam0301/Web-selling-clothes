@@ -30,13 +30,27 @@
 	</section>
 	<div class="container">
 		<div class="view-swap">
+				<div class="choice-display">
+                            <div class="icon grid-icon">
+                                <a href='search.php?sort=0&&key-word=<?php echo $_SESSION['key-word']?>'><button class='btn-promote btn btn-primary'><i class="fas fa-arrow-up"></i></button></a>
+                            </div>
+                            <div class= "icon list-icon">
+                                <a href='search.php?sort=1&&key-word=<?php echo $_SESSION['key-word']?>'><button class='btn-promote btn btn-primary'><i class="fas fa-arrow-down"></i></button></a>
+                            </div>
+                    </div>
 			<!--grid-view-->
 			<div class="product-gridview">
 				<?php
-                    include_once('./controllers/ClothesCtr.php'); 
-                    @$key=$_POST['search-key'];
-                    $ClothesCtr = new ClothesCtr();
-                    $ClothesCtr->Search($key);
+                   include_once('../controllers/ClothesCtr.php'); 
+				   @$_SESSION['key-word']=$_POST['search-key'];
+				   @$key=$_SESSION['key-word'];
+				   @$sort=isset($_GET['sort']) ? $_GET['sort'] : -1 ;
+					if (isset($_GET['key-word']) ){
+						   $_SESSION['key-word']=$_GET['key-word'];
+						   $key=$_GET['key-word'];
+					}
+				   $ClothesCtr = new ClothesCtr();
+				   $ClothesCtr->Search($key,$sort);
 				?>
                 
 			</div>
