@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('../controllers/AccountCtr.php');
+include_once('./controllers/AccountCtr.php');
 $AccountCtr = new AccountCtr();
 $AccountCtr->register();   
 $AccountCtr->updateUserInfor();   
@@ -14,7 +14,7 @@ $AccountCtr->updatePass();
     <div class="mg-left-right">
         <div class="row">
             <div class="col-lg-2 col-5">
-                <div class="logo"><img height="100px" src="../image/Untitled.png" style="float:left" width="100px"></div>
+                <div class="logo"><img height="100px" src="./image/Untitled.png" style="float:left" width="100px"></div>
                 <div class="icon-menu2">
                     <a href="#"><i class="fas fa-bars fa-lg" id="menu-click" onclick="menuActive()"></i></a>
                 </div>
@@ -29,7 +29,7 @@ $AccountCtr->updatePass();
                             <div class="list-clothing">
                                 <ul class="item-clothing">
                                     <?php
-                                        include_once('../controllers/TypeCtr.php');
+                                        include_once('./controllers/TypeCtr.php');
                                         $Type = new TypeCtr();
                                         $Type->getType();
                                     ?>
@@ -56,10 +56,10 @@ $AccountCtr->updatePass();
                             </div>
                         </li>
                         <li class="menu-item about">
-                            <a href="../templates/about.php">ABOUT US</a>
+                            <a href="./about.php">ABOUT US</a>
                         </li>
                         <li class="menu-item contact">
-                            <a href="../templates/contact.php">CONTACT</a>
+                            <a href="./contact.php">CONTACT</a>
                         </li>
                     </ul>
                 </div>
@@ -135,7 +135,7 @@ $AccountCtr->updatePass();
         <?php
             if(isset($_SESSION['user'])){
                 $user=$_SESSION['user'];
-                include_once('../views/homePage/user.php');
+                include_once('./views/homePage/user.php');
             }
             else {
                 $AccountCtr = new AccountCtr();
@@ -159,7 +159,7 @@ $AccountCtr->updatePass();
                     <div class="mb-clothing" style="display:none;">
                         <ul class="mb-list-clothing">
                         <?php
-                            include_once('../controllers/TypeCtr.php');
+                            include_once('./controllers/TypeCtr.php');
                             $Type = new TypeCtr();
                             $Type->getTypeIpad();
                         ?>
@@ -183,10 +183,10 @@ $AccountCtr->updatePass();
                     </div>
                 </li>
                 <li class="mb-list">
-                    <a href="../html/about.php">about us</a>
+                    <a href="./html/about.php">about us</a>
                 </li>
                 <li class="mb-list">
-                    <a href="../html/contact.php">contact</a>
+                    <a href="./html/contact.php">contact</a>
                 </li>
             </ul>
         </div>

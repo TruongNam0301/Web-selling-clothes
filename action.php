@@ -1,7 +1,7 @@
 <?php
-    include_once('../controllers/ClothesCtr.php');
-    include_once('../controllers/CartCtr.php');
-    include_once('../controllers/AccountCtr.php');
+    include_once('./controllers/ClothesCtr.php');
+    include_once('./controllers/CartCtr.php');
+    include_once('./controllers/AccountCtr.php');
     session_start();
     $ClothesCtr = new ClothesCtr();
     #showlistclothes

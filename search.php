@@ -9,10 +9,10 @@
 	<script src="https://kit.fontawesome.com/65adf3fa6d.js">
 	</script>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../css/product-page.css" rel="stylesheet" type="text/css">
-	<link href="../css/menubar.css" rel="stylesheet" type="text/css">
-	<link href="../css/menu-mobile.css" rel="stylesheet" type="text/css">
-	<link href="../css/main-home.css" rel="stylesheet" type="text/css">
+	<link href="./css/product-page.css" rel="stylesheet" type="text/css">
+	<link href="./css/menubar.css" rel="stylesheet" type="text/css">
+	<link href="./css/menu-mobile.css" rel="stylesheet" type="text/css">
+	<link href="./css/main-home.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<?php include_once('menu_header.php');?>
@@ -33,7 +33,7 @@
 			<!--grid-view-->
 			<div class="product-gridview">
 				<?php
-                    include_once('../controllers/ClothesCtr.php'); 
+                    include_once('./controllers/ClothesCtr.php'); 
                     @$key=$_POST['search-key'];
                     $ClothesCtr = new ClothesCtr();
                     $ClothesCtr->Search($key);
@@ -45,7 +45,7 @@
         <?php
 	        include_once('footer.php');
 	    ?>
-	<script src="../javascript/home.js">
+	<script src="./javascript/home.js">
 	</script>
 </body>
 </html>

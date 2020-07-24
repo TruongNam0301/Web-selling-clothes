@@ -9,9 +9,9 @@
 	<script src="https://kit.fontawesome.com/65adf3fa6d.js">
 	</script>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../css/product-page.css" rel="stylesheet" type="text/css">
-	<link href="../css/menubar.css" rel="stylesheet" type="text/css">
-	<link href="../css/menu-mobile.css" rel="stylesheet" type="text/css">
+	<link href="./css/product-page.css" rel="stylesheet" type="text/css">
+	<link href="./css/menubar.css" rel="stylesheet" type="text/css">
+	<link href="./css/menu-mobile.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<?php include_once('menu_header.php');?>
@@ -20,7 +20,7 @@
 			<div class="wall">
 				<div class='name-link' style='font-size:50px'>
 					<?php
-						include_once('../controllers/TypeCtr.php') ;
+						include_once('./controllers/TypeCtr.php') ;
 						$TypeCtr = new TypeCtr();
 						$Type = $TypeCtr->getOneType( $_GET['type']);
 					?>
@@ -44,7 +44,7 @@
 							<input checked='checked' class="check" name="type" type="radio" value="0"> <label>all</label>
 						</div>
 						<?php                      
-							include_once('../controllers/TypeClothesCtr.php');
+							include_once('./controllers/TypeClothesCtr.php');
 							$ClothesCtr = new TypeClothesCtr();
 							$ClothesCtr->getTypeClothes();
 						?>
@@ -73,7 +73,7 @@
 	   
 	       function loadData (val=0,page=1,type){
 	           $.ajax({
-	                   url:'../views/action.php',
+	                   url:'./action.php',
 	                   data: {type:val,page:page,action:'show',num:4,limit:15,idType:type},
 	                   type: 'POST',
 	                   success: function (value){
@@ -111,7 +111,7 @@
 	           });
 	       })
 	</script> 
-	<script src="../javascript/home.js">
+	<script src="./javascript/home.js">
 	</script>
 </body>
 </html>

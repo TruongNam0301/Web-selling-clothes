@@ -1,6 +1,6 @@
 <?php
-include_once('../models/AccountMdl.php');
-include_once('../models/UsersMdl.php');
+include_once('./models/AccountMdl.php');
+include_once('./models/UsersMdl.php');
     class AccountCtr{
         public function checkLogin(){
             if (isset($_POST["btn_submit"])) {
@@ -17,7 +17,7 @@ include_once('../models/UsersMdl.php');
                         $User = $UsersMdl -> getUserById($Account['id']);
                         $_SESSION['user']=$User;
                         $user=$_SESSION['user'];
-                        include_once('../views/homePage/user.php');
+                        include_once('./views/homePage/user.php');
                     }
                 }
             }
@@ -76,7 +76,7 @@ include_once('../models/UsersMdl.php');
                         if($fileError==0){
                         if($fileSize<1000000){
                                 $fileNameNew = uniqid('',true).".".$fileActualExt;
-                                $fileDestination = '../image/image-user/'.$fileNameNew;
+                                $fileDestination = './image/image-user/'.$fileNameNew;
                                 move_uploaded_file($fileTmpName,$fileDestination);
                                 $image = $fileNameNew;
                                 $name = $_POST['name'];
@@ -108,7 +108,7 @@ include_once('../models/UsersMdl.php');
             }
             else {
                 $id=$Account['id'];
-                include_once('../views/homePage/forgot-pass.php');
+                include_once('./views/homePage/forgot-pass.php');
             }
         }
         public function updatePass(){

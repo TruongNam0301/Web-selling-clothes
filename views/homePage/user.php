@@ -21,16 +21,17 @@
     .update-infor{
         margin-top:30px;
     }
+
 </style>
     <div class="exit-form-login"><i class="fas fa-times fa-lg" style="cursor:pointer;"></i></div>
         <div class='imageUser'>
-            <img src='../image/image-user/<?php echo $user['image'] ?>' class='item' style='z-index:-1' >
+            <img src='./image/image-user/<?php echo $user['image'] ?>' class='item' style='z-index:-1' >
         </div>
         <div class='name'><?php echo $user['name'] ?></div>
         <div class = 'update-infor'>
             <?php
                  if($user['lv']==1){
-                    echo "<button type='button' class='button-admin btn btn-warning'><a href='/web-selling-clothes/admin-test'> ADMIN PAGE</a></button>";
+                    echo "<button type='button' class='button-admin btn btn-warning'><a href='./admin-test'> ADMIN PAGE</a></button>";
                 }
             ?>
             <button class='btn-edit btn btn-primary' data-toggle='modal' data-target='#ViewModal'>VIEW BILL</button>
@@ -45,7 +46,7 @@
 <script>
     $(".button-logout").on('click',function(){
        
-        $.post('../views/homePage/logout.php',{action:'logout'},function(){
+        $.post('./views/homePage/logout.php',{action:'logout'},function(){
             $(".user").css("display", "none");
             $(".login-regis").css("display", "none");
             $(".login-regis-swapper").css("display", "none");

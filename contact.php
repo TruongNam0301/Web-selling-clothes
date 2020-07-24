@@ -9,9 +9,9 @@
 	<script src="https://kit.fontawesome.com/65adf3fa6d.js">
 	</script>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../css/menubar.css" rel="stylesheet" type="text/css">
-	<link href="../css/menu-mobile.css" rel="stylesheet" type="text/css">
-	<link href="../css/contact.css" rel="stylesheet" type="text/css">
+	<link href="./css/menubar.css" rel="stylesheet" type="text/css">
+	<link href="./css/menu-mobile.css" rel="stylesheet" type="text/css">
+	<link href="./css/contact.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div class="all">

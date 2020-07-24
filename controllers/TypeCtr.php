@@ -1,5 +1,5 @@
 <?php
-    include_once('../models/TypeMdl.php');
+    include_once('./models/TypeMdl.php');
     include_once("TypeClothesCtr.php");
     class TypeCtr{
         public function getType(){
@@ -8,7 +8,7 @@
             $TypeClothesCtr = new TypeClothesCtr();
             foreach($typeArr as $type){
                 $typeClothes = $TypeClothesCtr->getTypeClothesByType($type);
-                include_once("../views/homePage/clothing.php");
+                include_once("./views/homePage/clothing.php");
             }
         }
         public function getOneType($id){

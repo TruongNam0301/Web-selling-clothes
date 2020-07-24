@@ -9,9 +9,9 @@
 	<script src="https://kit.fontawesome.com/65adf3fa6d.js">
 	</script>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../css/product.css" rel="stylesheet" type="text/css">
-	<link href="../css/menubar.css" rel="stylesheet" type="text/css">
-	<link href="../css/menu-mobile.css" rel="stylesheet" type="text/css">
+	<link href="./css/product.css" rel="stylesheet" type="text/css">
+	<link href="./css/menubar.css" rel="stylesheet" type="text/css">
+	<link href="./css/menu-mobile.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<?php include_once('menu_header.php');?>
@@ -20,7 +20,7 @@
 			<div class="wall">
 				<div class='name-link' style='font-size:50px'>
 					<?php 
-						include_once('../controllers/productCtr.php');
+						include_once('./controllers/productCtr.php');
 						$productCtr = new productCtr();
 						$productCtr->getName( $_GET['id']);
 					 ?>
@@ -29,7 +29,7 @@
 					<a href='#'>Home /</a> 
                     <a href='#'>Clothing /</a> 
                     <a href='#'><?php 
-					                include_once('../controllers/TypeClothesCtr.php');
+					                include_once('./controllers/TypeClothesCtr.php');
                                     $TypeClothesCtr = new TypeClothesCtr();
                                     $TypeClothesCtr->getOneTypeClothes( $_GET['idType']);
 					            ?> /</a> 
@@ -45,7 +45,7 @@
 			<div class='container'>
 				<div class="row">
 					<?php
-						include_once('../controllers/ProductCtr.php');
+						include_once('./controllers/ProductCtr.php');
 						$ProductCtr = new ProductCtr();
 						$ProductCtr->getProduct($_GET['id']);
 					 ?>
@@ -57,7 +57,7 @@
 					<div class="best-sale">
 						<div class='bestsell row'>
 							<?php
-								include_once('../controllers/ClothesCtr.php');
+								include_once('./controllers/ClothesCtr.php');
 								$ClothesCtr = new ClothesCtr();
 								$ClothesCtr->getRelativeClothes($_GET['id']);
 							?>
@@ -75,17 +75,17 @@
 				let id = <?php echo $_GET['id'] ?>;
 				let quantity = $('.soluong').val();
 				let size = $('#size').val();
-				$.post('../views/action.php', { id:id,quantity:quantity,size:size,action:'add'},function(res){
+				$.post('./action.php', { id:id,quantity:quantity,size:size,action:'add'},function(res){
 					if(res==-1) alert('alredy in cart bro');
 					console.log(res);
-					$('.count').load('../views/cartPage/countItem.php');
+					$('.count').load('./views/cartPage/countItem.php');
 				});
 			});
 		})
 		</script>
-		<script src="../javascript/home.js">
+		<script src="./javascript/home.js">
 		</script> 
-		<script src="../javascript/product.js">
+		<script src="./javascript/product.js">
 		</script>
 </body>
 </html>

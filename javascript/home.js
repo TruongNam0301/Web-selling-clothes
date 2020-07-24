@@ -7,7 +7,7 @@ if (document.readyState == 'loading') {
      ChangeLoginRegister();
      OpenAndExitLogin();
      validateRegisterForm();
-    $('.count').load('../views/cartPage/countItem.php');
+    $('.count').load('./views/cartPage/countItem.php');
     $("input.text-input").on({
         keydown: function(e) {
           if (e.which === 32)
@@ -34,7 +34,7 @@ if (document.readyState == 'loading') {
         }
         else{
             $.ajax({
-                url:'../views/action.php',
+                url:'./action.php',
                 method:'POST',
                 data:{username:username,action:'check-user'},
                 success: function(data){

@@ -5,9 +5,9 @@
         $str = "   
         <div class='col-lg-3 col-6 image-product'>
             <div  class='product-bestsell sanpham' >
-                <a href='../templates/productDetail.php?idType=$cloth[id_type]&&id=$cloth[id]'>
+                <a href='./productDetail.php?idType=$cloth[id_type]&&id=$cloth[id]'>
                     <div class='pic'>  
-                        <img src='../image/image_product/$cloth[picture]' class='item'  >
+                        <img src='./image/image_product/$cloth[picture]' class='item'  >
                         <div class='view-detail-best-sell' style=' z-index: -1;'> 
                             <b >View Detail</b> 
                         </div>

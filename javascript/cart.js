@@ -6,7 +6,7 @@ $(document).ready(function(){
           let index = $(this).data('index');
           let value= $(this).val();
           $.ajax({
-            url:'../views/action.php',
+            url:'./action.php',
             type:'POST',
             data:{index:index,quantity:value,action:'update'},
             success: function(res){
@@ -19,7 +19,7 @@ $(document).ready(function(){
           let index = $(this).data('index');
           let value= $(this).val();
           $.ajax({
-            url:'../views/action.php',
+            url:'./action.php',
             type:'POST',
             data:{index:index,size:value,action:'update'},
             success: function(res){
@@ -32,14 +32,14 @@ $(document).ready(function(){
         let index = $(this).data('index');
         let deleteButton =$(this).parents('.cart-row');
         $.ajax({
-            url:'../views/action.php',
+            url:'./action.php',
             type:'POST',
             data:{index:index,action:'delete'},
             success: function(res){
                 console.log(res);
                 deleteButton.remove();
                 updateCartTotal();
-                $('.count').load('../views/cartPage/countItem.php');
+                $('.count').load('./views/cartPage/countItem.php');
             }
         })
         

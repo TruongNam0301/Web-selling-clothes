@@ -14,10 +14,10 @@
 	</script>
 	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
 	</script>
-	<link href="../css/product-page.css" rel="stylesheet" type="text/css">
-	<link href="../css/menubar.css" rel="stylesheet" type="text/css">
-	<link href="../css/menu-mobile.css" rel="stylesheet" type="text/css">
-	<link href="../css/cart.css" rel="stylesheet" type="text/css">
+	<link href="./css/product-page.css" rel="stylesheet" type="text/css">
+	<link href="./css/menubar.css" rel="stylesheet" type="text/css">
+	<link href="./css/menu-mobile.css" rel="stylesheet" type="text/css">
+	<link href="./css/cart.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<?php include_once('menu_header.php');?>
@@ -34,7 +34,7 @@
 		</div>
 	</section>
     <?php 
-	   include_once('../controllers/BillsCtr.php');
+	   include_once('./controllers/BillsCtr.php');
 	   $BillsCtr = new BillsCtr();
 	   $BillsCtr -> insertBills();
 	?>
@@ -46,7 +46,7 @@
 		<div class="cart-items">
 			<?php
                 $config['rewrite_short_tags'] = FALSE;
-                include_once('../controllers/CartCtr.php');
+                include_once('./controllers/CartCtr.php');
                 $CartCtr = new CartCtr();
                 $CartCtr->showCart();
 			?>
@@ -96,9 +96,9 @@
         }
 	</script>
 </body>
-    <script src="../javascript/home.js">
+    <script src="./javascript/home.js">
 	</script> 
-	<script src="../javascript/cart.js">
+	<script src="./javascript/cart.js">
 	</script> 
 </html>
 <?php 

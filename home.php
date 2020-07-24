@@ -8,9 +8,9 @@
 	<script src="https://kit.fontawesome.com/65adf3fa6d.js">
 	</script>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../css/menubar.css" rel="stylesheet" type="text/css">
-	<link href="../css/menu-mobile.css" rel="stylesheet" type="text/css">
-	<link href="../css/main-home.css" rel="stylesheet" type="text/css">
+	<link href="./css/menubar.css" rel="stylesheet" type="text/css">
+	<link href="./css/menu-mobile.css" rel="stylesheet" type="text/css">
+	<link href="./css/main-home.css" rel="stylesheet" type="text/css">
 	
 	<title>Home</title>
 </head>
@@ -59,9 +59,9 @@
 								<li data-slide-to="2" data-target="#myCarousel"></li>
 							</ul><!-- The slideshow -->
 							<div class="carousel-inner">
-								<div class="carousel-item active"><img alt="pic1" height="400" src="../image/slide1.jpg" width="1100"></div>
-								<div class="carousel-item"><img alt="pic2" height="400" src="../image/slide2.jpg" width="1100"></div>
-								<div class="carousel-item"><img alt="pic3" height="400" src="../image/slide3.jpg" width="1100"></div>
+								<div class="carousel-item active"><img alt="pic1" height="400" src="./image/slide1.jpg" width="1100"></div>
+								<div class="carousel-item"><img alt="pic2" height="400" src="./image/slide2.jpg" width="1100"></div>
+								<div class="carousel-item"><img alt="pic3" height="400" src="./image/slide3.jpg" width="1100"></div>
 							</div><!-- Left and right controls -->
 							 <a class="carousel-control-prev" data-slide="prev" href="#myCarousel"><span class="carousel-control-prev-icon"></span></a> <a class="carousel-control-next" data-slide="next" href="#myCarousel"><span class="carousel-control-next-icon"></span></a>
 						</div>
@@ -71,7 +71,7 @@
 					</div>
 					<div class='square-swap row'>
 						<?php
-                            include_once('../controllers/TypeClothesCtr.php');
+                            include_once('./controllers/TypeClothesCtr.php');
                             $TypeClothesCtr = new TypeClothesCtr();
                             $TypeClothesCtr->getAllTypeClothes();
                         ?>
@@ -82,7 +82,7 @@
 					<div class="best-sale">
 						<div class='bestsell row'>
                             <?php
-                                include_once('../controllers/ClothesCtr.php');
+                                include_once('./controllers/ClothesCtr.php');
                                 $ClothesCtr = new ClothesCtr();
                                 $ClothesCtr->getBestSell();
                             ?>
@@ -95,7 +95,7 @@
 			?>
 		</div>
 	</div><!--script-->
-	<script src="../javascript/home.js">
+	<script src="./javascript/home.js">
 	</script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js">
 	</script> 
