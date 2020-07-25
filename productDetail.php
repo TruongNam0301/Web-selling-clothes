@@ -20,7 +20,7 @@
 			<div class="wall">
 				<div class='name-link' style='font-size:50px'>
 					<?php 
-						include_once('./controllers/productCtr.php');
+						include_once('./controllers/ProductCtr.php');
 						$productCtr = new productCtr();
 						$productCtr->getName( $_GET['id']);
 					 ?>
