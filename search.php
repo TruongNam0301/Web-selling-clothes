@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,17 @@
 </head>
 <body>
 	<?php include_once('menu_header.php');?>
+
+	<?php
+	 include_once('./controllers/ClothesCtr.php'); 
+	 @$_SESSION['key-word']=$_POST['search-key'];
+	 @$key=$_SESSION['key-word'];
+	 @$sort=isset($_GET['sort']) ? $_GET['sort'] : -1 ;
+	  if (isset($_GET['key-word']) ){
+			 $_SESSION['key-word']=$_GET['key-word'];
+			 $key=$_GET['key-word'];
+	  }
+?>
 	<section class="section1">
 		<div class="background">
 			<div class="wall">
@@ -37,8 +49,8 @@
 					</a>
 
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href='search.php?sort=0&&key-word=<?php echo $_SESSION['key-word']?>'style="border-bottom:1px solid black"><i class="fas fa-caret-down "> Giá từ thấp đến cao</i></a>
-						<a class="dropdown-item" href='search.php?sort=1&&key-word=<?php echo $_SESSION['key-word']?>'><i class="fas fa-caret-up "> Giá từ cao đến thấp</i></a>
+						<a class="dropdown-item" href='search.php?sort=0&&key-word=<?php echo $key?>'style="border-bottom:1px solid black"><i class="fas fa-caret-down "> Giá từ thấp đến cao</i></a>
+						<a class="dropdown-item" href='search.php?sort=1&&key-word=<?php echo $key?>'><i class="fas fa-caret-up "> Giá từ cao đến thấp</i></a>
 					</div>
 				</div>
                            
@@ -46,14 +58,7 @@
 			<!--grid-view-->
 			<div class="product-gridview">
 				<?php
-                   include_once('./controllers/ClothesCtr.php'); 
-				   @$_SESSION['key-word']=$_POST['search-key'];
-				   @$key=$_SESSION['key-word'];
-				   @$sort=isset($_GET['sort']) ? $_GET['sort'] : -1 ;
-					if (isset($_GET['key-word']) ){
-						   $_SESSION['key-word']=$_GET['key-word'];
-						   $key=$_GET['key-word'];
-					}
+                  
 				   $ClothesCtr = new ClothesCtr();
 				   $ClothesCtr->Search($key,$sort);
 				?>
