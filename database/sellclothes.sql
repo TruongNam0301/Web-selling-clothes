@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 22, 2020 lúc 02:26 PM
+-- Thời gian đã tạo: Th7 25, 2020 lúc 02:45 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
--- Phiên bản PHP: 7.2.31
+-- Phiên bản PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,18 +41,6 @@ CREATE TABLE `accounts` (
 INSERT INTO `accounts` (`id`, `username`, `password`, `lv`) VALUES
 (-1, 'admin', '$2y$12$rHZZFIjJ7VEnGBQYm.4Dn.4zeVLmpV0QXT7.rzE1gXuXcYpMfhNiy', 1),
 (4, 'test', '$2y$12$y5i2J4KsRZEe/jHVOVfNp.FFN0nKTUuYgOh.pAjIWU.jWXz3LzqM6', 0);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `bills`
---
-
-CREATE TABLE `bills` (
-  `id` int(4) NOT NULL,
-  `id_clothes` int(4) NOT NULL,
-  `id_user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -260,14 +248,6 @@ ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `bills`
---
-ALTER TABLE `bills`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `Bills_fk0` (`id_clothes`),
-  ADD KEY `Bills_fk1` (`id_user`);
-
---
 -- Chỉ mục cho bảng `chitiet_hoadon`
 --
 ALTER TABLE `chitiet_hoadon`
@@ -325,12 +305,6 @@ ALTER TABLE `accounts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `bills`
---
-ALTER TABLE `bills`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT cho bảng `chitiet_hoadon`
 --
 ALTER TABLE `chitiet_hoadon`
@@ -375,13 +349,6 @@ ALTER TABLE `users`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
-
---
--- Các ràng buộc cho bảng `bills`
---
-ALTER TABLE `bills`
-  ADD CONSTRAINT `Bills_fk0` FOREIGN KEY (`id_clothes`) REFERENCES `clothes` (`id`),
-  ADD CONSTRAINT `Bills_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Các ràng buộc cho bảng `chitiet_hoadon`
